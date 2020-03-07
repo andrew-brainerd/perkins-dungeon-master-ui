@@ -1,0 +1,13 @@
+@import '../../../styles/mixins.scss';
+
+.textInputContainer {
+  position: relative;
+  text-align: center;
+
+  .textInput {
+    @include defaultInput();
+
+    font-size: 1.5em;
+    text-align: center;
+  }
+}

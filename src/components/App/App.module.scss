@@ -1,8 +1,41 @@
 .app {
   display: flex;
-  height: 100%;
-  justify-content: center;
+  height: 90%;
   margin: 25px auto;
   position: relative;
   width: 95%;
+
+  .textDisplay {
+    align-self: flex-end;
+    margin-bottom: 80px;
+
+    .messageItem {
+      margin: 10px auto;
+
+      .speaker {
+        color: cyan;
+        display: inline-block;
+        width: 150px;
+      }
+
+      .message {
+        display: inline-block;
+        font-style: italic;
+      }
+    }
+  }
+
+  .commandCenter {
+    .command {
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      width: 90%;
+
+      .commandInput {
+        text-align: left;
+        width: 100%;
+      }
+    }
+  }
 }
