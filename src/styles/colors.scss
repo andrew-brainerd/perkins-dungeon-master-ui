@@ -1,5 +1,3 @@
-$defaultBackground: black;
-$defaultTextColor: white;
 $gray-0: #ffffff;
 $gray-2-5: #f9f9f9;
 $gray-5: #f2f2f2;
@@ -23,3 +21,8 @@ $gray-85: #262626;
 $gray-90: #191919;
 $gray-95: #0d0d0d;
 $gray-100: #000000;
+
+$defaultBackground: black;
+$defaultTextColor: white;
+$buttonBackground: rgba(15, 15, 15, 1);
+$buttonBackgroundHover: rgba(15, 15, 15, 0.6);
