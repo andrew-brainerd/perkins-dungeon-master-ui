@@ -4,9 +4,9 @@ import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { history } from '../../store/configureStore';
 import { Provider } from 'react-redux';
-import App from './App';
+import Game from './Game';
 
-describe('App Component', () => {
+describe('Game Component', () => {
   let store;
 
   beforeEach(() => {
@@ -15,7 +15,7 @@ describe('App Component', () => {
 
   const render = () => shallow(
     <Provider store={store}>
-      <App history={history} />
+      <Game history={history} />
     </Provider>
   );
 
