@@ -1,23 +1,11 @@
-.landing {
+.menu {
   align-content: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: relative;
-  top: -150px;
   width: 100%;
 
   h1 {
     text-align: center;
-  }
-
-  .menu {
-    align-content: center;
-    display: flex;
-    justify-content: center;
-
-    > div {
-      margin: 10px;
-    }
   }
 }

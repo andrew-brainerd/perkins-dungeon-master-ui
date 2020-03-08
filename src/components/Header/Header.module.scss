@@ -1,0 +1,41 @@
+@import '../../styles/colors.scss';
+
+.header {
+  background: $gray-70;
+  display: flex;
+  height: 25px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+
+  .menuIcon {
+    cursor: default;
+    margin: 0 20px;
+    transform: rotate(90deg);
+    user-select: none;
+  }
+
+  .user {
+    align-content: center;
+    display: flex;
+    font-family: 'Inconsolata', monospace;
+    line-height: 25px;
+  }
+}
+
+.headerMenu {
+  left: 0;
+  position: absolute;
+  top: 25px;
+
+  .menuButton {
+    background: $gray-75;
+    border-radius: 0;
+    width: 150px;
+
+    &:hover {
+      background: $gray-60;
+      transform: none;
+    }
+  }
+}
