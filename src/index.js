@@ -1,10 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
+import WebFont from 'webfontloader';
 import { Provider } from 'react-redux';
 import configureStore, { history } from './store/configureStore';
-import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
+import App from './components/App/App';
+import './index.scss';
+
+console.log(
+  `%cPerkins DM App v${process.env.REACT_APP_VERSION}`,
+  'color: #00fcfe; font-size: 20px;'
+);
+
+WebFont.load({
+  google: {
+    families: [
+      'Inconsolata: 400',
+      'Roboto Mono: 400'
+    ]
+  }
+});
 
 const store = configureStore();
 

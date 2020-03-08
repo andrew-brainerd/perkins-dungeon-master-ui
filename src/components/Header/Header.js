@@ -14,8 +14,9 @@ const Header = () => {
         <div
           className={styles.menuIcon}
           onClick={() => isMenuOpen ? setIsMenuOpen(false) : setIsMenuOpen(true)}
-        >|||</div>
-        {loading && <div className={styles.loading}>Loading...</div>}
+        >
+          |||
+        </div>
         <div className={styles.user}>{(user || {}).name}</div>
       </div>
       {isMenuOpen &&
@@ -23,8 +24,8 @@ const Header = () => {
           {!isAuthenticated && (
             <Button
               className={styles.menuButton}
-              text={'Sign In'}
-              onClick={() => loginWithRedirect()}
+              text={loading ? 'Loading...' : 'Sign In'}
+              onClick={() => !loading && loginWithRedirect()}
             />
           )}
           {isAuthenticated && (
