@@ -27,7 +27,7 @@ export const Auth0Provider = ({
       setAuth0(auth0FromHook);
 
       if (window.location.search.includes('code=') &&
-          window.location.search.includes('state=')) {
+        window.location.search.includes('state=')) {
         const { appState } = await auth0FromHook.handleRedirectCallback();
         onRedirectCallback(appState);
       }
@@ -37,8 +37,11 @@ export const Auth0Provider = ({
       setIsAuthenticated(isAuthenticated);
 
       if (isAuthenticated) {
-        const user = await auth0FromHook.getUser();
-        user.player = await login(user.email, user.sub);
+        const auth0User = await auth0Client.getUser();
+        const perkinsUser = await login(auth0User.email, auth0User.sub);
+
+        const user = { ...auth0User, player: perkinsUser };
+
         setUser(user);
       }
 
@@ -57,8 +60,12 @@ export const Auth0Provider = ({
     } finally {
       setPopupOpen(false);
     }
-    const user = await auth0Client.getUser();
-    user.player = await login(user.email, user.sub);
+
+    const auth0User = await auth0Client.getUser();
+    const perkinsUser = await login(auth0User.email, auth0User.sub);
+
+    const user = { ...auth0User, player: perkinsUser };
+
     setUser(user);
     setIsAuthenticated(true);
   };
@@ -66,12 +73,17 @@ export const Auth0Provider = ({
   const handleRedirectCallback = async () => {
     setLoading(true);
     await auth0Client.handleRedirectCallback();
-    const user = await auth0Client.getUser();
-    user.player = await login(user.email, user.sub);
+
+    const auth0User = await auth0Client.getUser();
+    const perkinsUser = await login(auth0User.email, auth0User.sub);
+
+    const user = { ...auth0User, player: perkinsUser };
+
     setLoading(false);
     setIsAuthenticated(true);
     setUser(user);
   };
+
   return (
     <Auth0Context.Provider
       value={{
