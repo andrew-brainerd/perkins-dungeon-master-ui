@@ -31,7 +31,7 @@ const Game = () => {
   const messages = [...demoMessages, ...userText];
 
   return (
-    <div className={styles.app}>
+    <div className={styles.game}>
       <div className={styles.textDisplay}>
         {messages.map(({ speaker, message }, i) => (
           <div key={i} className={styles.messageItem}>

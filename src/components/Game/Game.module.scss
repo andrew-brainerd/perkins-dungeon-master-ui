@@ -1,9 +1,10 @@
-.app {
+.game {
   display: flex;
-  height: 90%;
-  margin: 25px auto;
+  height: 95%;
+  margin: 20px auto;
   position: relative;
   width: 95%;
+  z-index: 0;
 
   .textDisplay {
     align-self: flex-end;
@@ -11,6 +12,7 @@
 
     .messageItem {
       margin: 10px auto;
+      user-select: none;
 
       .speaker {
         color: cyan;

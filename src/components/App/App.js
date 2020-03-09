@@ -4,7 +4,7 @@ import { Auth0Provider } from '../../hooks/useAuth0';
 import { ConnectedRouter } from 'connected-react-router';
 import { Route, Switch } from 'react-router-dom';
 import { MENU_ROUTE, GAME_ROUTE } from '../../constants/routes';
-import Header from '../Header/Header';
+import Header from '../Header/container';
 import Menu from '../Menu/Menu';
 import Game from '../Game/Game';
 import styles from './App.module.scss';

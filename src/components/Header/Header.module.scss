@@ -7,6 +7,7 @@
   position: absolute;
   top: 0;
   width: 100%;
+  z-index: 5;
 
   .menuIcon {
     cursor: default;
@@ -27,6 +28,7 @@
   left: 0;
   position: absolute;
   top: 25px;
+  z-index: 10;
 
   .menuButton {
     background: $gray-75;

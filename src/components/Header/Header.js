@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { shape, string } from 'prop-types';
+import { shape, string, func } from 'prop-types';
 import { useAuth0 } from '../../hooks/useAuth0';
 import Button from '../common/Button/Button';
 import styles from './Header.module.scss';
 
-const Header = () => {
+const Header = ({ startGame }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isAuthenticated, loginWithRedirect, logout, loading, user } = useAuth0();
 
@@ -29,11 +29,18 @@ const Header = () => {
             />
           )}
           {isAuthenticated && (
-            <Button
-              className={styles.menuButton}
-              text={'Sign Out'}
-              onClick={() => logout()}
-            />
+            <>
+              <Button
+                className={styles.menuButton}
+                text={'New Game'}
+                onClick={() => { setIsMenuOpen(false); startGame(); }}
+              />
+              <Button
+                className={styles.menuButton}
+                text={'Sign Out'}
+                onClick={() => logout()}
+              />
+            </>
           )}
         </div>
       }
@@ -49,7 +56,8 @@ Header.propTypes = {
     name: string,
     picture: string,
     email: string
-  })
+  }),
+  startGame: func.isRequired
 };
 
 export default Header;
