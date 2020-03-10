@@ -23,16 +23,16 @@ export const Auth0Provider = ({
 
   useEffect(() => {
     const initAuth0 = async () => {
-      const auth0FromHook = await createAuth0Client(initOptions);
-      setAuth0(auth0FromHook);
+      const auth0Client = await createAuth0Client(initOptions);
+      setAuth0(auth0Client);
 
       if (window.location.search.includes('code=') &&
         window.location.search.includes('state=')) {
-        const { appState } = await auth0FromHook.handleRedirectCallback();
+        const { appState } = await auth0Client.handleRedirectCallback();
         onRedirectCallback(appState);
       }
 
-      const isAuthenticated = await auth0FromHook.isAuthenticated();
+      const isAuthenticated = await auth0Client.isAuthenticated();
 
       setIsAuthenticated(isAuthenticated);
 
