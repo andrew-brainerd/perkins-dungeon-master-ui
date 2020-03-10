@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
-import { shape, string, func } from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import { bool, func } from 'prop-types';
 import { useAuth0 } from '../../hooks/useAuth0';
 import Button from '../common/Button/Button';
 import styles from './Header.module.scss';
 
-const Header = ({ startGame }) => {
+const Header = ({ shouldSignIn, shouldSignOut, startGame }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isAuthenticated, loginWithRedirect, logout, loading, user } = useAuth0();
+
+  useEffect(() => {
+    !isAuthenticated && shouldSignIn && !loading && loginWithRedirect();
+  }, [isAuthenticated, shouldSignIn, loading, loginWithRedirect]);
+
+  useEffect(() => {
+    isAuthenticated && shouldSignOut && logout();
+  }, [isAuthenticated, shouldSignOut, logout]);
 
   return (
     <>
@@ -49,14 +57,8 @@ const Header = ({ startGame }) => {
 };
 
 Header.propTypes = {
-  user: shape({
-    given_name: string,
-    family_name: string,
-    nickname: string,
-    name: string,
-    picture: string,
-    email: string
-  }),
+  shouldSignIn: bool,
+  shouldSignOut: bool,
   startGame: func.isRequired
 };
 

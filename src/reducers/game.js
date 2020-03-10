@@ -43,7 +43,7 @@ export default function game (state = initialState, action) {
           ...state.messages,
           action.message
         ]
-      }
+      };
     default:
       return state;
   }
