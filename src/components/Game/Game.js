@@ -5,18 +5,18 @@ import styles from './Game.module.scss';
 
 const Game = ({ messages, addUserInput }) => {
   const [userInput, setUserInput] = useState('');
-  const [userText, setUserText] = useState(messages);
-
-  // const addUserInput = value =>
-  //   value && setUserText([...userText, { speaker: 'Me', message: value }]);
 
   return (
     <div className={styles.game}>
       <div className={styles.textDisplay}>
-        {messages.map(({ character, message }, i) => (
+        {messages.map(({ character, message, component }, i) => (
           <div key={i} className={styles.messageItem}>
-            <div className={styles.character}>{character}: </div>
-            <div className={styles.message}>{message}</div>
+            {character && <div className={styles.character}>{character}: </div>}
+            <div
+              className={styles.message}
+              dangerouslySetInnerHTML={{ __html: message }}
+            />
+            {component}
           </div>
         ))}
       </div>
