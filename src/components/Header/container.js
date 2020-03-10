@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  startGame: () => dispatch(startNewGame())
+  startGame: name => dispatch(startNewGame(name))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
