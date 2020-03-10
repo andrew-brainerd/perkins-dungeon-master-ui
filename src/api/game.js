@@ -14,3 +14,10 @@ export const createGame = async (name, createdBy = {}) => {
 
   return json;
 };
+
+export const processUserInput = async text => {
+  return {
+    character: 'The Psychiatrist',
+    message: 'And how do you feel about that?'
+  };
+};

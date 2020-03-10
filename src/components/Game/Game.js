@@ -1,41 +1,21 @@
 import React, { useState } from 'react';
+import { array, func } from 'prop-types';
 import TextInput from '../common/TextInput/TextInput';
 import styles from './Game.module.scss';
 
-const demoMessages = [
-  {
-    speaker: 'Dungeon Master',
-    message: 'You are in the well-lit living room of a large house'
-  },
-  {
-    speaker: 'Drogon',
-    message: 'Some shit a dragon would say'
-  },
-  {
-    speaker: 'Bilbo Baggins',
-    message: 'Time for 2nd Breakfast!'
-  },
-  {
-    speaker: 'Cookie Monster',
-    message: 'Cooooooo-kieeeeeee'
-  }
-];
-
-const Game = () => {
+const Game = ({ messages, addUserInput }) => {
   const [userInput, setUserInput] = useState('');
-  const [userText, setUserText] = useState([]);
+  const [userText, setUserText] = useState(messages);
 
-  const addUserInput = value =>
-    value && setUserText([...userText, { speaker: 'Me', message: value }]);
-
-  const messages = [...demoMessages, ...userText];
+  // const addUserInput = value =>
+  //   value && setUserText([...userText, { speaker: 'Me', message: value }]);
 
   return (
     <div className={styles.game}>
       <div className={styles.textDisplay}>
-        {messages.map(({ speaker, message }, i) => (
+        {messages.map(({ character, message }, i) => (
           <div key={i} className={styles.messageItem}>
-            <div className={styles.speaker}>{speaker}: </div>
+            <div className={styles.character}>{character}: </div>
             <div className={styles.message}>{message}</div>
           </div>
         ))}
@@ -48,13 +28,18 @@ const Game = () => {
           value={userInput}
           onChange={setUserInput}
           onPressEnter={() => {
-            addUserInput(userInput);
+            addUserInput({ character: 'User', message: userInput });
             setUserInput('');
           }}
         />
       </div>
     </div>
   );
+};
+
+Game.propTypes = {
+  messages: array,
+  addUserInput: func.isRequired
 };
 
 export default Game;

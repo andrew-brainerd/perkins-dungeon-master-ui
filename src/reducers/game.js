@@ -2,13 +2,15 @@ import {
   STARTING_GAME,
   ENDING_GAME,
   LOADING_GAME,
-  GAME_LOADED
+  GAME_LOADED,
+  APPEND_MESSAGE
 } from '../actions/game';
 
 const initialState = {
   isPlaying: false,
   isLoadingGame: false,
-  currentGame: {}
+  currentGame: {},
+  messages: []
 };
 
 export default function game (state = initialState, action) {
@@ -34,6 +36,14 @@ export default function game (state = initialState, action) {
         isLoadingGame: false,
         currentGame: action.game
       };
+    case APPEND_MESSAGE:
+      return {
+        ...state,
+        messages: [
+          ...state.messages,
+          action.message
+        ]
+      }
     default:
       return state;
   }
