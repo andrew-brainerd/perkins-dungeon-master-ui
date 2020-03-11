@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { array, func } from 'prop-types';
+import { string, array, func } from 'prop-types';
 import { useAuth0 } from '../../hooks/useAuth0';
 import TextInput from '../common/TextInput/TextInput';
 import styles from './Game.module.scss';
 
-const Game = ({ messages, addUserInput, connectClient }) => {
+const getGameId = pathname => pathname.split('/')[2];
+
+const Game = ({ pathname, messages, addUserInput, connectClient }) => {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const [userInput, setUserInput] = useState('');
+  const gameId = getGameId(pathname);
 
   useEffect(() => {
     console.log('%cConnecting Client to Game Server...', 'color: cyan');
-    connectClient('5e66b065edf0dc63b8ade64a');
-  }, [connectClient]);
+    connectClient(gameId);
+  }, [connectClient, gameId]);
 
   return (
     <div className={styles.game}>
@@ -53,6 +56,7 @@ const Game = ({ messages, addUserInput, connectClient }) => {
 };
 
 Game.propTypes = {
+  pathname: string,
   messages: array,
   addUserInput: func.isRequired,
   connectClient: func.isRequired

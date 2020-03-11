@@ -26,7 +26,7 @@ const App = ({ history }) => {
         <ConnectedRouter history={history}>
           <Header />
           <Switch>
-            <Route path={ROOT_ROUTE} exact component={Game} />
+            <Route path={ROOT_ROUTE} component={Game} />
           </Switch>
         </ConnectedRouter>
       </Auth0Provider>
