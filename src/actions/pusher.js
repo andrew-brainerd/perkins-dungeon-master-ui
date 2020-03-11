@@ -1,8 +1,8 @@
 import * as pusher from '../api/pusher';
 import { getChannel } from '../utils/pusher';
-import { NOW_PLAYING } from '../constants/pods';
+import { UPDATE_GAME } from '../constants/game';
 import { getCurrentGameId } from '../selectors/game';
-import { nowPlayingLoaded } from '../actions/spotify';
+import { addServerMessages } from './game';
 
 const PREFIX = 'PUSHER';
 
@@ -12,17 +12,13 @@ export const SET_SYNCING = `${PREFIX}/SET_SYNCING`;
 
 export const setSyncing = isSyncing => ({ type: SET_SYNCING, isSyncing });
 
-export const connectToUpdates = channelId => async dispatch => {
+export const connectClient = channelId => async dispatch => {
   console.log('%cConnecting to Pusher channel...', 'color: cyan');
-  getChannel(channelId).bind(NOW_PLAYING, track => {
-    track && track.item && console.log('%cNow Playing: %o', 'color: orange', track.item.name);
-    dispatch(nowPlayingLoaded(track));
+  getChannel(channelId).bind(UPDATE_GAME, messages => {
+    messages && console.log('%cGame: %o', 'color: orange', messages);
+    dispatch(addServerMessages(messages));
   });
   dispatch(setSyncing(true));
-};
-
-export const connectClient = gameId => async dispatch => {
-  dispatch(connectToUpdates(gameId));
 };
 
 export const updateClients = (game = {}) => async (dispatch, getState) => {

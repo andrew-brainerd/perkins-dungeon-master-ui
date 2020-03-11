@@ -3,7 +3,8 @@ import {
   ENDING_GAME,
   LOADING_GAME,
   GAME_LOADED,
-  APPEND_MESSAGE
+  APPEND_MESSAGE,
+  APPEND_MESSAGES
 } from '../actions/game';
 
 const initialState = {
@@ -42,6 +43,14 @@ export default function game (state = initialState, action) {
         messages: [
           ...state.messages,
           action.message
+        ]
+      };
+    case APPEND_MESSAGES:
+      return {
+        ...state,
+        messages: [
+          ...state.messages,
+          ...action.messages
         ]
       };
     default:
