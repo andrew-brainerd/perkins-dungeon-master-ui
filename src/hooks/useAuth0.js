@@ -3,6 +3,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import { node, func } from 'prop-types';
 import createAuth0Client from '@auth0/auth0-spa-js';
 import { login } from '../api/index.js';
+import { useDispatch } from 'react-redux';
+import { updateToken } from '../actions/user';
+import { selectCharacter } from '../actions/game';
 
 const DEFAULT_REDIRECT_CALLBACK = () =>
   window.history.replaceState({}, document.title, window.location.pathname);
@@ -20,6 +23,7 @@ export const Auth0Provider = ({
   const [auth0Client, setAuth0] = useState();
   const [loading, setLoading] = useState(true);
   const [popupOpen, setPopupOpen] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const initAuth0 = async () => {
@@ -39,6 +43,8 @@ export const Auth0Provider = ({
       if (isAuthenticated) {
         const auth0User = await auth0Client.getUser();
         const perkinsUser = await login(auth0User.email, auth0User.sub);
+        updateToken(perkinsUser.token)(dispatch);
+        selectCharacter(perkinsUser.characters[0].name)(dispatch); // Hack alert: Skipping character selection
 
         const user = { ...auth0User, player: perkinsUser };
 
@@ -63,6 +69,8 @@ export const Auth0Provider = ({
 
     const auth0User = await auth0Client.getUser();
     const perkinsUser = await login(auth0User.email, auth0User.sub);
+    updateToken(perkinsUser.token)(dispatch);
+    selectCharacter(perkinsUser.characters[0])(dispatch); // Hack alert: Skipping character selection
 
     const user = { ...auth0User, player: perkinsUser };
 
@@ -76,6 +84,8 @@ export const Auth0Provider = ({
 
     const auth0User = await auth0Client.getUser();
     const perkinsUser = await login(auth0User.email, auth0User.sub);
+    updateToken(perkinsUser.token)(dispatch);
+    selectCharacter(perkinsUser.characters[0])(dispatch); // Hack alert: Skipping character selection
 
     const user = { ...auth0User, player: perkinsUser };
 
