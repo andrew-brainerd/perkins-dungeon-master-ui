@@ -1,42 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { string, array, func } from 'prop-types';
+import { useAuth0 } from '../../hooks/useAuth0';
 import TextInput from '../common/TextInput/TextInput';
 import styles from './Game.module.scss';
 
-const demoMessages = [
-  {
-    speaker: 'Dungeon Master',
-    message: 'You are in the well-lit living room of a large house'
-  },
-  {
-    speaker: 'Drogon',
-    message: 'Some shit a dragon would say'
-  },
-  {
-    speaker: 'Bilbo Baggins',
-    message: 'Time for 2nd Breakfast!'
-  },
-  {
-    speaker: 'Cookie Monster',
-    message: 'Cooooooo-kieeeeeee'
-  }
-];
+const getGameId = pathname => pathname.split('/')[2];
 
-const Game = () => {
+const Game = ({ pathname, messages, addUserInput, connectClient }) => {
+  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const [userInput, setUserInput] = useState('');
-  const [userText, setUserText] = useState([]);
+  const gameId = getGameId(pathname);
 
-  const addUserInput = value =>
-    value && setUserText([...userText, { speaker: 'Me', message: value }]);
-
-  const messages = [...demoMessages, ...userText];
+  useEffect(() => {
+    console.log('%cConnecting Client to Game Server...', 'color: cyan');
+    connectClient(gameId);
+  }, [connectClient, gameId]);
 
   return (
     <div className={styles.game}>
       <div className={styles.textDisplay}>
-        {messages.map(({ speaker, message }, i) => (
+        {messages.map(({ character, message, component, color }, i) => (
           <div key={i} className={styles.messageItem}>
-            <div className={styles.speaker}>{speaker}: </div>
-            <div className={styles.message}>{message}</div>
+            {character &&
+              <div className={styles.character} style={{ color }}>{character}: </div>
+            }
+            <div
+              className={styles.message}
+              dangerouslySetInnerHTML={{ __html: message }}
+            />
+            {component}
           </div>
         ))}
       </div>
@@ -48,13 +40,26 @@ const Game = () => {
           value={userInput}
           onChange={setUserInput}
           onPressEnter={() => {
-            addUserInput(userInput);
+            addUserInput({
+              isAuthenticated,
+              login: loginWithRedirect,
+              logout,
+              character: 'User',
+              message: userInput
+            });
             setUserInput('');
           }}
         />
       </div>
     </div>
   );
+};
+
+Game.propTypes = {
+  pathname: string,
+  messages: array,
+  addUserInput: func.isRequired,
+  connectClient: func.isRequired
 };
 
 export default Game;
