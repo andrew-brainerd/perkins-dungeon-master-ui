@@ -2,20 +2,32 @@ import React, { useState, useEffect } from 'react';
 import { string, array, func } from 'prop-types';
 import uuid from 'react-uuid';
 import { useAuth0 } from '../../hooks/useAuth0';
+import usePrevious from '../../hooks/usePrevious';
 import TextInput from '../common/TextInput/TextInput';
 import styles from './Game.module.scss';
 
 const getGameId = pathname => pathname.split('/')[2];
 
-const Game = ({ pathname, messages, addUserInput, connectClient }) => {
+const Game = ({ pathname, messages, addUserInput, shouldUpdateGame, connectClient, loadGame }) => {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const [userInput, setUserInput] = useState('');
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
   const gameId = getGameId(pathname);
+  const prevGameId = usePrevious(gameId);
+  const shouldUpdate = shouldUpdateGame || gameId && gameId !== prevGameId;
 
   useEffect(() => {
     console.log('%cConnecting Client to Game Server...', 'color: cyan');
-    gameId && connectClient(gameId);
+    gameId && gameId !== 'undefined' && connectClient(gameId);
   }, [connectClient, gameId]);
+
+  useEffect(() => {
+    if (shouldUpdate || isInitialLoad) {
+      console.log('Loading Game...');
+      loadGame(gameId);
+      setIsInitialLoad(false);
+    }
+  }, [shouldUpdate, isInitialLoad, gameId, prevGameId]);
 
   return (
     <div className={styles.game}>

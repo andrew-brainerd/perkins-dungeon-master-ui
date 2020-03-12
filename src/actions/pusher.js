@@ -1,8 +1,7 @@
 import * as pusher from '../api/pusher';
 import { getChannel } from '../utils/pusher';
 import { UPDATE_GAME } from '../constants/game';
-import { getCurrentGameId } from '../selectors/game';
-import { addServerMessages } from './game';
+import { triggerUpdate } from './game';
 
 const PREFIX = 'PUSHER';
 
@@ -13,16 +12,10 @@ export const SET_SYNCING = `${PREFIX}/SET_SYNCING`;
 export const setSyncing = isSyncing => ({ type: SET_SYNCING, isSyncing });
 
 export const connectClient = channelId => async dispatch => {
-  console.log('%cConnecting to Pusher channel...', 'color: cyan');
+  console.log('%cConnecting to Pusher channel %s...', 'color: cyan', channelId);
   getChannel(channelId).bind(UPDATE_GAME, messages => {
-    messages && console.log('%cGame: %o', 'color: orange', messages);
-    dispatch(addServerMessages(messages));
+    messages && console.log('%cMessages: %o', 'color: orange', messages);
+    dispatch(triggerUpdate);
   });
   dispatch(setSyncing(true));
-};
-
-export const updateClients = (game = {}) => async (dispatch, getState) => {
-  dispatch({ type: UPDATING_CLIENTS });
-  const gameId = getCurrentGameId(getState());
-  pusher.updateClients(gameId, game);
 };
