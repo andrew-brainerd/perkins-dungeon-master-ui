@@ -9,7 +9,7 @@ import styles from './Game.module.scss';
 const getGameId = pathname => pathname.split('/')[2];
 
 const Game = ({ pathname, messages, shouldUpdateGame, addUserInput, connectClient, loadGame }) => {
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
   const [userInput, setUserInput] = useState('');
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const gameId = getGameId(pathname);
@@ -57,7 +57,7 @@ const Game = ({ pathname, messages, shouldUpdateGame, addUserInput, connectClien
               logout,
               gameId,
               id: uuid(),
-              character: 'User',
+              character: (user || {}).name || 'User',
               message: userInput
             });
             setUserInput('');
