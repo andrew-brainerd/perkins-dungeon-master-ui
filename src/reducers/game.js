@@ -1,6 +1,5 @@
 import {
   STARTING_GAME,
-  ENDING_GAME,
   LOADING_GAME,
   GAME_LOADED,
   TRIGGER_UPDATE
@@ -19,11 +18,6 @@ export default function game (state = initialState, action) {
       return {
         ...state,
         isPlaying: true
-      };
-    case ENDING_GAME:
-      return {
-        ...state,
-        isPlaying: false
       };
     case LOADING_GAME:
       return {

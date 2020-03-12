@@ -34,9 +34,6 @@ export const processUserInput = async (gameId, input) => {
     });
 
     handleResponse(response, 204);
-    const json = await response.json();
-
-    console.log('Process User Input: %o', json);
   }
 
   return parseInput(input);
