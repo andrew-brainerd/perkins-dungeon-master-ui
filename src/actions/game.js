@@ -2,6 +2,7 @@ import * as gameApi from '../api/game';
 import { navTo } from './routing';
 import { GAME_ROUTE } from '../constants/routes';
 import { AUTH_USER, GAME_MASTER } from '../constants/game';
+import { getCurrentGameId } from '../selectors/game';
 
 const PREFIX = 'GAME';
 
@@ -23,13 +24,18 @@ export const startNewGame = name => async dispatch => {
   dispatch(startingGame);
   gameApi.createGame(name).then(game => {
     dispatch(gameLoaded(game));
+    dispatch(gameLoaded(game));
     dispatch(navTo(GAME_ROUTE.replace(':gameId', game._id)));
   });
 };
 
-export const addUserInput = input => async dispatch => {
+export const addUserInput = input => async (dispatch, getState) => {
+  const gameId = getCurrentGameId(getState());
+
+  console.log(gameId);
+
   dispatch(appendMessage(input));
-  gameApi.processUserInput(input).then(response => {
+  gameApi.processUserInput(gameId, input).then(response => {
     if (response.character === AUTH_USER) {
       if (response.message === 'Signing In...') {
         input.login();

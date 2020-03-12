@@ -16,6 +16,17 @@ export const createGame = async (name, createdBy = {}) => {
   return json;
 };
 
-export const processUserInput = async input => {
+export const processUserInput = async (gameId, input) => {
+  const response = await fetch(`${PERKINS_API_URL}/api/games/${gameId}/logs`, {
+    method: 'PUT',
+    headers: basicJsonHeader,
+    body: JSON.stringify({ logs: input })
+  });
+
+  handleResponse(response, 204);
+  const json = await response.json();
+
+  console.log('Process User Input: %o', json);
+
   return parseInput(input);
 };

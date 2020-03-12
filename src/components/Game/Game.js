@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { string, array, func } from 'prop-types';
+import uuid from 'react-uuid';
 import { useAuth0 } from '../../hooks/useAuth0';
 import TextInput from '../common/TextInput/TextInput';
 import styles from './Game.module.scss';
@@ -13,7 +14,7 @@ const Game = ({ pathname, messages, addUserInput, connectClient }) => {
 
   useEffect(() => {
     console.log('%cConnecting Client to Game Server...', 'color: cyan');
-    connectClient(gameId);
+    gameId && connectClient(gameId);
   }, [connectClient, gameId]);
 
   return (
@@ -44,6 +45,8 @@ const Game = ({ pathname, messages, addUserInput, connectClient }) => {
               isAuthenticated,
               login: loginWithRedirect,
               logout,
+              gameId,
+              id: uuid(),
               character: 'User',
               message: userInput
             });

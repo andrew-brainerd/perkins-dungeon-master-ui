@@ -35,6 +35,7 @@ export default function game (state = initialState, action) {
       return {
         ...state,
         isLoadingGame: false,
+        currentGameId: action.game._id,
         currentGame: action.game
       };
     case APPEND_MESSAGE:
