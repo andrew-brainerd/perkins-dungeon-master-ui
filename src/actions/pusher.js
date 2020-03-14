@@ -5,10 +5,9 @@ import { triggerUpdate } from './game';
 const PREFIX = 'PUSHER';
 
 export const CONNECTING_CLIENT = `${PREFIX}/CONNECTING_CLIENT`;
-export const UPDATING_CLIENTS = `${PREFIX}/UPDATING_CLIENTS`;
-export const SET_SYNCING = `${PREFIX}/SET_SYNCING`;
+export const SET_IS_CONNECTED = `${PREFIX}/SET_IS_CONNECTED`;
 
-export const setSyncing = isSyncing => ({ type: SET_SYNCING, isSyncing });
+export const setIsConnected = isConnected => ({ type: SET_IS_CONNECTED, isConnected });
 
 export const connectClient = channelId => async dispatch => {
   console.log('%cConnecting to Pusher channel %s', 'color: cyan', channelId);
@@ -16,5 +15,5 @@ export const connectClient = channelId => async dispatch => {
     gameUpdate && console.log('%cGame Update: %o', 'color: orange', gameUpdate);
     dispatch(triggerUpdate);
   });
-  dispatch(setSyncing(true));
+  dispatch(setIsConnected(true));
 };
