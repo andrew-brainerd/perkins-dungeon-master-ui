@@ -16,6 +16,25 @@ export const createGame = async (name, createdBy = {}) => {
   return json;
 };
 
-export const processUserInput = async input => {
+export const loadGame = async gameId => {
+  const response = await fetch(`${PERKINS_API_URL}/api/games/${gameId}`);
+
+  handleResponse(response);
+  const json = await response.json();
+
+  return json;
+};
+
+export const processUserInput = async (gameId, input) => {
+  if (!!gameId) {
+    const response = await fetch(`${PERKINS_API_URL}/api/games/${gameId}/logs`, {
+      method: 'PUT',
+      headers: basicJsonHeader,
+      body: JSON.stringify({ logs: input })
+    });
+
+    handleResponse(response, 204);
+  }
+
   return parseInput(input);
 };

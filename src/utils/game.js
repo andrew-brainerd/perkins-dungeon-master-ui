@@ -39,8 +39,5 @@ export const parseInput = ({ isAuthenticated, message }) => {
     }
   }
 
-  return {
-    character: 'The Psychiatrist',
-    message: 'And how do you feel about that?'
-  };
+  return {};
 };

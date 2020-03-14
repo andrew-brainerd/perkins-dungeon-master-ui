@@ -1,20 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { string, array, func } from 'prop-types';
+import { string, array, bool, func } from 'prop-types';
+import uuid from 'react-uuid';
 import { useAuth0 } from '../../hooks/useAuth0';
+import usePrevious from '../../hooks/usePrevious';
 import TextInput from '../common/TextInput/TextInput';
 import styles from './Game.module.scss';
 
 const getGameId = pathname => pathname.split('/')[2];
 
-const Game = ({ pathname, messages, addUserInput, connectClient }) => {
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+const Game = ({ pathname, messages, shouldUpdateGame, addUserInput, connectClient, loadGame }) => {
+  const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
   const [userInput, setUserInput] = useState('');
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
   const gameId = getGameId(pathname);
+  const prevGameId = usePrevious(gameId);
+  const shouldUpdate = shouldUpdateGame || (gameId && gameId !== prevGameId);
 
   useEffect(() => {
-    console.log('%cConnecting Client to Game Server...', 'color: cyan');
-    connectClient(gameId);
+    gameId && gameId !== 'undefined' && connectClient(gameId);
   }, [connectClient, gameId]);
+
+  useEffect(() => {
+    if (shouldUpdate || isInitialLoad) {
+      loadGame(gameId);
+      setIsInitialLoad(false);
+    }
+  }, [shouldUpdate, isInitialLoad, gameId, prevGameId]);
 
   return (
     <div className={styles.game}>
@@ -44,7 +55,9 @@ const Game = ({ pathname, messages, addUserInput, connectClient }) => {
               isAuthenticated,
               login: loginWithRedirect,
               logout,
-              character: 'User',
+              gameId,
+              id: uuid(),
+              character: (user || {}).name || 'User',
               message: userInput
             });
             setUserInput('');
@@ -58,8 +71,10 @@ const Game = ({ pathname, messages, addUserInput, connectClient }) => {
 Game.propTypes = {
   pathname: string,
   messages: array,
+  shouldUpdateGame: bool,
   addUserInput: func.isRequired,
-  connectClient: func.isRequired
+  connectClient: func.isRequired,
+  loadGame: func.isRequired
 };
 
 export default Game;

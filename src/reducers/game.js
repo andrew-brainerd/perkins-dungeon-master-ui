@@ -1,17 +1,15 @@
 import {
   STARTING_GAME,
-  ENDING_GAME,
   LOADING_GAME,
   GAME_LOADED,
-  APPEND_MESSAGE,
-  APPEND_MESSAGES
+  TRIGGER_UPDATE
 } from '../actions/game';
 
 const initialState = {
   isPlaying: false,
   isLoadingGame: false,
   currentGame: {},
-  messages: []
+  hasUpdates: false
 };
 
 export default function game (state = initialState, action) {
@@ -20,11 +18,6 @@ export default function game (state = initialState, action) {
       return {
         ...state,
         isPlaying: true
-      };
-    case ENDING_GAME:
-      return {
-        ...state,
-        isPlaying: false
       };
     case LOADING_GAME:
       return {
@@ -35,23 +28,15 @@ export default function game (state = initialState, action) {
       return {
         ...state,
         isLoadingGame: false,
-        currentGame: action.game
+        isPlaying: true,
+        currentGameId: action.game._id,
+        currentGame: action.game,
+        hasUpdates: false
       };
-    case APPEND_MESSAGE:
+    case TRIGGER_UPDATE:
       return {
         ...state,
-        messages: [
-          ...state.messages,
-          action.message
-        ]
-      };
-    case APPEND_MESSAGES:
-      return {
-        ...state,
-        messages: [
-          ...state.messages,
-          ...action.messages
-        ]
+        hasUpdates: true
       };
     default:
       return state;
