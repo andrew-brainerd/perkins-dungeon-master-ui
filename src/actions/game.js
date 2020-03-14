@@ -37,15 +37,15 @@ export const addUserInput = input => async dispatch => {
   const config = omit(['login', 'logout'], input);
 
   return gameApi.processUserInput(gameId, config)
-    .then(response => {
-      if (response.character === AUTH_USER) {
-        if (response.message === 'Signing In...') {
+    .then(({ character, message }) => {
+      if (character === AUTH_USER) {
+        if (message === 'Signing In...') {
           login();
-        } else if (response.message === 'Signing Out...') {
+        } else if (message === 'Signing Out...') {
           logout();
         }
-      } else if (response.character === GAME_MASTER) {
-        if (response.message === 'Starting a new game...') {
+      } else if (character === GAME_MASTER) {
+        if (message === 'Starting a new game...') {
           dispatch(startNewGame('Some New Game', userName));
         }
       }

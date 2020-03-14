@@ -20,14 +20,12 @@ const Game = ({ pathname, messages, shouldUpdateGame, addUserInput, connectClien
 
   useEffect(() => {
     if (isDefined(gameId)) {
-      console.log('Connecting to game %s', gameId);
       connectClient(gameId);
     }
   }, [connectClient, gameId]);
 
   useEffect(() => {
     if (shouldUpdate || isInitialLoad) {
-      console.log('Loading game %s', gameId);
       loadGame(gameId);
       setIsInitialLoad(false);
     }
