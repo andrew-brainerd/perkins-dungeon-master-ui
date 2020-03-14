@@ -1,9 +1,8 @@
+import { omit } from 'ramda';
 import * as gameApi from '../api/game';
 import { navTo } from './routing';
 import { GAME_ROUTE } from '../constants/routes';
 import { AUTH_USER, GAME_MASTER } from '../constants/game';
-import { getCurrentGameId } from '../selectors/game';
-import { isDefined } from '../utils/validation';
 
 const PREFIX = 'GAME';
 
@@ -35,8 +34,9 @@ export const loadGame = gameId => async dispatch => {
 
 export const addUserInput = input => async dispatch => {
   const { login, logout, gameId, userName } = input || {};
+  const config = omit(['login', 'logout'], input);
 
-  return gameApi.processUserInput(gameId, input)
+  return gameApi.processUserInput(gameId, config)
     .then(response => {
       if (response.character === AUTH_USER) {
         if (response.message === 'Signing In...') {

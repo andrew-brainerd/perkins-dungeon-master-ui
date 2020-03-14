@@ -27,10 +27,10 @@ export const loadGame = async gameId => {
 
 export const processUserInput = async (gameId, input) => {
   if (!!gameId) {
-    const response = await fetch(`${PERKINS_API_URL}/api/games/${gameId}/logs`, {
+    const response = await fetch(`${PERKINS_API_URL}/api/games/${gameId}`, {
       method: 'PUT',
       headers: basicJsonHeader,
-      body: JSON.stringify({ logs: input })
+      body: JSON.stringify({ message: input })
     });
 
     handleResponse(response, 204);
