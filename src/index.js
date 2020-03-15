@@ -9,7 +9,7 @@ import './index.scss';
 
 console.log(
   `%cPerkins DM App v${process.env.REACT_APP_VERSION}`,
-  'color: #00fcfe; font-size: 20px;'
+  'color: orange; font-size: 20px;'
 );
 
 WebFont.load({

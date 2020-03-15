@@ -3,21 +3,25 @@ import { string, array, bool, func } from 'prop-types';
 import uuid from 'react-uuid';
 import { useAuth0 } from '../../hooks/useAuth0';
 import usePrevious from '../../hooks/usePrevious';
+import { isDefined } from '../../utils/validation';
 import TextInput from '../common/TextInput/TextInput';
 import styles from './Game.module.scss';
 
 const getGameId = pathname => pathname.split('/')[2];
 
 const Game = ({ pathname, messages, shouldUpdateGame, addUserInput, connectClient, loadGame }) => {
+  const gameId = getGameId(pathname);
   const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
   const [userInput, setUserInput] = useState('');
-  const [isInitialLoad, setIsInitialLoad] = useState(true);
-  const gameId = getGameId(pathname);
+  const [isInitialLoad, setIsInitialLoad] = useState(isDefined(gameId));
+
   const prevGameId = usePrevious(gameId);
-  const shouldUpdate = shouldUpdateGame || (gameId && gameId !== prevGameId);
+  const shouldUpdate = shouldUpdateGame || (isDefined(gameId) && gameId !== prevGameId);
 
   useEffect(() => {
-    gameId && gameId !== 'undefined' && connectClient(gameId);
+    if (isDefined(gameId)) {
+      connectClient(gameId);
+    }
   }, [connectClient, gameId]);
 
   useEffect(() => {
@@ -25,7 +29,7 @@ const Game = ({ pathname, messages, shouldUpdateGame, addUserInput, connectClien
       loadGame(gameId);
       setIsInitialLoad(false);
     }
-  }, [shouldUpdate, isInitialLoad, gameId, prevGameId]);
+  }, [shouldUpdate, isInitialLoad, loadGame, gameId, prevGameId]);
 
   return (
     <div className={styles.game}>
@@ -58,6 +62,7 @@ const Game = ({ pathname, messages, shouldUpdateGame, addUserInput, connectClien
               gameId,
               id: uuid(),
               character: (user || {}).name || 'User',
+              userName: (user || {}).email,
               message: userInput
             });
             setUserInput('');

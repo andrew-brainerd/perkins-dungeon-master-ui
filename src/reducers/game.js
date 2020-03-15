@@ -12,7 +12,7 @@ const initialState = {
   hasUpdates: false
 };
 
-export default function game (state = initialState, action) {
+const game = (state = initialState, action) => {
   switch (action.type) {
     case STARTING_GAME:
       return {
@@ -42,3 +42,5 @@ export default function game (state = initialState, action) {
       return state;
   }
 };
+
+export default game;

@@ -1,8 +1,8 @@
+import { omit } from 'ramda';
 import * as gameApi from '../api/game';
 import { navTo } from './routing';
 import { GAME_ROUTE } from '../constants/routes';
 import { AUTH_USER, GAME_MASTER } from '../constants/game';
-import { getCurrentGameId } from '../selectors/game';
 
 const PREFIX = 'GAME';
 
@@ -16,9 +16,9 @@ export const loadingGame = { type: LOADING_GAME };
 export const gameLoaded = game => ({ type: GAME_LOADED, game });
 export const triggerUpdate = { type: TRIGGER_UPDATE };
 
-export const startNewGame = name => async dispatch => {
+export const startNewGame = (name, createdBy) => async dispatch => {
   dispatch(startingGame);
-  gameApi.createGame(name).then(game => {
+  gameApi.createGame(name, createdBy).then(game => {
     dispatch(gameLoaded(game));
     dispatch(navTo(GAME_ROUTE.replace(':gameId', game._id)));
   });
@@ -32,20 +32,21 @@ export const loadGame = gameId => async dispatch => {
   });
 };
 
-export const addUserInput = input => async (dispatch, getState) => {
-  const gameId = getCurrentGameId(getState());
+export const addUserInput = input => async dispatch => {
+  const { login, logout, gameId, userName } = input || {};
+  const config = omit(['login', 'logout'], input);
 
-  return gameApi.processUserInput(gameId, input)
-    .then(response => {
-      if (response.character === AUTH_USER) {
-        if (response.message === 'Signing In...') {
-          input.login();
-        } else if (response.message === 'Signing Out...') {
-          input.logout();
+  return gameApi.processUserInput(gameId, config)
+    .then(({ character, message }) => {
+      if (character === AUTH_USER) {
+        if (message === 'Signing In...') {
+          login();
+        } else if (message === 'Signing Out...') {
+          logout();
         }
-      } else if (response.character === GAME_MASTER) {
-        if (response.message === 'Starting a new game...') {
-          dispatch(startNewGame('Some New Game'));
+      } else if (character === GAME_MASTER) {
+        if (message === 'Starting a new game...') {
+          dispatch(startNewGame('Some New Game', userName));
         }
       }
     });

@@ -3,7 +3,7 @@ import { parseInput } from '../utils/game';
 
 const PERKINS_API_URL = process.env.REACT_APP_PERKINS_API_URL || 'http://localhost:5000';
 
-export const createGame = async (name, createdBy = {}) => {
+export const createGame = async (name, createdBy = 'System') => {
   const response = await fetch(`${PERKINS_API_URL}/api/games`, {
     method: 'POST',
     headers: basicJsonHeader,
@@ -27,10 +27,10 @@ export const loadGame = async gameId => {
 
 export const processUserInput = async (gameId, input) => {
   if (!!gameId) {
-    const response = await fetch(`${PERKINS_API_URL}/api/games/${gameId}/logs`, {
+    const response = await fetch(`${PERKINS_API_URL}/api/games/${gameId}`, {
       method: 'PUT',
       headers: basicJsonHeader,
-      body: JSON.stringify({ logs: input })
+      body: JSON.stringify({ message: input })
     });
 
     handleResponse(response, 204);
