@@ -4,7 +4,7 @@ import { useAuth0 } from '../../hooks/useAuth0';
 import Button from '../common/Button/Button';
 import styles from './Header.module.scss';
 
-const Header = ({ shouldSignIn, shouldSignOut, startGame }) => {
+const Header = ({ shouldSignIn, shouldSignOut, setCurrentUser, startGame }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isAuthenticated, loginWithRedirect, logout, loading, user } = useAuth0();
 
@@ -15,6 +15,10 @@ const Header = ({ shouldSignIn, shouldSignOut, startGame }) => {
   useEffect(() => {
     isAuthenticated && shouldSignOut && logout();
   }, [isAuthenticated, shouldSignOut, logout]);
+
+  useEffect(() => {
+    user && setCurrentUser(user);
+  }, [user]);
 
   return (
     <>
@@ -59,6 +63,7 @@ const Header = ({ shouldSignIn, shouldSignOut, startGame }) => {
 Header.propTypes = {
   shouldSignIn: bool,
   shouldSignOut: bool,
+  setCurrentUser: func.isRequired,
   startGame: func.isRequired
 };
 

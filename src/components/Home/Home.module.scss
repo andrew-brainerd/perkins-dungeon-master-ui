@@ -1,0 +1,54 @@
+@import '../../styles/colors.scss';
+
+.home {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  z-index: 5;
+
+  .gameButton {
+    position: relative;
+    top: -150px;
+  }
+
+  .newGame {
+    display: none;
+    height: 500px;
+    position: relative;
+    top: 30px;
+    width: 100%;
+    z-index: 6;
+
+    &.isOpen {
+      align-items: center;
+      background: $defaultBackground;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: absolute;
+    }
+
+    .nameInput {
+      border: 1px solid $gray-80;
+      margin: 20px auto 30px;
+      padding: 5px;
+
+      input {
+        text-align: left;
+        text-indent: 10px;
+      }
+    }
+
+    .buttonContainer {
+      display: flex;
+      justify-content: space-around;
+      width: 350px;
+
+      .newGameButton {
+        width: 125px;
+      }
+    }
+  }
+}
