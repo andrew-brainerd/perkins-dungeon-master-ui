@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { bool, func } from 'prop-types';
 import { useAuth0 } from '../../hooks/useAuth0';
+import useOnClickOutside from '../../hooks/useOnClickOutside';
+import { ROOT_ROUTE } from '../../constants/routes';
 import Button from '../common/Button/Button';
 import styles from './Header.module.scss';
 
-const Header = ({ shouldSignIn, shouldSignOut, setCurrentUser, startGame }) => {
+const Header = ({ isPlaying, shouldSignIn, shouldSignOut, setCurrentUser, startGame, navTo }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isAuthenticated, loginWithRedirect, logout, loading, user } = useAuth0();
+  const menuRef = useRef();
 
   useEffect(() => {
     !isAuthenticated && shouldSignIn && !loading && loginWithRedirect();
@@ -20,6 +23,8 @@ const Header = ({ shouldSignIn, shouldSignOut, setCurrentUser, startGame }) => {
     user && setCurrentUser(user);
   }, [user]);
 
+  useOnClickOutside(menuRef, () => setIsMenuOpen(false));
+
   return (
     <>
       <div className={styles.header}>
@@ -32,7 +37,7 @@ const Header = ({ shouldSignIn, shouldSignOut, setCurrentUser, startGame }) => {
         <div className={styles.user}>{(user || {}).name}</div>
       </div>
       {isMenuOpen &&
-        <div className={styles.headerMenu}>
+        <div className={styles.headerMenu} ref={menuRef}>
           {!isAuthenticated && (
             <Button
               className={styles.menuButton}
@@ -45,8 +50,21 @@ const Header = ({ shouldSignIn, shouldSignOut, setCurrentUser, startGame }) => {
               <Button
                 className={styles.menuButton}
                 text={'New Game'}
-                onClick={() => { setIsMenuOpen(false); startGame(); }}
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  startGame();
+                }}
               />
+              {isPlaying && (
+                <Button
+                  className={styles.menuButton}
+                  text={'Exit Game'}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    navTo(ROOT_ROUTE);
+                  }}
+                />
+              )}
               <Button
                 className={styles.menuButton}
                 text={'Sign Out'}
@@ -61,10 +79,12 @@ const Header = ({ shouldSignIn, shouldSignOut, setCurrentUser, startGame }) => {
 };
 
 Header.propTypes = {
+  isPlaying: bool,
   shouldSignIn: bool,
   shouldSignOut: bool,
   setCurrentUser: func.isRequired,
-  startGame: func.isRequired
+  startGame: func.isRequired,
+  navTo: func.isRequired
 };
 
 export default Header;
