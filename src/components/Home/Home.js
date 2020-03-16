@@ -7,19 +7,25 @@ import styles from './Home.module.scss';
 
 const Home = ({ user, startNewGame }) => {
   const [isNewGameOpen, setIsNewGameOpen] = useState(false);
+  const [isLoadGameOpen, setIsLoadGameOpen] = useState(false);
+  const [selectedGame, setSelectedGame] = useState(null);
   const [gameName, setGameName] = useState('');
 
   return (
     <div className={styles.home}>
       {!isEmpty(user) ? (
-        <Button
-          className={styles.gameButton}
-          text={'New Game'}
-          onClick={() => {
-            console.log('Start new game');
-            setIsNewGameOpen(true);
-          }}
-        />
+        <>
+          <Button
+            className={styles.gameButton}
+            text={'New Game'}
+            onClick={() => setIsNewGameOpen(true)}
+          />
+          <Button
+            className={styles.gameButton}
+            text={'Load Game'}
+            onClick={() => setIsLoadGameOpen(true)}
+          />
+        </>
       ) :
         <div className={styles.pleaseSignIn}>
           Sign in to start your adventure!
@@ -48,6 +54,27 @@ const Home = ({ user, startNewGame }) => {
             text={'Start'}
             onClick={() => startNewGame(gameName, user.email)}
             disabled={!gameName || !user}
+          />
+        </div>
+      </div>
+      <div className={[
+        styles.loadGame,
+        isLoadGameOpen ? styles.isOpen : ''
+      ].join(' ')}>
+        <h1>Load A Game</h1>
+        <div className={styles.buttonContainer}>
+          <Button
+            className={styles.loadGameButton}
+            text={'Cancel'}
+            onClick={() => setIsLoadGameOpen(false)}
+          />
+          <Button
+            className={styles.loadGameButton}
+            text={'Load'}
+            onClick={() => {
+              console.log('Load Game');
+            }}
+            disabled={!selectedGame}
           />
         </div>
       </div>
