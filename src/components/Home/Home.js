@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
-import { shape, string, func } from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import { shape, string, array, func } from 'prop-types';
 import { isEmpty } from 'ramda';
 import Button from '../common/Button/Button';
 import TextInput from '../common/TextInput/TextInput';
 import styles from './Home.module.scss';
+import { GAME_ROUTE } from '../../constants/routes';
 
-const Home = ({ user, startNewGame }) => {
+const Home = ({ user, userGames, loadUserGames, startNewGame, navTo }) => {
   const [isNewGameOpen, setIsNewGameOpen] = useState(false);
   const [isLoadGameOpen, setIsLoadGameOpen] = useState(false);
   const [selectedGame, setSelectedGame] = useState(null);
   const [gameName, setGameName] = useState('');
+
+  useEffect(() => {
+    isLoadGameOpen && user && loadUserGames(user.email);
+  }, [isLoadGameOpen]);
 
   return (
     <div className={styles.home}>
@@ -62,6 +67,20 @@ const Home = ({ user, startNewGame }) => {
         isLoadGameOpen ? styles.isOpen : ''
       ].join(' ')}>
         <h1>Load A Game</h1>
+        <div className={styles.gameContainer}>
+          {userGames.map((game, g) => (
+            <div
+              key={g}
+              className={[
+                styles.game,
+                game._id === (selectedGame || {})._id ? styles.selected : ''
+              ].join(' ')}
+              onClick={() => setSelectedGame(game)}
+            >
+              {(game || {}).name}
+            </div>
+          ))}
+        </div>
         <div className={styles.buttonContainer}>
           <Button
             className={styles.loadGameButton}
@@ -72,7 +91,7 @@ const Home = ({ user, startNewGame }) => {
             className={styles.loadGameButton}
             text={'Load'}
             onClick={() => {
-              console.log('Load Game');
+              navTo(GAME_ROUTE.replace(':gameId', selectedGame._id));
             }}
             disabled={!selectedGame}
           />
@@ -86,7 +105,10 @@ Home.propTypes = {
   user: shape({
     email: string
   }),
-  startNewGame: func.isRequired
+  userGames: array,
+  loadUserGames: func.isRequired,
+  startNewGame: func.isRequired,
+  navTo: func.isRequired
 };
 
 export default Home;

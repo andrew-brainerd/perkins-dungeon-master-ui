@@ -78,6 +78,28 @@
       position: absolute;
     }
 
+    .gameContainer {
+      border: 1px solid $gray-80;
+      height: 250px;
+      margin-bottom: 20px;
+      overflow-y: auto;
+      width: 300px;
+
+      .game {
+        cursor: pointer;
+        padding: 10px;
+        transition: 0.3s background;
+
+        &.selected {
+          background: $gray-85;
+        }
+
+        &:hover:not(.selected) {
+          background: $gray-90;
+        }
+      }
+    }
+
     .buttonContainer {
       display: flex;
       justify-content: space-around;

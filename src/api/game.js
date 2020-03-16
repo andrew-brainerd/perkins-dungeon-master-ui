@@ -16,6 +16,15 @@ export const createGame = async (name, createdBy = 'System') => {
   return json;
 };
 
+export const loadUserGames = async userEmail => {
+  const response = await fetch(`${PERKINS_API_URL}/api/games`);
+
+  handleResponse(response);
+  const json = await response.json();
+
+  return json;
+};
+
 export const loadGame = async gameId => {
   const response = await fetch(`${PERKINS_API_URL}/api/games/${gameId}`);
 
