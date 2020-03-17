@@ -7,11 +7,15 @@ import { AUTH_USER, GAME_MASTER } from '../constants/game';
 const PREFIX = 'GAME';
 
 export const STARTING_GAME = `${PREFIX}/STARTING_GAME`;
+export const LOADING_GAMES = `${PREFIX}/LOADING_GAMES`;
+export const GAMES_LOADED = `${PREFIX}/GAMES_LOADED`;
 export const LOADING_GAME = `${PREFIX}/LOADING_GAME`;
 export const GAME_LOADED = `${PREFIX}/GAME_LOADED`;
 export const TRIGGER_UPDATE = `${PREFIX}/TRIGGER_UPDATE`;
 
 export const startingGame = { type: STARTING_GAME };
+export const loadingGames = { type: LOADING_GAMES };
+export const gamesLoaded = games => ({ type: GAMES_LOADED, games });
 export const loadingGame = { type: LOADING_GAME };
 export const gameLoaded = game => ({ type: GAME_LOADED, game });
 export const triggerUpdate = { type: TRIGGER_UPDATE };
@@ -22,6 +26,13 @@ export const startNewGame = (name, createdBy) => async dispatch => {
     dispatch(gameLoaded(game));
     dispatch(navTo(GAME_ROUTE.replace(':gameId', game._id)));
   });
+};
+
+export const loadUserGames = userEmail => async dispatch => {
+  dispatch(loadingGames);
+  gameApi.loadUserGames(userEmail).then(({ items }) =>
+    dispatch(gamesLoaded(items))
+  );
 };
 
 export const loadGame = gameId => async dispatch => {
