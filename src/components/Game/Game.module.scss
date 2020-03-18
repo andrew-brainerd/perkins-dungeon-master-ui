@@ -14,6 +14,8 @@
     margin-bottom: 80px;
 
     .messageItem {
+      align-items: flex-start;
+      display: flex;
       margin: 10px auto;
       user-select: none;
 

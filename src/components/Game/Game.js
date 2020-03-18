@@ -61,6 +61,7 @@ const Game = ({ pathname, messages, shouldUpdateGame, addUserInput, connectClien
               logout,
               gameId,
               id: uuid(),
+              timestamp: new Date(),
               character: (user || {}).name || 'User',
               userName: (user || {}).email,
               message: userInput
