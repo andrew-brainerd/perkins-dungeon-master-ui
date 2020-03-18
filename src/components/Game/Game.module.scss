@@ -2,16 +2,18 @@
 
 .game {
   display: flex;
-  height: 95%;
   margin: 40px auto 10px auto;
-  overflow-y: auto;
+  overflow-y: hidden;
   position: relative;
   width: 95%;
   z-index: 0;
 
   .textDisplay {
     align-self: flex-end;
+    height: 90%;
     margin-bottom: 80px;
+    overflow-y: auto;
+    width: 100%;
 
     .messageItem {
       align-items: flex-start;

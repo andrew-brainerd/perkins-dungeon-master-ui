@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { string, array, bool, func } from 'prop-types';
+import { number, string, array, bool, func } from 'prop-types';
 import uuid from 'react-uuid';
 import { useAuth0 } from '../../hooks/useAuth0';
 import usePrevious from '../../hooks/usePrevious';
@@ -9,14 +9,17 @@ import styles from './Game.module.scss';
 
 const getGameId = pathname => pathname.split('/')[2];
 
-const Game = ({ pathname, messages, shouldUpdateGame, addUserInput, connectClient, loadGame }) => {
+const HEADER_HEIGHT = 30;
+const INPUT_HEIGHT = 105;
+
+const Game = ({ height, pathname, messages, shouldUpdateGame, addUserInput, connectClient, loadGame }) => {
   const gameId = getGameId(pathname);
   const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
   const [userInput, setUserInput] = useState('');
   const [isInitialLoad, setIsInitialLoad] = useState(isDefined(gameId));
-
   const prevGameId = usePrevious(gameId);
   const shouldUpdate = shouldUpdateGame || (isDefined(gameId) && gameId !== prevGameId);
+  const textDisplayHeight = height - HEADER_HEIGHT - INPUT_HEIGHT;
 
   useEffect(() => {
     if (isDefined(gameId)) {
@@ -33,7 +36,7 @@ const Game = ({ pathname, messages, shouldUpdateGame, addUserInput, connectClien
 
   return (
     <div className={styles.game}>
-      <div className={styles.textDisplay}>
+      <div className={styles.textDisplay} style={{ height: textDisplayHeight }}>
         {messages.map(({ character, message, component, color }, i) => (
           <div key={i} className={styles.messageItem}>
             {character &&
@@ -75,6 +78,7 @@ const Game = ({ pathname, messages, shouldUpdateGame, addUserInput, connectClien
 };
 
 Game.propTypes = {
+  height: number.isRequired,
   pathname: string,
   messages: array,
   shouldUpdateGame: bool,
