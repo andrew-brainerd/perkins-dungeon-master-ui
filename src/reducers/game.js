@@ -12,7 +12,7 @@ const initialState = {
   isPlaying: false,
   isLoadingGame: false,
   currentGame: {},
-  currentUserGames: [],
+  currentPlayerGames: [],
   localMessages: [],
   hasUpdates: false
 };
@@ -28,13 +28,13 @@ const game = (state = initialState, action) => {
       return {
         ...state,
         isLoadingGames: true,
-        currentUserGames: null
+        currentPlayerGames: null
       };
     case GAMES_LOADED:
       return {
         ...state,
         isLoadingGames: false,
-        currentUserGames: action.games
+        currentPlayerGames: action.games
       };
     case LOADING_GAME:
       return {

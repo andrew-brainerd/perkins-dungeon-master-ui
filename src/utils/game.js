@@ -3,6 +3,7 @@ import uuid from 'react-uuid';
 import { toLower } from 'ramda';
 import { AUTH_USER, GAME_MASTER } from '../constants/game';
 import HelpText from '../components/HelpText/HelpText';
+import NewCharacter from '../components/Game/NewCharacter/container';
 
 const getUniqueMessage = message => ({
   id: uuid(),
@@ -11,12 +12,17 @@ const getUniqueMessage = message => ({
 });
 
 export const parseLocalInput = ({ message }) => {
-  const userInput = toLower(message).trim();
+  const playerInput = toLower(message).trim();
 
-  if (userInput === 'help') {
+  if (playerInput === 'help') {
     return getUniqueMessage({
       character: null,
       component: <HelpText />
+    });
+  } else if (playerInput === 'newchar' || playerInput === 'newcharacter') {
+    return getUniqueMessage({
+      character: null,
+      component: <NewCharacter />
     });
   }
 
@@ -24,21 +30,21 @@ export const parseLocalInput = ({ message }) => {
 };
 
 export const parseServerResponse = ({ isAuthenticated, message }) => {
-  const userInput = toLower(message).trim();
+  const serverOutput = toLower(message).trim();
 
-  if (userInput === 'login' || userInput === 'signin') {
+  if (serverOutput === 'login' || serverOutput === 'signin') {
     return getUniqueMessage({
       character: AUTH_USER,
       message: isAuthenticated ? 'Already signed in :D' : 'Signing In...',
       color: 'orange'
     });
-  } else if (userInput === 'logout' || userInput === 'signout') {
+  } else if (serverOutput === 'logout' || serverOutput === 'signout') {
     return getUniqueMessage({
       character: AUTH_USER,
       message: isAuthenticated ? 'Signing Out...' : 'Not signed in',
       color: 'orange'
     });
-  } else if (userInput === 'newgame') {
+  } else if (serverOutput === 'newgame') {
     if (isAuthenticated) {
       return {
         character: GAME_MASTER,

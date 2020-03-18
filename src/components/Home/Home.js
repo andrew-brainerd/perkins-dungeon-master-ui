@@ -6,19 +6,19 @@ import TextInput from '../common/TextInput/TextInput';
 import styles from './Home.module.scss';
 import { GAME_ROUTE } from '../../constants/routes';
 
-const Home = ({ user, userGames, loadUserGames, startNewGame, navTo }) => {
+const Home = ({ player, playerGames, loadPlayerGames, startNewGame, navTo }) => {
   const [isNewGameOpen, setIsNewGameOpen] = useState(false);
   const [isLoadGameOpen, setIsLoadGameOpen] = useState(false);
   const [selectedGame, setSelectedGame] = useState(null);
   const [gameName, setGameName] = useState('');
 
   useEffect(() => {
-    isLoadGameOpen && user && loadUserGames(user.email);
-  }, [isLoadGameOpen, user, loadUserGames]);
+    isLoadGameOpen && player && loadPlayerGames(player.email);
+  }, [isLoadGameOpen, player, loadPlayerGames]);
 
   return (
     <div className={styles.home}>
-      {!isEmpty(user) ? (
+      {!isEmpty(player) ? (
         <>
           <Button
             className={styles.gameButton}
@@ -57,8 +57,8 @@ const Home = ({ user, userGames, loadUserGames, startNewGame, navTo }) => {
           <Button
             className={styles.newGameButton}
             text={'Start'}
-            onClick={() => startNewGame(gameName, user.email)}
-            disabled={!gameName || !user}
+            onClick={() => startNewGame(gameName, player.email)}
+            disabled={!gameName || !player}
           />
         </div>
       </div>
@@ -68,7 +68,7 @@ const Home = ({ user, userGames, loadUserGames, startNewGame, navTo }) => {
       ].join(' ')}>
         <h1>Load A Game</h1>
         <div className={styles.gameContainer}>
-          {userGames.map((game, g) => (
+          {playerGames.map((game, g) => (
             <div
               key={g}
               className={[
@@ -102,11 +102,11 @@ const Home = ({ user, userGames, loadUserGames, startNewGame, navTo }) => {
 };
 
 Home.propTypes = {
-  user: shape({
+  player: shape({
     email: string
   }),
-  userGames: array,
-  loadUserGames: func.isRequired,
+  playerGames: array,
+  loadPlayerGames: func.isRequired,
   startNewGame: func.isRequired,
   navTo: func.isRequired
 };

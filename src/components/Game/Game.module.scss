@@ -32,6 +32,11 @@
       .message {
         display: inline-block;
         font-style: italic;
+
+        pre {
+          position: relative;
+          left: -200px;
+        }
       }
     }
   }
