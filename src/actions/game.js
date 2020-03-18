@@ -3,6 +3,7 @@ import * as gameApi from '../api/game';
 import { navTo } from './routing';
 import { GAME_ROUTE } from '../constants/routes';
 import { AUTH_USER, GAME_MASTER, localCommands } from '../constants/game';
+import { parseLocalInput } from '../utils/game';
 
 const PREFIX = 'GAME';
 
@@ -50,9 +51,12 @@ export const addUserInput = input => async dispatch => {
   const config = omit(['login', 'logout'], input);
 
   if (localCommands.includes(message)) {
-    console.log('Local Message: ', message);
+    const localResponse = parseLocalInput(input);
 
-    return dispatch(addLocalMessage(input));
+    dispatch(addLocalMessage(input));
+    dispatch(addLocalMessage(localResponse));
+
+    return 0;
   }
 
   return gameApi.processUserInput(gameId, config)

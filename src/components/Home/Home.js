@@ -14,7 +14,7 @@ const Home = ({ user, userGames, loadUserGames, startNewGame, navTo }) => {
 
   useEffect(() => {
     isLoadGameOpen && user && loadUserGames(user.email);
-  }, [isLoadGameOpen]);
+  }, [isLoadGameOpen, user, loadUserGames]);
 
   return (
     <div className={styles.home}>

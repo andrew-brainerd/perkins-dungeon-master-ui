@@ -21,7 +21,7 @@ const Header = ({ isPlaying, shouldSignIn, shouldSignOut, setCurrentUser, startG
 
   useEffect(() => {
     user && setCurrentUser(user);
-  }, [user]);
+  }, [user, setCurrentUser]);
 
   useOnClickOutside(menuRef, () => setIsMenuOpen(false));
 

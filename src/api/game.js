@@ -1,5 +1,5 @@
 import { basicJsonHeader, handleResponse } from './tools';
-import { parseInput } from '../utils/game';
+import { parseServerResponse } from '../utils/game';
 
 const PERKINS_API_URL = process.env.REACT_APP_PERKINS_API_URL || 'http://localhost:5000';
 
@@ -45,5 +45,5 @@ export const processUserInput = async (gameId, input) => {
     handleResponse(response, 204);
   }
 
-  return parseInput(input);
+  return parseServerResponse(input);
 };

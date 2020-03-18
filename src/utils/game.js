@@ -1,28 +1,43 @@
 import React from 'react';
+import uuid from 'react-uuid';
 import { toLower } from 'ramda';
 import { AUTH_USER, GAME_MASTER } from '../constants/game';
 import HelpText from '../components/HelpText/HelpText';
 
-export const parseInput = ({ isAuthenticated, message }) => {
+const getUniqueMessage = message => ({
+  id: uuid(),
+  timestamp: new Date(),
+  ...message
+});
+
+export const parseLocalInput = ({ message }) => {
   const userInput = toLower(message).trim();
 
   if (userInput === 'help') {
-    return {
+    return getUniqueMessage({
       character: null,
       component: <HelpText />
-    };
-  } else if (userInput === 'login' || userInput === 'signin') {
-    return {
+    });
+  }
+
+  return {};
+};
+
+export const parseServerResponse = ({ isAuthenticated, message }) => {
+  const userInput = toLower(message).trim();
+
+  if (userInput === 'login' || userInput === 'signin') {
+    return getUniqueMessage({
       character: AUTH_USER,
       message: isAuthenticated ? 'Already signed in :D' : 'Signing In...',
       color: 'orange'
-    };
+    });
   } else if (userInput === 'logout' || userInput === 'signout') {
-    return {
+    return getUniqueMessage({
       character: AUTH_USER,
       message: isAuthenticated ? 'Signing Out...' : 'Not signed in',
       color: 'orange'
-    };
+    });
   } else if (userInput === 'newgame') {
     if (isAuthenticated) {
       return {
