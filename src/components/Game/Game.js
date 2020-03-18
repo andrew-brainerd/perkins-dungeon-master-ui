@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { number, string, array, bool, func } from 'prop-types';
 import uuid from 'react-uuid';
 import { useAuth0 } from '../../hooks/useAuth0';
@@ -17,6 +17,8 @@ const Game = ({ height, pathname, messages, shouldUpdateGame, addUserInput, conn
   const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
   const [userInput, setUserInput] = useState('');
   const [isInitialLoad, setIsInitialLoad] = useState(isDefined(gameId));
+  const textDisplayRef = useRef();
+
   const prevGameId = usePrevious(gameId);
   const shouldUpdate = shouldUpdateGame || (isDefined(gameId) && gameId !== prevGameId);
   const textDisplayHeight = height - HEADER_HEIGHT - INPUT_HEIGHT;
@@ -34,9 +36,13 @@ const Game = ({ height, pathname, messages, shouldUpdateGame, addUserInput, conn
     }
   }, [shouldUpdate, isInitialLoad, loadGame, gameId, prevGameId]);
 
+  useEffect(() => {
+    textDisplayRef.current.scrollTop = textDisplayRef.current.scrollHeight;
+  }, [messages.length]);
+
   return (
     <div className={styles.game}>
-      <div className={styles.textDisplay} style={{ height: textDisplayHeight }}>
+      <div className={styles.textDisplay} ref={textDisplayRef} style={{ height: textDisplayHeight }}>
         {messages.map(({ character, message, component, color }, i) => (
           <div key={i} className={styles.messageItem}>
             {character &&
