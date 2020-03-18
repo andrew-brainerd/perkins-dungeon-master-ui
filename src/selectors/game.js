@@ -1,12 +1,24 @@
 import { path, pathOr } from 'ramda';
+import { createSelector } from 'reselect';
 
 export const getIsPlaying = path(['game', 'isPlaying']);
 
 export const getCurrentGameId = path(['game', 'currentGameId']);
 
-export const getMessages = pathOr([], ['game', 'messages']);
+export const getLocalMessages = pathOr([], ['game', 'localMessages']);
 
-export const getGameLogs = pathOr([], ['game', 'currentGame', 'messages']);
+export const getGameMessages = pathOr([], ['game', 'currentGame', 'messages']);
+
+export const getMessages = createSelector([getGameMessages, getLocalMessages],
+  (gameMessages, localMessages) => {
+    const allMessages = [...gameMessages, ...localMessages];
+    const sortedMessages = allMessages.slice().sort((a, b) =>
+      new Date(a.timestamp) - new Date(b.timestamp)
+    );
+
+    return sortedMessages;
+  }
+);
 
 export const getShouldUpdateGame = path(['game', 'hasUpdates']);
 

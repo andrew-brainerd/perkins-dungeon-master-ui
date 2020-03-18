@@ -2,14 +2,14 @@ import { connect } from 'react-redux';
 import { compose } from 'ramda';
 import withSizes from 'react-sizes';
 import { getPathname } from '../../selectors/routing';
-import { getGameLogs, getShouldUpdateGame } from '../../selectors/game';
+import { getMessages, getShouldUpdateGame } from '../../selectors/game';
 import { addUserInput, loadGame } from '../../actions/game';
 import { connectClient } from '../../actions/pusher';
 import Game from './Game';
 
 const mapStateToProps = state => ({
   pathname: getPathname(state),
-  messages: getGameLogs(state),
+  messages: getMessages(state),
   shouldUpdateGame: getShouldUpdateGame(state)
 });
 

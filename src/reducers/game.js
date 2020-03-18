@@ -4,7 +4,8 @@ import {
   GAMES_LOADED,
   LOADING_GAME,
   GAME_LOADED,
-  TRIGGER_UPDATE
+  TRIGGER_UPDATE,
+  ADD_LOCAL_MESSAGE
 } from '../actions/game';
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   isLoadingGame: false,
   currentGame: {},
   currentUserGames: [],
+  localMessages: [],
   hasUpdates: false
 };
 
@@ -52,6 +54,14 @@ const game = (state = initialState, action) => {
       return {
         ...state,
         hasUpdates: true
+      };
+    case ADD_LOCAL_MESSAGE:
+      return {
+        ...state,
+        localMessages: [
+          ...state.localMessages,
+          action.message
+        ]
       };
     default:
       return state;
