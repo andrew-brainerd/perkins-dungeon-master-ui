@@ -13,7 +13,7 @@ const Home = ({ player, playerGames, loadPlayerGames, startNewGame, navTo }) => 
   const [gameName, setGameName] = useState('');
 
   useEffect(() => {
-    isLoadGameOpen && player && loadPlayerGames(player.email);
+    isLoadGameOpen && player && loadPlayerGames(player._id);
   }, [isLoadGameOpen, player, loadPlayerGames]);
 
   return (

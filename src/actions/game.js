@@ -29,7 +29,9 @@ export const addLocalMessage = message => ({ type: ADD_LOCAL_MESSAGE, message })
 export const creatingCharacter = { type: CREATING_CHARACTER };
 export const characterCreated = character => ({ type: CHARACTER_CREATED, character });
 
-export const startNewGame = (name, createdBy) => async dispatch => {
+export const startNewGame = name => async (dispatch, getState) => {
+  const createdBy = getCurrentPlayerId(getState());
+
   dispatch(startingGame);
   gameApi.createGame(name, createdBy).then(game => {
     dispatch(gameLoaded(game));
@@ -37,9 +39,9 @@ export const startNewGame = (name, createdBy) => async dispatch => {
   });
 };
 
-export const loadPlayerGames = playerEmail => async dispatch => {
+export const loadPlayerGames = playerId => async dispatch => {
   dispatch(loadingGames);
-  gameApi.loadPlayerGames(playerEmail).then(({ items }) =>
+  gameApi.loadPlayerGames(playerId).then(({ items }) =>
     dispatch(gamesLoaded(items))
   );
 };
@@ -53,7 +55,7 @@ export const loadGame = gameId => async dispatch => {
 };
 
 export const addPlayerInput = input => async dispatch => {
-  const { login, logout, gameId, playerName, message } = input || {};
+  const { login, logout, gameId, message } = input || {};
   const config = omit(['login', 'logout'], input);
 
   if (localCommands.includes(message)) {
@@ -75,7 +77,7 @@ export const addPlayerInput = input => async dispatch => {
         }
       } else if (character === GAME_MASTER) {
         if (message === 'Starting a new game...') {
-          dispatch(startNewGame('Some New Game', playerName));
+          dispatch(startNewGame('Some New Game'));
         }
       }
     });

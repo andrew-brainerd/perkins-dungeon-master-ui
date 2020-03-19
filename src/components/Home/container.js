@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadPlayerGames: playerEmail => dispatch(loadPlayerGames(playerEmail)),
+  loadPlayerGames: playerId => dispatch(loadPlayerGames(playerId)),
   startNewGame: (name, createdBy) => dispatch(startNewGame(name, createdBy)),
   navTo: path => dispatch(navTo(path))
 });
