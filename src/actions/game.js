@@ -4,6 +4,8 @@ import { navTo } from './routing';
 import { GAME_ROUTE } from '../constants/routes';
 import { AUTH_USER, GAME_MASTER, localCommands } from '../constants/game';
 import { parseLocalInput } from '../utils/game';
+import { getCurrentGameId } from '../selectors/game';
+import { getCurrentPlayerId } from '../selectors/player';
 
 const PREFIX = 'GAME';
 
@@ -79,9 +81,12 @@ export const addPlayerInput = input => async dispatch => {
     });
 };
 
-export const createCharacter = name => async dispatch => {
+export const createCharacter = name => async (dispatch, getState) => {
+  const gameId = getCurrentGameId(getState());
+  const createdBy = getCurrentPlayerId(getState());
+
   dispatch(creatingCharacter);
-  gameApi.createCharacter(name).then(character =>
-    dispatch(characterCreated)
+  gameApi.createCharacter(gameId, { name, createdBy }).then(character =>
+    dispatch(characterCreated(character))
   );
 };

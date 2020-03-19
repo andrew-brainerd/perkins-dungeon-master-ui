@@ -48,12 +48,12 @@ export const processPlayerInput = async (gameId, input) => {
   return parseServerResponse(input);
 };
 
-export const createCharacter = async (gameId, character) => {
+export const createCharacter = async (gameId, { name, createdBy, ...rest }) => {
   if (!!gameId) {
-    const response = await fetch(`${PERKINS_API_URL}/api/characters/${gameId}`, {
+    const response = await fetch(`${PERKINS_API_URL}/api/characters`, {
       method: 'POST',
       headers: basicJsonHeader,
-      body: JSON.stringify({ character })
+      body: JSON.stringify({ gameId, name, createdBy })
     });
 
     handleResponse(response, 201);
