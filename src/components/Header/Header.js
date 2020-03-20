@@ -47,14 +47,6 @@ const Header = ({ isPlaying, shouldSignIn, shouldSignOut, setCurrentPlayer, star
           )}
           {isAuthenticated && (
             <>
-              <Button
-                className={styles.menuButton}
-                text={'New Game'}
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  startGame();
-                }}
-              />
               {isPlaying && (
                 <Button
                   className={styles.menuButton}

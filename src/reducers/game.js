@@ -22,7 +22,8 @@ const game = (state = initialState, action) => {
     case STARTING_GAME:
       return {
         ...state,
-        isPlaying: true
+        isPlaying: true,
+        localMessages: []
       };
     case LOADING_GAMES:
       return {
