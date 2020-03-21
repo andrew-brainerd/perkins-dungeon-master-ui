@@ -1,9 +1,7 @@
 @import '../../../styles/mixins.scss';
 
-.textInputContainer {
-  position: relative;
-
-  .textInput {
+.dropdown {
+  select {
     @include defaultInput();
 
     width: 100%;

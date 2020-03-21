@@ -15,9 +15,9 @@ export const loadingCharacter = { type: LOADING_CHARACTER };
 export const characterLoaded = character => ({ type: CHARACTER_LOADED, character });
 
 export const createCharacter = character => async (dispatch, getState) => {
-  const createdBy = getCurrentPlayerId(getState());
+  const playerId = getCurrentPlayerId(getState());
 
-  const newCharacter = { ...character, createdBy };
+  const newCharacter = { ...character, playerId };
 
   dispatch(creatingCharacter);
   charactersApi.createCharacter(newCharacter).then(newCharacter => {

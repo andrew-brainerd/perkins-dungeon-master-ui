@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { func } from 'prop-types';
+import { string, func } from 'prop-types';
+import { CHARACTER_CLASSES } from '../../constants/game';
 import TextInput from '../common/TextInput/TextInput';
 import Button from '../common/Button/Button';
+import Dropdown from '../common/Dropdown/Dropdown';
 import styles from './NewCharacter.module.scss';
 
 const NewCharacter = ({ gameId, createCharacter }) => {
-  const [name, setName] = useState('');
+  const [characterName, setCharacterName] = useState('');
+  const [characterClass, setCharacterClass] = useState(CHARACTER_CLASSES[0].value);
 
   return (
     <div className={styles.newCharacter}>
@@ -15,21 +18,39 @@ const NewCharacter = ({ gameId, createCharacter }) => {
           autofocus
           inputClassName={styles.textInput}
           placeholder={'BoJack Horseman'}
-          value={name}
-          onChange={setName}
+          value={characterName}
+          onChange={setCharacterName}
+        />
+      </div>
+      <div className={styles.characterInput}>
+        <div className={styles.label}>Character Class</div>
+        <Dropdown
+          className={styles.classDropdown}
+          options={CHARACTER_CLASSES}
+          displayKey={'name'}
+          valueKey={'value'}
+          selectedOption={characterClass}
+          onOptionSelected={option => {
+            console.log(option);
+            setCharacterClass(option);
+          }}
         />
       </div>
       <Button
         className={styles.submit}
         text={'Create'}
-        onClick={() => createCharacter({ name, gameId })}
-        disabled={!name}
+        onClick={() => createCharacter({
+          name: characterName,
+          gameId
+        })}
+        disabled={!characterName}
       />
     </div>
   );
 };
 
 NewCharacter.propTypes = {
+  gameId: string,
   createCharacter: func.isRequired
 };
 

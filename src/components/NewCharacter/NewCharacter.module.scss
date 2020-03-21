@@ -4,15 +4,13 @@
   margin: 50px;
   position: relative;
 
-  .label {
-    padding: 7px 10px;
-  }
+  .characterInput {
+    margin: 15px auto;
+    width: 250px;
 
-  .textInput {
-    background: $gray-90;
-    border: 1px solid $gray-80;
-    padding: 10px 15px;
-    text-align: left;
+    .label {
+      padding: 7px 10px;
+    }
   }
 
   .submit {
