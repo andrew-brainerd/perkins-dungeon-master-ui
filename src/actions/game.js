@@ -1,10 +1,9 @@
 import { omit } from 'ramda';
 import * as gameApi from '../api/game';
-import { navTo } from './routing';
-import { GAME_ROUTE } from '../constants/routes';
+import { GAME_ROUTE, CHARACTER_CREATION_ROUTE } from '../constants/routes';
 import { AUTH_USER, GAME_MASTER, localCommands } from '../constants/game';
+import { navTo } from './routing';
 import { parseLocalInput } from '../utils/game';
-import { getCurrentGameId } from '../selectors/game';
 import { getCurrentPlayerId } from '../selectors/player';
 
 const PREFIX = 'GAME';
@@ -16,8 +15,6 @@ export const LOADING_GAME = `${PREFIX}/LOADING_GAME`;
 export const GAME_LOADED = `${PREFIX}/GAME_LOADED`;
 export const TRIGGER_UPDATE = `${PREFIX}/TRIGGER_UPDATE`;
 export const ADD_LOCAL_MESSAGE = `${PREFIX}/ADD_LOCAL_MESSAGE`;
-export const CREATING_CHARACTER = `${PREFIX}/CREATING_CHARACTER`;
-export const CHARACTER_CREATED = `${PREFIX}/CHARACTER_CREATED`;
 
 export const startingGame = { type: STARTING_GAME };
 export const loadingGames = { type: LOADING_GAMES };
@@ -26,8 +23,6 @@ export const loadingGame = { type: LOADING_GAME };
 export const gameLoaded = game => ({ type: GAME_LOADED, game });
 export const triggerUpdate = { type: TRIGGER_UPDATE };
 export const addLocalMessage = message => ({ type: ADD_LOCAL_MESSAGE, message });
-export const creatingCharacter = { type: CREATING_CHARACTER };
-export const characterCreated = character => ({ type: CHARACTER_CREATED, character });
 
 export const startNewGame = name => async (dispatch, getState) => {
   const createdBy = getCurrentPlayerId(getState());
@@ -35,7 +30,7 @@ export const startNewGame = name => async (dispatch, getState) => {
   dispatch(startingGame);
   gameApi.createGame(name, createdBy).then(game => {
     dispatch(gameLoaded(game));
-    dispatch(navTo(GAME_ROUTE.replace(':gameId', game._id)));
+    dispatch(navTo(CHARACTER_CREATION_ROUTE.replace(':gameId', game._id)));
   });
 };
 
@@ -81,14 +76,4 @@ export const addPlayerInput = input => async dispatch => {
         }
       }
     });
-};
-
-export const createCharacter = name => async (dispatch, getState) => {
-  const gameId = getCurrentGameId(getState());
-  const createdBy = getCurrentPlayerId(getState());
-
-  dispatch(creatingCharacter);
-  gameApi.createCharacter(gameId, { name, createdBy }).then(character =>
-    dispatch(characterCreated(character))
-  );
 };

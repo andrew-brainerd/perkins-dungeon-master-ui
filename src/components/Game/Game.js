@@ -7,13 +7,10 @@ import { isDefined } from '../../utils/validation';
 import TextInput from '../common/TextInput/TextInput';
 import styles from './Game.module.scss';
 
-const getGameId = pathname => pathname.split('/')[2];
-
 const HEADER_HEIGHT = 30;
 const INPUT_HEIGHT = 105;
 
-const Game = ({ height, pathname, messages, shouldUpdateGame, addPlayerInput, connectClient, loadGame }) => {
-  const gameId = getGameId(pathname);
+const Game = ({ height, gameId, messages, shouldUpdateGame, addPlayerInput, connectClient, loadGame }) => {
   const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
   const [playerInput, setPlayerInput] = useState('');
   const [isInitialLoad, setIsInitialLoad] = useState(isDefined(gameId));
@@ -85,6 +82,7 @@ const Game = ({ height, pathname, messages, shouldUpdateGame, addPlayerInput, co
 
 Game.propTypes = {
   height: number.isRequired,
+  gameId: string,
   pathname: string,
   messages: array,
   shouldUpdateGame: bool,

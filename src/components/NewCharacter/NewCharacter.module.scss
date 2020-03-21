@@ -1,0 +1,21 @@
+@import '../../styles/colors.scss';
+
+.newCharacter {
+  margin: 50px;
+  position: relative;
+
+  .label {
+    padding: 7px 10px;
+  }
+
+  .textInput {
+    background: $gray-90;
+    border: 1px solid $gray-80;
+    padding: 10px 15px;
+    text-align: left;
+  }
+
+  .submit {
+    margin-top: 30px;
+  }
+}

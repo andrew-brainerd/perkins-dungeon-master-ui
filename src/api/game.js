@@ -1,7 +1,6 @@
 import { basicJsonHeader, handleResponse } from './tools';
 import { parseServerResponse } from '../utils/game';
-
-const PERKINS_API_URL = process.env.REACT_APP_PERKINS_API_URL || 'http://localhost:5000';
+import { PERKINS_API_URL } from '../constants/api';
 
 export const createGame = async (name, createdBy = 'System') => {
   const response = await fetch(`${PERKINS_API_URL}/api/games`, {

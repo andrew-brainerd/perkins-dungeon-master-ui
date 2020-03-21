@@ -1,11 +1,11 @@
 import { basicJsonHeader, handleResponse } from './tools';
 import { PERKINS_API_URL } from '../constants/api';
 
-export const createPlayer = async (name, email) => {
-  const response = await fetch(`${PERKINS_API_URL}/api/players`, {
+export const createCharacter = async character => {
+  const response = await fetch(`${PERKINS_API_URL}/api/characters`, {
     method: 'POST',
     headers: basicJsonHeader,
-    body: JSON.stringify({ name, email })
+    body: JSON.stringify(character)
   });
 
   handleResponse(response, 201);
@@ -14,12 +14,11 @@ export const createPlayer = async (name, email) => {
   return json;
 };
 
-export const getPlayerByEmail = async email => {
-  const response = await fetch(`${PERKINS_API_URL}/api/players/email?email=${email}`);
+export const loadCharacter = async characterId => {
+  const response = await fetch(`${PERKINS_API_URL}/api/characters?characterId=${characterId}`);
 
   handleResponse(response);
   const json = await response.json();
 
   return json;
 };
-
