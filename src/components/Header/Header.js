@@ -6,7 +6,7 @@ import { ROOT_ROUTE } from '../../constants/routes';
 import Button from '../common/Button/Button';
 import styles from './Header.module.scss';
 
-const Header = ({ isPlaying, shouldSignIn, shouldSignOut, setCurrentUser, startGame, navTo }) => {
+const Header = ({ isPlaying, shouldSignIn, shouldSignOut, setCurrentPlayer, startGame, navTo }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isAuthenticated, loginWithRedirect, logout, loading, user } = useAuth0();
   const menuRef = useRef();
@@ -20,8 +20,8 @@ const Header = ({ isPlaying, shouldSignIn, shouldSignOut, setCurrentUser, startG
   }, [isAuthenticated, shouldSignOut, logout]);
 
   useEffect(() => {
-    user && setCurrentUser(user);
-  }, [user, setCurrentUser]);
+    user && setCurrentPlayer(user);
+  }, [user, setCurrentPlayer]);
 
   useOnClickOutside(menuRef, () => setIsMenuOpen(false));
 
@@ -34,7 +34,7 @@ const Header = ({ isPlaying, shouldSignIn, shouldSignOut, setCurrentUser, startG
         >
           |||
         </div>
-        <div className={styles.user}>{(user || {}).name}</div>
+        <div className={styles.player}>{(user || {}).name}</div>
       </div>
       {isMenuOpen &&
         <div className={styles.headerMenu} ref={menuRef}>
@@ -47,14 +47,6 @@ const Header = ({ isPlaying, shouldSignIn, shouldSignOut, setCurrentUser, startG
           )}
           {isAuthenticated && (
             <>
-              <Button
-                className={styles.menuButton}
-                text={'New Game'}
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  startGame();
-                }}
-              />
               {isPlaying && (
                 <Button
                   className={styles.menuButton}
@@ -82,7 +74,7 @@ Header.propTypes = {
   isPlaying: bool,
   shouldSignIn: bool,
   shouldSignOut: bool,
-  setCurrentUser: func.isRequired,
+  setCurrentPlayer: func.isRequired,
   startGame: func.isRequired,
   navTo: func.isRequired
 };

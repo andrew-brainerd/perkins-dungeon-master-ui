@@ -16,8 +16,8 @@ export const createGame = async (name, createdBy = 'System') => {
   return json;
 };
 
-export const loadUserGames = async userEmail => {
-  const response = await fetch(`${PERKINS_API_URL}/api/games?userEmail=${userEmail}`);
+export const loadPlayerGames = async playerId => {
+  const response = await fetch(`${PERKINS_API_URL}/api/games?playerId=${playerId}`);
 
   handleResponse(response);
   const json = await response.json();
@@ -34,7 +34,7 @@ export const loadGame = async gameId => {
   return json;
 };
 
-export const processUserInput = async (gameId, input) => {
+export const processPlayerInput = async (gameId, input) => {
   if (!!gameId) {
     const response = await fetch(`${PERKINS_API_URL}/api/games/${gameId}`, {
       method: 'PUT',
@@ -46,4 +46,21 @@ export const processUserInput = async (gameId, input) => {
   }
 
   return parseServerResponse(input);
+};
+
+export const createCharacter = async (gameId, { name, createdBy, ...rest }) => {
+  if (!!gameId) {
+    const response = await fetch(`${PERKINS_API_URL}/api/characters`, {
+      method: 'POST',
+      headers: basicJsonHeader,
+      body: JSON.stringify({ gameId, name, createdBy })
+    });
+
+    handleResponse(response, 201);
+    const json = response.json();
+
+    return json;
+  }
+
+  return {};
 };

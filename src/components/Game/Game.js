@@ -12,10 +12,10 @@ const getGameId = pathname => pathname.split('/')[2];
 const HEADER_HEIGHT = 30;
 const INPUT_HEIGHT = 105;
 
-const Game = ({ height, pathname, messages, shouldUpdateGame, addUserInput, connectClient, loadGame }) => {
+const Game = ({ height, pathname, messages, shouldUpdateGame, addPlayerInput, connectClient, loadGame }) => {
   const gameId = getGameId(pathname);
   const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
-  const [userInput, setUserInput] = useState('');
+  const [playerInput, setPlayerInput] = useState('');
   const [isInitialLoad, setIsInitialLoad] = useState(isDefined(gameId));
   const textDisplayRef = useRef();
 
@@ -61,21 +61,21 @@ const Game = ({ height, pathname, messages, shouldUpdateGame, addUserInput, conn
           className={styles.command}
           inputClassName={styles.commandInput}
           autofocus
-          value={userInput}
-          onChange={setUserInput}
+          value={playerInput}
+          onChange={setPlayerInput}
           onPressEnter={() => {
-            addUserInput({
+            addPlayerInput({
               isAuthenticated,
               login: loginWithRedirect,
               logout,
               gameId,
               id: uuid(),
               timestamp: new Date(),
-              character: (user || {}).name || 'User',
-              userName: (user || {}).email,
-              message: userInput
+              character: (user || {}).name || 'Player',
+              playerName: (user || {}).email,
+              message: playerInput
             });
-            setUserInput('');
+            setPlayerInput('');
           }}
         />
       </div>
@@ -88,7 +88,7 @@ Game.propTypes = {
   pathname: string,
   messages: array,
   shouldUpdateGame: bool,
-  addUserInput: func.isRequired,
+  addPlayerInput: func.isRequired,
   connectClient: func.isRequired,
   loadGame: func.isRequired
 };

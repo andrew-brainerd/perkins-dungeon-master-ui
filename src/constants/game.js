@@ -5,5 +5,5 @@ export const UPDATE_GAME = 'updateGame';
 export const localCommands = [
   'help',
   'newchar',
-  'newcharacters'
+  'newcharacter'
 ];

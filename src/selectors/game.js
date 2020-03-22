@@ -22,4 +22,4 @@ export const getMessages = createSelector([getGameMessages, getLocalMessages],
 
 export const getShouldUpdateGame = path(['game', 'hasUpdates']);
 
-export const getCurrentUserGames = pathOr([], ['game', 'currentUserGames']);
+export const getCurrentPlayerGames = pathOr([], ['game', 'currentPlayerGames']);
