@@ -1,24 +1,18 @@
-import { basicJsonHeader, handleResponse } from './tools';
-import { PERKINS_API_URL } from '../constants/api';
+import { prop } from 'ramda';
+import { client } from './tools';
 
 export const createCharacter = async character => {
-  const response = await fetch(`${PERKINS_API_URL}/api/characters`, {
-    method: 'POST',
-    headers: basicJsonHeader,
-    body: JSON.stringify(character)
-  });
+  const response = await client.post('/characters', { ...character })
+    .then(prop('data'))
+    .catch(err => console.error(err));
 
-  handleResponse(response, 201);
-  const json = await response.json();
-
-  return json;
+  return response;
 };
 
 export const loadCharacter = async characterId => {
-  const response = await fetch(`${PERKINS_API_URL}/api/characters?characterId=${characterId}`);
+  const response = await client.get('/characters', { params: { characterId } })
+    .then(prop('data'))
+    .catch(err => console.error(err));
 
-  handleResponse(response);
-  const json = await response.json();
-
-  return json;
+  return response;
 };

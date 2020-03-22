@@ -1,25 +1,19 @@
-import { basicJsonHeader, handleResponse } from './tools';
-import { PERKINS_API_URL } from '../constants/api';
+import { prop } from 'ramda';
+import { client } from './tools';
 
 export const createPlayer = async (name, email) => {
-  const response = await fetch(`${PERKINS_API_URL}/api/players`, {
-    method: 'POST',
-    headers: basicJsonHeader,
-    body: JSON.stringify({ name, email })
-  });
+  const response = await client.post('/players', { name, email })
+    .then(prop('data'))
+    .catch(err => console.error(err));
 
-  handleResponse(response, 201);
-  const json = await response.json();
-
-  return json;
+  return response;
 };
 
 export const getPlayerByEmail = async email => {
-  const response = await fetch(`${PERKINS_API_URL}/api/players/email?email=${email}`);
+  const response = await client.get('/players/email', { params: { email } })
+    .then(prop('data'))
+    .catch(err => console.error(err));
 
-  handleResponse(response);
-  const json = await response.json();
-
-  return json;
+  return response;
 };
 

@@ -1,4 +1,5 @@
 import { isEmpty, keys } from 'ramda';
+import axios from 'axios';
 
 export const printResponse = response => console.log('Response: %o', response);
 
@@ -19,3 +20,8 @@ export const parseOptions = options => {
       `${option}=${options[option]}`
     ).join('&')}`) || '';
 };
+
+export const client = axios.create({
+  baseURL: process.env.REACT_APP_PERKINS_API_URL || 'http://localhost:5000/api/',
+  headers: basicJsonHeader
+});

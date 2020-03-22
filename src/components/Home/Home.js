@@ -45,8 +45,9 @@ const Home = ({ player, playerGames, loadPlayerGames, startNewGame, navTo }) => 
           autofocus
           className={styles.nameInput}
           placeholder={'Name'}
-          onChange={setGameName}
           value={gameName}
+          onChange={setGameName}
+          onPressEnter={() => startNewGame(gameName, player.email)}
         />
         <div className={styles.buttonContainer}>
           <Button
