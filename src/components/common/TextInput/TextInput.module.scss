@@ -6,6 +6,6 @@
   .textInput {
     @include defaultInput();
 
-    width: 100%;
+    font-size: 1.5em;
   }
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { string, func } from 'prop-types';
-import { CHARACTER_CLASSES } from '../../constants/game';
+import { CHARACTER_CLASSES, CHARACTER_RACES } from '../../constants/game';
 import TextInput from '../common/TextInput/TextInput';
 import Button from '../common/Button/Button';
 import Dropdown from '../common/Dropdown/Dropdown';
@@ -9,6 +9,7 @@ import styles from './NewCharacter.module.scss';
 const NewCharacter = ({ gameId, createCharacter }) => {
   const [characterName, setCharacterName] = useState('');
   const [characterClass, setCharacterClass] = useState(CHARACTER_CLASSES[0].value);
+  const [characterRace, setCharacterRace] = useState(CHARACTER_RACES[0].value);
 
   return (
     <div className={styles.newCharacter}>
@@ -30,10 +31,18 @@ const NewCharacter = ({ gameId, createCharacter }) => {
           displayKey={'name'}
           valueKey={'value'}
           selectedOption={characterClass}
-          onOptionSelected={option => {
-            console.log(option);
-            setCharacterClass(option);
-          }}
+          onOptionSelected={option => setCharacterClass(option)}
+        />
+      </div>
+      <div className={styles.characterInput}>
+        <div className={styles.label}>Character Race</div>
+        <Dropdown
+          className={styles.raceDropdown}
+          options={CHARACTER_RACES}
+          displayKey={'name'}
+          valueKey={'value'}
+          selectedOption={characterRace}
+          onOptionSelected={option => setCharacterRace(option)}
         />
       </div>
       <Button
@@ -41,6 +50,8 @@ const NewCharacter = ({ gameId, createCharacter }) => {
         text={'Create'}
         onClick={() => createCharacter({
           name: characterName,
+          class: characterClass,
+          race: characterRace,
           gameId
         })}
         disabled={!characterName}

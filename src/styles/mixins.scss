@@ -2,14 +2,12 @@
 
 @mixin defaultInput {
   appearance: none;
-  background: $gray-90;
-  border: 1px solid $gray-80;
+  background: $defaultBackground;
+  border: 1px solid transparent;
   border-radius: 5px;
   color: $defaultTextColor;
-  font-size: 1.5em;
   outline: none;
-  padding: 10px 15px;
-  text-align: left;
+  padding: 10px 5px;
 }
 
 @mixin boxShadow {

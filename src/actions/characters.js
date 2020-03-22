@@ -7,10 +7,12 @@ import { getCurrentPlayerId } from '../selectors/player';
 const PREFIX = 'GAME';
 
 export const CREATING_CHARACTER = `${PREFIX}/CREATING_CHARACTER`;
+export const CREATING_CHARACTER_FAILED = `${PREFIX}/LOADING_CHARACTER_FAILED`;
 export const LOADING_CHARACTER = `${PREFIX}/LOADING_CHARACTER`;
 export const CHARACTER_LOADED = `${PREFIX}/CHARACTER_CREATED`;
 
 export const creatingCharacter = { type: CREATING_CHARACTER };
+export const creatingCharacterFailed = err => ({ type: CREATING_CHARACTER_FAILED, err });
 export const loadingCharacter = { type: LOADING_CHARACTER };
 export const characterLoaded = character => ({ type: CHARACTER_LOADED, character });
 
@@ -21,8 +23,13 @@ export const createCharacter = character => async (dispatch, getState) => {
 
   dispatch(creatingCharacter);
   charactersApi.createCharacter(newCharacter).then(newCharacter => {
-    dispatch(characterLoaded(newCharacter));
-    dispatch(navTo(GAME_ROUTE.replace(':gameId', character.gameId)));
+    console.log(newCharacter);
+    if (newCharacter.message && newCharacter.message.toLowerCase().includes('error')) {
+      dispatch(creatingCharacterFailed(newCharacter.message));
+    } else {
+      dispatch(characterLoaded(newCharacter));
+      dispatch(navTo(GAME_ROUTE.replace(':gameId', character.gameId)));
+    }
   });
 };
 

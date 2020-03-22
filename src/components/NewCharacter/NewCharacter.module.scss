@@ -11,6 +11,13 @@
     .label {
       padding: 7px 10px;
     }
+
+    .textInput,
+    select {
+      border: 1px solid $gray-80;
+      background: $gray-90;
+      padding: 10px 15px;
+    }
   }
 
   .submit {

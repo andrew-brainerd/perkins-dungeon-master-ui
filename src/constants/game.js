@@ -60,15 +60,42 @@ export const CHARACTER_CLASSES = [
 ];
 
 export const CHARACTER_RACES = [
-  'Dwarf',
-  'Elf',
-  'Halfling',
-  'Human',
-  'Dragonborn',
-  'Gnome',
-  'Half-Elf',
-  'Half-Orc',
-  'Tiefling'
+  {
+    name: 'Dwarf',
+    value: 'dwarf'
+  },
+  {
+    name: 'Elf',
+    value: 'elf'
+  },
+  {
+    name: 'Halfling',
+    value: 'halfling'
+  },
+  {
+    name: 'Human',
+    value: 'human'
+  },
+  {
+    name: 'Dragonborn',
+    value: 'dragonborn'
+  },
+  {
+    name: 'Gnome',
+    value: 'gnome'
+  },
+  {
+    name: 'Half-Elf',
+    value: 'halfElf'
+  },
+  {
+    name: 'Half-Orc',
+    value: 'halfOrc'
+  },
+  {
+    name: 'Tiefling',
+    value: 'tiefling'
+  }
 ];
 
 export const CHARACTER_ALIGNMENTS = [
