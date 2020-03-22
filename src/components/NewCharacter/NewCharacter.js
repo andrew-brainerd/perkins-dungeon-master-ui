@@ -54,7 +54,7 @@ const NewCharacter = ({ gameId, createCharacter }) => {
           race: characterRace,
           gameId
         })}
-        disabled={!characterName}
+        disabled={!characterName || !characterClass || !characterRace}
       />
     </div>
   );
