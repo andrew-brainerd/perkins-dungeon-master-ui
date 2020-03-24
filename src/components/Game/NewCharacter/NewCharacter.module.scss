@@ -1,0 +1,13 @@
+.newCharacter {
+  position: relative;
+
+  .input {
+    .characterInput {
+      border: 1px dashed yellow;
+    }
+
+    .textInput {
+      text-align: left;
+    }
+  }
+}

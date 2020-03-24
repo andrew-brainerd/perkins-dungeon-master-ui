@@ -3,6 +3,7 @@ import uuid from 'react-uuid';
 import { toLower } from 'ramda';
 import { AUTH_USER, GAME_MASTER } from '../constants/game';
 import HelpText from '../components/HelpText/HelpText';
+import NewCharacter from '../components/Game/NewCharacter/container';
 
 const getUniqueMessage = message => ({
   id: uuid(),
@@ -17,6 +18,11 @@ export const parseLocalInput = ({ message }) => {
     return getUniqueMessage({
       character: null,
       component: <HelpText />
+    });
+  } else if (playerInput === 'newchar' || playerInput === 'newcharacter') {
+    return getUniqueMessage({
+      character: null,
+      component: <NewCharacter />
     });
   }
 
