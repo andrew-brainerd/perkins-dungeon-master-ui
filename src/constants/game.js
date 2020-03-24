@@ -11,7 +11,7 @@ export const localCommands = [
 export const CHARACTER_CLASSES = [
   {
     name: '-- Not Selected --',
-    value: null
+    value: ''
   },
   {
     name: 'Barbarian',
@@ -66,7 +66,7 @@ export const CHARACTER_CLASSES = [
 export const CHARACTER_RACES = [
   {
     name: '-- Not Selected --',
-    value: null
+    value: ''
   },
   {
     name: 'Dwarf',

@@ -31,7 +31,7 @@ Dropdown.propTypes = {
   options: array.isRequired,
   displayKey: string.isRequired,
   valueKey: string.isRequired,
-  selectedOption: string.isRequired,
+  selectedOption: string,
   onOptionSelected: func.isRequired
 };
 
