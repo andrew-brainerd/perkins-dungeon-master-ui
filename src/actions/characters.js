@@ -37,10 +37,11 @@ export const loadCharacter = characterId => async (dispatch, getState) => {
   const gameId = getCurrentGameId(getState());
 
   dispatch(loadingCharacter);
-  charactersApi.loadCharacter(gameId, characterId)
-    .then(character => {
-      dispatch(characterLoaded(character));
-      dispatch(navTo(GAME_ROUTE.replace(':gameId', gameId)));
-    })
-    .catch(err => dispatch(loadingCharacterFailed(err)));
+  try {
+    const character = charactersApi.loadCharacter(gameId, characterId);
+    dispatch(characterLoaded(character));
+    dispatch(navTo(GAME_ROUTE.replace(':gameId', gameId)));
+  } catch (err) {
+    dispatch(loadingCharacterFailed(err));
+  }
 };
