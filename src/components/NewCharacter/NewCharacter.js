@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { string, func } from 'prop-types';
-import { CHARACTER_CLASSES, CHARACTER_RACES } from '../../constants/game';
+import { characters } from 'gm-common';
 import TextInput from '../common/TextInput/TextInput';
 import Button from '../common/Button/Button';
 import Dropdown from '../common/Dropdown/Dropdown';
@@ -11,7 +11,7 @@ const characterClassOptions = [
     name: '-- Not Selected --',
     value: ''
   },
-  ...CHARACTER_CLASSES
+  ...characters.classes
 ];
 
 const characterRaceOptions = [
@@ -19,7 +19,7 @@ const characterRaceOptions = [
     name: '-- Not Selected --',
     value: ''
   },
-  ...CHARACTER_RACES
+  ...characters.races
 ];
 
 const NewCharacter = ({ gameId, createCharacter }) => {

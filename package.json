@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "connected-react-router": "^6.7.0",
+    "gm-common": "^0.0.6",
     "history": "^4.10.1",
     "node-sass": "^4.13.1",
     "pusher-js": "^5.1.1",

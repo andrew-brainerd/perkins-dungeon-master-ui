@@ -1,7 +1,8 @@
 import { omit } from 'ramda';
+import { AUTH_USER, GAME_MASTER } from 'gm-common';
 import * as gameApi from '../api/game';
 import { GAME_ROUTE, CHARACTER_CREATION_ROUTE } from '../constants/routes';
-import { AUTH_USER, GAME_MASTER, localCommands } from '../constants/game';
+import { localCommands } from '../constants/game';
 import { navTo } from './routing';
 import { parseLocalInput } from '../utils/game';
 import { getCurrentPlayerId } from '../selectors/player';
