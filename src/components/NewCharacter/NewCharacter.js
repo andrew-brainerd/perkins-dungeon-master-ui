@@ -6,10 +6,26 @@ import Button from '../common/Button/Button';
 import Dropdown from '../common/Dropdown/Dropdown';
 import styles from './NewCharacter.module.scss';
 
+const characterClassOptions = [
+  {
+    name: '-- Not Selected --',
+    value: ''
+  },
+  ...CHARACTER_CLASSES
+];
+
+const characterRaceOptions = [
+  {
+    name: '-- Not Selected --',
+    value: ''
+  },
+  ...CHARACTER_RACES
+];
+
 const NewCharacter = ({ gameId, createCharacter }) => {
   const [characterName, setCharacterName] = useState('');
-  const [characterClass, setCharacterClass] = useState(CHARACTER_CLASSES[0].value);
-  const [characterRace, setCharacterRace] = useState(CHARACTER_RACES[0].value);
+  const [characterClass, setCharacterClass] = useState(characterClassOptions[0].value);
+  const [characterRace, setCharacterRace] = useState(characterRaceOptions[0].value);
 
   return (
     <div className={styles.newCharacter}>
@@ -27,7 +43,7 @@ const NewCharacter = ({ gameId, createCharacter }) => {
         <div className={styles.label}>Character Class</div>
         <Dropdown
           className={styles.classDropdown}
-          options={CHARACTER_CLASSES}
+          options={characterClassOptions}
           displayKey={'name'}
           valueKey={'value'}
           selectedOption={characterClass}
@@ -38,7 +54,7 @@ const NewCharacter = ({ gameId, createCharacter }) => {
         <div className={styles.label}>Character Race</div>
         <Dropdown
           className={styles.raceDropdown}
-          options={CHARACTER_RACES}
+          options={characterRaceOptions}
           displayKey={'name'}
           valueKey={'value'}
           selectedOption={characterRace}

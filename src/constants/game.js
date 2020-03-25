@@ -10,10 +10,6 @@ export const localCommands = [
 
 export const CHARACTER_CLASSES = [
   {
-    name: '-- Not Selected --',
-    value: ''
-  },
-  {
     name: 'Barbarian',
     value: 'barbarian'
   },
@@ -64,10 +60,6 @@ export const CHARACTER_CLASSES = [
 ];
 
 export const CHARACTER_RACES = [
-  {
-    name: '-- Not Selected --',
-    value: ''
-  },
   {
     name: 'Dwarf',
     value: 'dwarf'
