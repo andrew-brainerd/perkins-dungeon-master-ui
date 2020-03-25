@@ -47,7 +47,6 @@ const game = (state = initialState, action) => {
         ...state,
         isLoadingGame: false,
         isPlaying: true,
-        currentGameId: action.game._id,
         currentGame: action.game,
         hasUpdates: false
       };

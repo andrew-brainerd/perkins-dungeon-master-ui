@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { createCharacter } from '../../../actions/game';
+import { createCharacter } from '../../../actions/characters';
 import NewCharacter from './NewCharacter';
 
 const mapDispatchToProps = dispatch => ({

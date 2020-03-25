@@ -1,66 +1,37 @@
-import { basicJsonHeader, handleResponse } from './tools';
+import { prop } from 'ramda';
+import { client } from './tools';
 import { parseServerResponse } from '../utils/game';
 
-const PERKINS_API_URL = process.env.REACT_APP_PERKINS_API_URL || 'http://localhost:5000';
-
 export const createGame = async (name, createdBy = 'System') => {
-  const response = await fetch(`${PERKINS_API_URL}/api/games`, {
-    method: 'POST',
-    headers: basicJsonHeader,
-    body: JSON.stringify({ name, createdBy })
-  });
+  const response = await client.post('/games', { name, createdBy })
+    .then(prop('data'))
+    .catch(err => console.error(err));
 
-  handleResponse(response, 201);
-  const json = await response.json();
-
-  return json;
+  return response;
 };
 
 export const loadPlayerGames = async playerId => {
-  const response = await fetch(`${PERKINS_API_URL}/api/games?playerId=${playerId}`);
+  const response = await client.get('/games', { params: { playerId } })
+    .then(prop('data'))
+    .catch(err => console.error(err));
 
-  handleResponse(response);
-  const json = await response.json();
-
-  return json;
+  return response;
 };
 
 export const loadGame = async gameId => {
-  const response = await fetch(`${PERKINS_API_URL}/api/games/${gameId}`);
+  const response = await client.get(`/games/${gameId}`)
+    .then(prop('data'))
+    .catch(err => console.error(err));
 
-  handleResponse(response);
-  const json = await response.json();
-
-  return json;
+  return response;
 };
 
 export const processPlayerInput = async (gameId, input) => {
   if (!!gameId) {
-    const response = await fetch(`${PERKINS_API_URL}/api/games/${gameId}`, {
-      method: 'PUT',
-      headers: basicJsonHeader,
-      body: JSON.stringify({ message: input })
-    });
-
-    handleResponse(response, 204);
+    await client.put(`/games/${gameId}`, { message: input })
+      .then(prop('data'))
+      .catch(err => console.error(err));
   }
 
   return parseServerResponse(input);
-};
-
-export const createCharacter = async (gameId, { name, createdBy, ...rest }) => {
-  if (!!gameId) {
-    const response = await fetch(`${PERKINS_API_URL}/api/characters`, {
-      method: 'POST',
-      headers: basicJsonHeader,
-      body: JSON.stringify({ gameId, name, createdBy })
-    });
-
-    handleResponse(response, 201);
-    const json = response.json();
-
-    return json;
-  }
-
-  return {};
 };

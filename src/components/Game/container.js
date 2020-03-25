@@ -8,7 +8,7 @@ import { connectClient } from '../../actions/pusher';
 import Game from './Game';
 
 const mapStateToProps = state => ({
-  pathname: getPathname(state),
+  gameId: getPathname(state).split('/')[2],
   messages: getMessages(state),
   shouldUpdateGame: getShouldUpdateGame(state)
 });

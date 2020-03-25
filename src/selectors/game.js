@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 
 export const getIsPlaying = path(['game', 'isPlaying']);
 
-export const getCurrentGameId = path(['game', 'currentGameId']);
+export const getCurrentGameId = path(['game', 'currentGame', '_id']);
 
 export const getLocalMessages = pathOr([], ['game', 'localMessages']);
 
