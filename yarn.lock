@@ -5311,6 +5311,11 @@ globule@^1.0.0:
     lodash "~4.17.12"
     minimatch "~3.0.2"
 
+gm-common@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/gm-common/-/gm-common-0.0.6.tgz#632d59db43909ba7d6e1079039eb2b17caf24760"
+  integrity sha512-fnyrqQ4/D3o6nepJUrmzwpTTYau8lPY1gmyBUVnHlaZwhUBgpglY60ZEDTrzFC9RYkCOroT3STCIApTMJWjeUg==
+
 gonzales-pe@^4.2.4:
   version "4.2.4"
   resolved "https://registry.yarnpkg.com/gonzales-pe/-/gonzales-pe-4.2.4.tgz#356ae36a312c46fe0f1026dd6cb539039f8500d2"

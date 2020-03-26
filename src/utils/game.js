@@ -1,7 +1,7 @@
 import React from 'react';
 import uuid from 'react-uuid';
 import { toLower } from 'ramda';
-import { AUTH_USER, GAME_MASTER } from '../constants/game';
+import { AUTH_USER, GAME_MASTER } from 'gm-common';
 import HelpText from '../components/HelpText/HelpText';
 import NewCharacter from '../components/Game/NewCharacter/container';
 
