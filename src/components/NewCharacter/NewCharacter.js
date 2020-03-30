@@ -22,10 +22,28 @@ const characterRaceOptions = [
   ...characters.races
 ];
 
+const characterOrderOptions = [
+  {
+    name: '-- Not Selected --',
+    value: ''
+  },
+  ...characters.alignments.orders
+];
+
+const characterMoralityOptions = [
+  {
+    name: '-- Not Selected --',
+    value: ''
+  },
+  ...characters.alignments.morality
+];
+
 const NewCharacter = ({ gameId, createCharacter }) => {
   const [characterName, setCharacterName] = useState('');
   const [characterClass, setCharacterClass] = useState(characterClassOptions[0].value);
   const [characterRace, setCharacterRace] = useState(characterRaceOptions[0].value);
+  const [characterOrder, setCharacterOrder] = useState(characterOrderOptions[0].value);
+  const [characterMorality, setCharacterMorality] = useState(characterMoralityOptions[0].value);
 
   return (
     <div className={styles.newCharacter}>
@@ -61,6 +79,26 @@ const NewCharacter = ({ gameId, createCharacter }) => {
           onOptionSelected={option => setCharacterRace(option)}
         />
       </div>
+      <div className={styles.characterInput}>
+        <div className={styles.label}>Order</div>
+        <Dropdown
+          className={styles.orderDropdown}
+          options={characterOrderOptions}
+          displayKey={'name'}
+          valueKey={'value'}
+          selectedOption={characterOrder}
+          onOptionSelected={option => setCharacterOrder(option)}
+        />
+        <div className={styles.label}>Morality</div>
+        <Dropdown
+          className={styles.moralityDropdown}
+          options={characterMoralityOptions}
+          displayKey={'name'}
+          valueKey={'value'}
+          selectedOption={characterMorality}
+          onOptionSelected={option => setCharacterMorality(option)}
+        />
+      </div>
       <Button
         className={styles.submit}
         text={'Create'}
@@ -68,9 +106,16 @@ const NewCharacter = ({ gameId, createCharacter }) => {
           name: characterName,
           class: characterClass,
           race: characterRace,
+          order: characterOrder,
+          morality: characterMorality,
           gameId
         })}
-        disabled={!characterName || !characterClass || !characterRace}
+        disabled={!characterName ||
+          !characterClass ||
+          !characterRace ||
+          !characterOrder ||
+          !characterMorality
+        }
       />
     </div>
   );
