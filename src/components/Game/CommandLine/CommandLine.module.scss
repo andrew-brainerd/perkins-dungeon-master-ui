@@ -1,0 +1,16 @@
+@import '../../../styles/colors.scss';
+
+.commandLine {
+  .command {
+    border-top: 1px solid $gray-80;
+    bottom: 10px;
+    left: 0;
+    position: absolute;
+    width: 90%;
+
+    .commandInput {
+      text-align: left;
+      width: 100%;
+    }
+  }
+}

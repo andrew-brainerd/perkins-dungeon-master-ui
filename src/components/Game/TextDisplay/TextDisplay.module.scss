@@ -1,0 +1,27 @@
+.textDisplay {
+  align-self: flex-end;
+  height: 90%;
+  margin-bottom: 80px;
+  overflow-y: auto;
+  width: 100%;
+
+  .messageItem {
+    align-items: flex-start;
+    display: flex;
+    margin: 10px auto;
+    user-select: none;
+
+    .character {
+      color: cyan;
+      display: inline-block;
+      margin-right: 20px;
+      overflow: hidden;
+      width: 150px;
+    }
+
+    .message {
+      display: inline-block;
+      font-style: italic;
+    }
+  }
+}
