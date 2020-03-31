@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { number, string, bool, func } from 'prop-types';
 import usePrevious from '../../hooks/usePrevious';
 import { isDefined } from '../../utils/validation';
-import { CHARACTER_CREATION_ROUTE } from '../../constants/routes';
 import TextDisplay from './TextDisplay/container';
 import CommandLine from './CommandLine/container';
 import styles from './Game.module.scss';
@@ -10,19 +9,9 @@ import styles from './Game.module.scss';
 const HEADER_HEIGHT = 30;
 const INPUT_HEIGHT = 105;
 
-const Game = ({
-  height,
-  gameId,
-  playerId,
-  characterId,
-  isLoadingCharacters,
-  shouldUpdateGame,
-  connectClient,
-  loadGame,
-  loadCharacters,
-  navTo
-}) => {
+const Game = ({ height, gameId, shouldUpdateGame, connectClient, loadGame }) => {
   const [isInitialLoad, setIsInitialLoad] = useState(isDefined(gameId));
+
   const prevGameId = usePrevious(gameId);
   const hasUpdatedGameId = isDefined(gameId) && gameId !== prevGameId;
   const shouldUpdate = shouldUpdateGame || hasUpdatedGameId;
@@ -48,7 +37,7 @@ const Game = ({
     }
   }, [shouldUpdate, isInitialLoad, loadGame, loadCharacters, gameId, playerId, prevGameId]);
 
-  return !isInitialLoad && (
+  return (
     <div className={styles.game}>
       <TextDisplay height={textDisplayHeight} />
       <CommandLine />
@@ -59,9 +48,7 @@ const Game = ({
 Game.propTypes = {
   height: number.isRequired,
   gameId: string,
-  playerId: string,
-  characterId: string,
-  isLoadingCharacters: bool,
+  pathname: string,
   shouldUpdateGame: bool,
   connectClient: func.isRequired,
   loadGame: func.isRequired,

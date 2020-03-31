@@ -1,13 +1,15 @@
 import React, { useRef, useEffect } from 'react';
-import { number, array, string } from 'prop-types';
+import { number, array } from 'prop-types';
 import styles from './TextDisplay.module.scss';
 
-const TextDisplay = ({ height, messages, characterId }) => {
+const TextDisplay = ({ height, messages }) => {
   const textDisplayRef = useRef();
 
   useEffect(() => {
+    const lastMessage = messages[messages.length];
+    console.log('Last Message: %o', lastMessage);
     textDisplayRef.current.scrollTop = textDisplayRef.current.scrollHeight;
-  }, [messages, characterId]);
+  }, [messages.length]);
 
   return (
     <div className={styles.textDisplay} ref={textDisplayRef} style={{ height }}>
@@ -29,8 +31,7 @@ const TextDisplay = ({ height, messages, characterId }) => {
 
 TextDisplay.propTypes = {
   height: number.isRequired,
-  messages: array.isRequired,
-  characterId: string
+  messages: array.isRequired
 };
 
 export default TextDisplay;
