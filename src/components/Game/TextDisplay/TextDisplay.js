@@ -6,11 +6,7 @@ const TextDisplay = ({ height, messages, characterId }) => {
   const textDisplayRef = useRef();
 
   useEffect(() => {
-    const lastUserMessage = messages[messages.length - 2];
-
-    if (lastUserMessage && characterId && lastUserMessage.characterId === characterId) {
-      textDisplayRef.current.scrollTop = textDisplayRef.current.scrollHeight;
-    }
+    textDisplayRef.current.scrollTop = textDisplayRef.current.scrollHeight;
   }, [messages, characterId]);
 
   return (
