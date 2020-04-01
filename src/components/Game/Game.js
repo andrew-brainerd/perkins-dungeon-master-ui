@@ -9,9 +9,8 @@ import styles from './Game.module.scss';
 const HEADER_HEIGHT = 30;
 const INPUT_HEIGHT = 105;
 
-const Game = ({ height, gameId, shouldUpdateGame, connectClient, loadGame }) => {
+const Game = ({ height, gameId, playerId, shouldUpdateGame, connectClient, loadGame, loadCharacters }) => {
   const [isInitialLoad, setIsInitialLoad] = useState(isDefined(gameId));
-
   const prevGameId = usePrevious(gameId);
   const hasUpdatedGameId = isDefined(gameId) && gameId !== prevGameId;
   const shouldUpdate = shouldUpdateGame || hasUpdatedGameId;
@@ -48,12 +47,11 @@ const Game = ({ height, gameId, shouldUpdateGame, connectClient, loadGame }) => 
 Game.propTypes = {
   height: number.isRequired,
   gameId: string,
-  pathname: string,
+  playerId: string,
   shouldUpdateGame: bool,
   connectClient: func.isRequired,
   loadGame: func.isRequired,
-  loadCharacters: func.isRequired,
-  navTo: func.isRequired
+  loadCharacters: func.isRequired
 };
 
 export default Game;
