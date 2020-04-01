@@ -7,10 +7,8 @@ const TextDisplay = ({ height, messages, characterId }) => {
 
   useEffect(() => {
     const lastUserMessage = messages[messages.length - 2];
-    lastUserMessage && console.log('Last User Message: %o', lastUserMessage);
 
     if (lastUserMessage && characterId && lastUserMessage.characterId === characterId) {
-      console.log('Current character added new message');
       textDisplayRef.current.scrollTop = textDisplayRef.current.scrollHeight;
     }
   }, [messages, characterId]);
