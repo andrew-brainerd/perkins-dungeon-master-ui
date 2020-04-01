@@ -1,24 +1,38 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { number, string, array, bool, func } from 'prop-types';
-import uuid from 'react-uuid';
-import { useAuth0 } from '../../hooks/useAuth0';
+import React, { useState, useEffect } from 'react';
+import { number, string, bool, func } from 'prop-types';
 import usePrevious from '../../hooks/usePrevious';
 import { isDefined } from '../../utils/validation';
-import TextInput from '../common/TextInput/TextInput';
+import { CHARACTER_CREATION_ROUTE } from '../../constants/routes';
+import TextDisplay from './TextDisplay/container';
+import CommandLine from './CommandLine/container';
 import styles from './Game.module.scss';
 
 const HEADER_HEIGHT = 30;
 const INPUT_HEIGHT = 105;
 
-const Game = ({ height, gameId, messages, shouldUpdateGame, addPlayerInput, connectClient, loadGame }) => {
-  const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
-  const [playerInput, setPlayerInput] = useState('');
+const Game = ({
+  height,
+  gameId,
+  playerId,
+  characterId,
+  isLoadingCharacters,
+  shouldUpdateGame,
+  connectClient,
+  loadGame,
+  loadCharacters,
+  navTo
+}) => {
   const [isInitialLoad, setIsInitialLoad] = useState(isDefined(gameId));
-  const textDisplayRef = useRef();
-
   const prevGameId = usePrevious(gameId);
-  const shouldUpdate = shouldUpdateGame || (isDefined(gameId) && gameId !== prevGameId);
+  const hasUpdatedGameId = isDefined(gameId) && gameId !== prevGameId;
+  const shouldUpdate = shouldUpdateGame || hasUpdatedGameId;
   const textDisplayHeight = height - HEADER_HEIGHT - INPUT_HEIGHT;
+
+  useEffect(() => {
+    if (!isInitialLoad && !isLoadingCharacters && !characterId) {
+      navTo(CHARACTER_CREATION_ROUTE.replace(':gameId', gameId));
+    }
+  }, [isInitialLoad, isLoadingCharacters, characterId, navTo, gameId]);
 
   useEffect(() => {
     if (isDefined(gameId)) {
@@ -27,55 +41,17 @@ const Game = ({ height, gameId, messages, shouldUpdateGame, addPlayerInput, conn
   }, [connectClient, gameId]);
 
   useEffect(() => {
-    if (shouldUpdate || isInitialLoad) {
+    if ((shouldUpdate || isInitialLoad) && playerId) {
       loadGame(gameId);
+      loadCharacters(gameId);
       setIsInitialLoad(false);
     }
-  }, [shouldUpdate, isInitialLoad, loadGame, gameId, prevGameId]);
+  }, [shouldUpdate, isInitialLoad, loadGame, loadCharacters, gameId, playerId, prevGameId]);
 
-  useEffect(() => {
-    textDisplayRef.current.scrollTop = textDisplayRef.current.scrollHeight;
-  }, [messages.length]);
-
-  return (
+  return !isInitialLoad && (
     <div className={styles.game}>
-      <div className={styles.textDisplay} ref={textDisplayRef} style={{ height: textDisplayHeight }}>
-        {messages.map(({ character, message, component, color }, i) => (
-          <div key={i} className={styles.messageItem}>
-            {character &&
-              <div className={styles.character} style={{ color }}>{character}: </div>
-            }
-            <div
-              className={styles.message}
-              dangerouslySetInnerHTML={{ __html: message }}
-            />
-            {component}
-          </div>
-        ))}
-      </div>
-      <div className={styles.commandCenter}>
-        <TextInput
-          className={styles.command}
-          inputClassName={styles.commandInput}
-          autofocus
-          value={playerInput}
-          onChange={setPlayerInput}
-          onPressEnter={() => {
-            addPlayerInput({
-              isAuthenticated,
-              login: loginWithRedirect,
-              logout,
-              gameId,
-              id: uuid(),
-              timestamp: new Date(),
-              character: (user || {}).name || 'Player',
-              playerName: (user || {}).email,
-              message: playerInput
-            });
-            setPlayerInput('');
-          }}
-        />
-      </div>
+      <TextDisplay height={textDisplayHeight} />
+      <CommandLine />
     </div>
   );
 };
@@ -83,12 +59,14 @@ const Game = ({ height, gameId, messages, shouldUpdateGame, addPlayerInput, conn
 Game.propTypes = {
   height: number.isRequired,
   gameId: string,
-  pathname: string,
-  messages: array,
+  playerId: string,
+  characterId: string,
+  isLoadingCharacters: bool,
   shouldUpdateGame: bool,
-  addPlayerInput: func.isRequired,
   connectClient: func.isRequired,
-  loadGame: func.isRequired
+  loadGame: func.isRequired,
+  loadCharacters: func.isRequired,
+  navTo: func.isRequired
 };
 
 export default Game;

@@ -1,7 +1,7 @@
 import { omit } from 'ramda';
 import { AUTH_USER, GAME_MASTER } from 'gm-common';
 import * as gameApi from '../api/game';
-import { GAME_ROUTE, CHARACTER_CREATION_ROUTE } from '../constants/routes';
+import { GAME_ROUTE, CHARACTER_CREATION_ROUTE, ROOT_ROUTE } from '../constants/routes';
 import { localCommands } from '../constants/game';
 import { navTo } from './routing';
 import { parseLocalInput } from '../utils/game';
@@ -18,6 +18,7 @@ export const TRIGGER_UPDATE = `${PREFIX}/TRIGGER_UPDATE`;
 export const ADD_LOCAL_MESSAGE = `${PREFIX}/ADD_LOCAL_MESSAGE`;
 export const CREATING_CHARACTER = `${PREFIX}/CREATING_CHARACTER`;
 export const CHARACTER_CREATED = `${PREFIX}/CHARACTER_CREATED`;
+export const EXIT_GAME = `${PREFIX}/EXIT_GAME`;
 
 export const startingGame = { type: STARTING_GAME };
 export const loadingGames = { type: LOADING_GAMES };
@@ -37,6 +38,11 @@ export const startNewGame = name => async (dispatch, getState) => {
     dispatch(gameLoaded(game));
     dispatch(navTo(CHARACTER_CREATION_ROUTE.replace(':gameId', game._id)));
   });
+};
+
+export const exitGame = () => async dispatch => {
+  dispatch({ type: EXIT_GAME });
+  dispatch(navTo(ROOT_ROUTE));
 };
 
 export const loadPlayerGames = playerId => async dispatch => {

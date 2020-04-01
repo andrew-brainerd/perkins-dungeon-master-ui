@@ -4,11 +4,12 @@ import WebFont from 'webfontloader';
 import { Provider } from 'react-redux';
 import configureStore, { history } from './store/configureStore';
 import * as serviceWorker from './serviceWorker';
+import { version } from '../package.json';
 import App from './components/App/App';
 import './index.scss';
 
 console.log(
-  `%cPerkins DM App v${process.env.REACT_APP_VERSION}`,
+  `%cPerkins DM App v${version}`,
   'color: orange; font-size: 20px;'
 );
 

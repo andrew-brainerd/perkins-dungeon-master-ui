@@ -7,8 +7,8 @@ export const createCharacter = async character => {
   return prop('data', response);
 };
 
-export const loadCharacter = async characterId => {
-  const response = await client.get('/characters', { params: { characterId } });
+export const loadCharacters = async gameId => {
+  const response = await client.get('/characters', { params: { gameId } });
 
   return prop('data', response);
 };

@@ -4,8 +4,9 @@ const HelpText = () => (
   <div>
     <h3>Available Commands</h3>
     <pre>help: show this menu</pre>
-    <pre>login or signIn: sign in to PDM</pre>
-    <pre>logout or signOut: sign out of PDM</pre>
+    <pre>login || signIn: Log in to Anorak GM</pre>
+    <pre>logout || signOut: Log out of Anorak GM</pre>
+    <pre>chars || characters: Display game character list</pre>
   </div>
 );
 
