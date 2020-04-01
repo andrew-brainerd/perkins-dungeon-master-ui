@@ -5,7 +5,7 @@ import { connectClient } from '../../../actions/pusher';
 import CommandLine from './CommandLine';
 
 const mapStateToProps = state => ({
-  gameId: getPathname(state).split('/')[2],
+  gameId: getPathname(state).split('/')[2]
 });
 
 const mapDispatchToProps = dispatch => ({
