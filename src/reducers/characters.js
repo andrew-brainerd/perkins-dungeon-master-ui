@@ -1,13 +1,14 @@
 import {
   CREATING_CHARACTER,
   LOADING_CHARACTERS,
-  CHARACTERS_LOADED
+  CHARACTERS_LOADED,
+  SET_CURRENT_CHARACTER
 } from '../actions/characters';
 
 const initialState = {
   isLoadingCharacter: false,
   currentCharacter: {},
-  playerCharacters: []
+  gameCharacters: {}
 };
 
 const game = (state = initialState, action) => {
@@ -26,8 +27,12 @@ const game = (state = initialState, action) => {
       return {
         ...state,
         isLoadingCharacter: false,
-        gameCharacters: action.characters,
-        currentCharacter: action.character
+        gameCharacters: action.characters
+      };
+    case SET_CURRENT_CHARACTER:
+      return {
+        ...state,
+        currentCharacter: action.currentCharacter
       };
     default:
       return state;
