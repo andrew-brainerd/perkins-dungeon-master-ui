@@ -26,7 +26,7 @@ const CommandLine = ({ gameId, character, addPlayerInput }) => {
             id: uuid(),
             timestamp: new Date(),
             characterId: (character || {})._id,
-            character: (user || {}).name || 'Player',
+            characterName: (character || {}).name || 'Player',
             playerName: (user || {}).email,
             message: playerInput
           });
