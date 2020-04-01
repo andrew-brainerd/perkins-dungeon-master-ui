@@ -11,10 +11,10 @@ const TextDisplay = ({ height, messages, characterId }) => {
 
   return (
     <div className={styles.textDisplay} ref={textDisplayRef} style={{ height }}>
-      {messages.map(({ character, message, component, color }, i) => (
+      {messages.map(({ characterName, message, component, color }, i) => (
         <div key={i} className={styles.messageItem}>
-          {character &&
-            <div className={styles.character} style={{ color }}>{character}: </div>
+          {characterName &&
+            <div className={styles.character} style={{ color }}>{characterName}: </div>
           }
           <div
             className={styles.message}
