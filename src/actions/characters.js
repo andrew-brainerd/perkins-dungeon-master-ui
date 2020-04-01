@@ -28,6 +28,7 @@ export const createCharacter = character => async (dispatch, getState) => {
 
     await charactersApi.createCharacter(newCharacter);
 
+    dispatch(setCurrentCharacter(newCharacter));
     dispatch(navTo(GAME_ROUTE.replace(':gameId', character.gameId)));
   } catch (err) {
     dispatch(creatingCharacterFailed(err));

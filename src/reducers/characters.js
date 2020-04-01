@@ -26,12 +26,12 @@ const game = (state = initialState, action) => {
     case CHARACTERS_LOADED:
       return {
         ...state,
-        isLoadingCharacter: false,
         gameCharacters: action.characters
       };
     case SET_CURRENT_CHARACTER:
       return {
         ...state,
+        isLoadingCharacters: false,
         currentCharacter: action.currentCharacter
       };
     case SET_CURRENT_CHARACTER:

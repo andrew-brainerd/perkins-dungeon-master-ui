@@ -3,9 +3,11 @@ import { getPathname } from '../../../selectors/routing';
 import { addPlayerInput, loadGame } from '../../../actions/game';
 import { connectClient } from '../../../actions/pusher';
 import CommandLine from './CommandLine';
+import { getCurrentCharacter } from '../../../selectors/characters';
 
 const mapStateToProps = state => ({
-  gameId: getPathname(state).split('/')[2]
+  gameId: getPathname(state).split('/')[2],
+  character: getCurrentCharacter(state)
 });
 
 const mapDispatchToProps = dispatch => ({
