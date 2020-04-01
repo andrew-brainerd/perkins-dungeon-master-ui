@@ -2,11 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import { bool, func } from 'prop-types';
 import { useAuth0 } from '../../hooks/useAuth0';
 import useOnClickOutside from '../../hooks/useOnClickOutside';
-import { ROOT_ROUTE } from '../../constants/routes';
 import Button from '../common/Button/Button';
 import styles from './Header.module.scss';
 
-const Header = ({ isPlaying, shouldSignIn, shouldSignOut, setCurrentPlayer, startGame, navTo }) => {
+const Header = ({ isPlaying, shouldSignIn, shouldSignOut, setCurrentPlayer, exitGame }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isAuthenticated, loginWithRedirect, logout, loading, user } = useAuth0();
   const menuRef = useRef();
@@ -53,7 +52,7 @@ const Header = ({ isPlaying, shouldSignIn, shouldSignOut, setCurrentPlayer, star
                   text={'Exit Game'}
                   onClick={() => {
                     setIsMenuOpen(false);
-                    navTo(ROOT_ROUTE);
+                    exitGame();
                   }}
                 />
               )}
@@ -76,7 +75,7 @@ Header.propTypes = {
   shouldSignOut: bool,
   setCurrentPlayer: func.isRequired,
   startGame: func.isRequired,
-  navTo: func.isRequired
+  exitGame: func.isRequired
 };
 
 export default Header;

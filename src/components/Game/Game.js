@@ -9,12 +9,18 @@ import styles from './Game.module.scss';
 const HEADER_HEIGHT = 30;
 const INPUT_HEIGHT = 105;
 
-const Game = ({ height, gameId, playerId, shouldUpdateGame, connectClient, loadGame, loadCharacters }) => {
+const Game = ({ height, gameId, playerId, characterId, shouldUpdateGame, connectClient, loadGame, loadCharacters }) => {
   const [isInitialLoad, setIsInitialLoad] = useState(isDefined(gameId));
   const prevGameId = usePrevious(gameId);
   const hasUpdatedGameId = isDefined(gameId) && gameId !== prevGameId;
   const shouldUpdate = shouldUpdateGame || hasUpdatedGameId;
   const textDisplayHeight = height - HEADER_HEIGHT - INPUT_HEIGHT;
+
+  useEffect(() => {
+    if (!isInitialLoad && !characterId) {
+      console.log('No character for current player');
+    }
+  }, [isInitialLoad, characterId]);
 
   useEffect(() => {
     if (isDefined(gameId)) {
@@ -42,6 +48,7 @@ Game.propTypes = {
   height: number.isRequired,
   gameId: string,
   playerId: string,
+  characterId: string,
   shouldUpdateGame: bool,
   connectClient: func.isRequired,
   loadGame: func.isRequired,

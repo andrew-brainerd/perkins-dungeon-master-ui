@@ -4,6 +4,7 @@ import withSizes from 'react-sizes';
 import { getPathname } from '../../selectors/routing';
 import { getMessages, getShouldUpdateGame } from '../../selectors/game';
 import { getCurrentPlayerId } from '../../selectors/player';
+import { getCurrentCharacterId } from '../../selectors/characters';
 import { connectClient } from '../../actions/pusher';
 import { loadGame } from '../../actions/game';
 import { loadCharacters } from '../../actions/characters';
@@ -12,6 +13,7 @@ import Game from './Game';
 const mapStateToProps = state => ({
   gameId: getPathname(state).split('/')[2],
   playerId: getCurrentPlayerId(state),
+  characterId: getCurrentCharacterId(state),
   messages: getMessages(state),
   shouldUpdateGame: getShouldUpdateGame(state)
 });
