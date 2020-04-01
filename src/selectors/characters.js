@@ -12,5 +12,3 @@ export const deriveCurrentCharacter = createSelector(
 export const getCurrentCharacter = path(['characters', 'currentCharacter']);
 
 export const getCurrentCharacterId = compose(prop('_id'), getCurrentCharacter);
-
-export const getIsLoadingCharacters = path(['characters', 'isLoadingCharacters']);

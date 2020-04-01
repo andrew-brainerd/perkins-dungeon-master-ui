@@ -3,6 +3,7 @@ import { GAME_ROUTE } from '../constants/routes';
 import { navTo } from './routing';
 import { getCurrentPlayerId } from '../selectors/player';
 import { getPathname } from '../selectors/routing';
+import { deriveCurrentCharacter } from '../selectors/characters';
 
 const PREFIX = 'GAME';
 
@@ -11,6 +12,7 @@ export const CREATING_CHARACTER_FAILED = `${PREFIX}/LOADING_CHARACTER_FAILED`;
 export const LOADING_CHARACTERS = `${PREFIX}/LOADING_CHARACTERS`;
 export const CHARACTERS_LOADED = `${PREFIX}/CHARACTERS_LOADED`;
 export const LOADING_CHARACTERS_FAILED = `${PREFIX}/LOADING_CHARACTERS_FAILED`;
+export const SET_CURRENT_CHARACTER = `${PREFIX}/SET_CURRENT_CHARACTER`;
 
 export const creatingCharacter = { type: CREATING_CHARACTER };
 export const creatingCharacterFailed = err => ({ type: CREATING_CHARACTER_FAILED, err });
@@ -32,11 +34,14 @@ export const createCharacter = character => async (dispatch, getState) => {
   }
 };
 
-export const charactersLoaded = characters => async (dispatch, getState) => {
-  const playerId = getCurrentPlayerId(getState());
-  const currentCharacter = (characters || {}).items.find(character => character.playerId === playerId);
+export const setCurrentCharacter = () => async (dispatch, getState) => {
+  const currentCharacter = deriveCurrentCharacter(getState());
+  dispatch({ type: SET_CURRENT_CHARACTER, currentCharacter });
+};
 
-  dispatch({ type: CHARACTERS_LOADED, characters, currentCharacter });
+export const charactersLoaded = characters => async dispatch => {
+  dispatch({ type: CHARACTERS_LOADED, characters });
+  dispatch(setCurrentCharacter());
 };
 
 export const loadCharacters = gameId => async (dispatch, getState) => {
