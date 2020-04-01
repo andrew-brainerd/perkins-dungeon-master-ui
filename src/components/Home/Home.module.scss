@@ -1,9 +1,12 @@
 @import '../../styles/colors.scss';
+@import '../../styles/sizing.scss';
 
 .home {
   align-items: center;
   display: flex;
   justify-content: center;
+  margin: 0 auto;
+  max-width: 900px;
   width: 100%;
   z-index: 1;
 
@@ -24,7 +27,7 @@
 
   .newGame {
     display: none;
-    height: 70vh;
+    height: 75vh;
     position: relative;
     top: 30px;
     width: 100%;
@@ -62,7 +65,7 @@
 
   .loadGame {
     display: none;
-    height: 70vh;
+    height: 75vh;
     position: relative;
     top: 30px;
     width: 100%;
@@ -107,6 +110,16 @@
       .loadGameButton {
         width: 125px;
       }
+    }
+  }
+}
+
+@media screen and (max-width: $smallScreen) {
+  .home {
+    flex-direction: column;
+
+    .gameButton {
+      margin: 50px auto;
     }
   }
 }
