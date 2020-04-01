@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { string, func } from 'prop-types';
+import { string, shape, func } from 'prop-types';
 import uuid from 'react-uuid';
 import { useAuth0 } from '../../../hooks/useAuth0';
 import TextInput from '../../common/TextInput/TextInput';
 import styles from './CommandLine.module.scss';
 
-const CommandLine = ({ gameId, addPlayerInput }) => {
+const CommandLine = ({ gameId, character, addPlayerInput }) => {
   const { isAuthenticated, loginWithRedirect, logout, user } = useAuth0();
   const [playerInput, setPlayerInput] = useState('');
 
@@ -25,6 +25,7 @@ const CommandLine = ({ gameId, addPlayerInput }) => {
             gameId,
             id: uuid(),
             timestamp: new Date(),
+            characterId: (character || {})._id,
             character: (user || {}).name || 'Player',
             playerName: (user || {}).email,
             message: playerInput
@@ -38,6 +39,9 @@ const CommandLine = ({ gameId, addPlayerInput }) => {
 
 CommandLine.propTypes = {
   gameId: string.isRequired,
+  character: shape({
+    _id: string
+  }),
   addPlayerInput: func.isRequired
 };
 

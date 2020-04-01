@@ -6,7 +6,7 @@ import {
 } from '../actions/characters';
 
 const initialState = {
-  isLoadingCharacter: false,
+  isLoadingCharacters: false,
   currentCharacter: {},
   gameCharacters: {}
 };
@@ -21,17 +21,17 @@ const game = (state = initialState, action) => {
     case LOADING_CHARACTERS:
       return {
         ...state,
-        isLoadingCharacter: true
+        isLoadingCharacters: true
       };
     case CHARACTERS_LOADED:
       return {
         ...state,
-        isLoadingCharacter: false,
         gameCharacters: action.characters
       };
     case SET_CURRENT_CHARACTER:
       return {
         ...state,
+        isLoadingCharacters: false,
         currentCharacter: action.currentCharacter
       };
     default:
