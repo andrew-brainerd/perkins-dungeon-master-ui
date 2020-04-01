@@ -1,6 +1,6 @@
 {
-  "name": "three-minute-dungeon",
-  "version": "0.1.0",
+  "name": "anorak-ui",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.6.4",

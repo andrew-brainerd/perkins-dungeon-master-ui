@@ -9,11 +9,11 @@ import styles from './Game.module.scss';
 const HEADER_HEIGHT = 30;
 const INPUT_HEIGHT = 105;
 
-const Game = ({ height, gameId, shouldUpdateGame, connectClient, loadGame }) => {
+const Game = ({ height, gameId, playerId, shouldUpdateGame, connectClient, loadGame, loadCharacters }) => {
   const [isInitialLoad, setIsInitialLoad] = useState(isDefined(gameId));
-
   const prevGameId = usePrevious(gameId);
-  const shouldUpdate = shouldUpdateGame || (isDefined(gameId) && gameId !== prevGameId);
+  const hasUpdatedGameId = isDefined(gameId) && gameId !== prevGameId;
+  const shouldUpdate = shouldUpdateGame || hasUpdatedGameId;
   const textDisplayHeight = height - HEADER_HEIGHT - INPUT_HEIGHT;
 
   useEffect(() => {
@@ -23,11 +23,12 @@ const Game = ({ height, gameId, shouldUpdateGame, connectClient, loadGame }) => 
   }, [connectClient, gameId]);
 
   useEffect(() => {
-    if (shouldUpdate || isInitialLoad) {
+    if ((shouldUpdate || isInitialLoad) && playerId) {
       loadGame(gameId);
+      loadCharacters(gameId);
       setIsInitialLoad(false);
     }
-  }, [shouldUpdate, isInitialLoad, loadGame, gameId, prevGameId]);
+  }, [shouldUpdate, isInitialLoad, loadGame, loadCharacters, gameId, playerId, prevGameId]);
 
   return (
     <div className={styles.game}>
@@ -40,10 +41,11 @@ const Game = ({ height, gameId, shouldUpdateGame, connectClient, loadGame }) => 
 Game.propTypes = {
   height: number.isRequired,
   gameId: string,
-  pathname: string,
+  playerId: string,
   shouldUpdateGame: bool,
   connectClient: func.isRequired,
-  loadGame: func.isRequired
+  loadGame: func.isRequired,
+  loadCharacters: func.isRequired
 };
 
 export default Game;
