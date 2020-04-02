@@ -10,7 +10,8 @@
   padding: 20px 50px;
   width: 100%;
 
-  h1, h2 {
+  h1,
+  h2 {
     user-select: none;
     white-space: nowrap;
   }
@@ -37,6 +38,14 @@
       position: relative;
       top: 2px;
 
+      &:hover {
+        svg {
+          path {
+            fill: white;
+          }
+        }
+      }
+
       svg {
         height: 20px;
         width: 45px;
@@ -44,12 +53,6 @@
         path {
           fill: $gray-40;
           transition: 0.3s fill;
-        }
-
-        &:hover {
-          path {
-            fill: white;
-          }
         }
       }
     }

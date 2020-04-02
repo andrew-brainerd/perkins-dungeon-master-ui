@@ -35,3 +35,15 @@ export const processPlayerInput = async (gameId, input) => {
 
   return parseServerResponse(input);
 };
+
+export const sendInvite = async (gameId, playerName, email) => {
+  const response = await client.post('/messaging', {
+    gameId,
+    to: email,
+    from: 'invites@anorakgm.com',
+    subject: `${playerName} invites you to an adventure!`,
+    text: `${window.location.hostname}/game/${gameId}/party`
+  });
+
+  return prop('data', response);
+};

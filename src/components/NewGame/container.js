@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { getCurrentPlayer } from '../../selectors/player';
-import { startNewGame } from '../../actions/game';
+import { sendInvite, startNewGame } from '../../actions/game';
 import { navTo } from '../../actions/routing';
 import NewGame from './NewGame';
 
@@ -9,6 +9,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  sendInvite: email => dispatch(sendInvite(email)),
   startNewGame: (name, createdBy) => dispatch(startNewGame(name, createdBy)),
   navTo: path => dispatch(navTo(path))
 });

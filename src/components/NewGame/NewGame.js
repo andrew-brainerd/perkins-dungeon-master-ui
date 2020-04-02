@@ -69,6 +69,7 @@ NewGame.propTypes = {
   player: shape({
     email: string
   }),
+  sendInvite: func.isRequired,
   startNewGame: func.isRequired,
   navTo: func.isRequired
 };

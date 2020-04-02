@@ -19,6 +19,7 @@ export const ADD_LOCAL_MESSAGE = `${PREFIX}/ADD_LOCAL_MESSAGE`;
 export const CREATING_CHARACTER = `${PREFIX}/CREATING_CHARACTER`;
 export const CHARACTER_CREATED = `${PREFIX}/CHARACTER_CREATED`;
 export const EXIT_GAME = `${PREFIX}/EXIT_GAME`;
+export const SENDING_INVITE_EMAIL = `${PREFIX}/SENDING_INVITE_EMAIL`;
 
 export const startingGame = { type: STARTING_GAME };
 export const loadingGames = { type: LOADING_GAMES };
@@ -88,3 +89,8 @@ export const addPlayerInput = input => async dispatch => {
       }
     });
 };
+
+export const sendInvite = email => async dispatch => {
+  dispatch({ type: SENDING_INVITE_EMAIL });
+  gameApi.sendInvite(email)
+}
