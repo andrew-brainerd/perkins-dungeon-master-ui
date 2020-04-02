@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { compose } from 'ramda';
 import withSizes from 'react-sizes';
-import { getPathname } from '../../selectors/routing';
+import { getGameId } from '../../selectors/routing';
 import { getShouldUpdateGame } from '../../selectors/game';
 import { getCurrentPlayerId } from '../../selectors/player';
 import { getCurrentCharacterId, getIsLoadingCharacters } from '../../selectors/characters';
@@ -12,7 +12,7 @@ import { navTo } from '../../actions/routing';
 import Game from './Game';
 
 const mapStateToProps = state => ({
-  gameId: getPathname(state).split('/')[2],
+  gameId: getGameId(state),
   playerId: getCurrentPlayerId(state),
   characterId: getCurrentCharacterId(state),
   isLoadingCharacters: getIsLoadingCharacters(state),

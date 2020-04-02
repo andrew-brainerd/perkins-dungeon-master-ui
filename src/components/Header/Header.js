@@ -74,7 +74,6 @@ Header.propTypes = {
   shouldSignIn: bool,
   shouldSignOut: bool,
   setCurrentPlayer: func.isRequired,
-  startGame: func.isRequired,
   exitGame: func.isRequired
 };
 

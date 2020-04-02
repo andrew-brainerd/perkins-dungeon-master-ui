@@ -1,12 +1,9 @@
 @import '../../styles/colors.scss';
-@import '../../styles/sizing.scss';
 
 .home {
   align-items: center;
   display: flex;
   justify-content: center;
-  margin: 0 auto;
-  max-width: $maxContentWidth;
   width: 100%;
   z-index: 1;
 
@@ -25,9 +22,47 @@
     width: 250px;
   }
 
+  .newGame {
+    display: none;
+    height: 70vh;
+    position: relative;
+    top: 30px;
+    width: 100%;
+    z-index: 2;
+
+    &.isOpen {
+      align-items: center;
+      background: $defaultBackground;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: absolute;
+    }
+
+    .nameInput {
+      border: 1px solid $gray-80;
+      margin: 20px auto 30px;
+
+      input {
+        text-align: left;
+        text-indent: 10px;
+      }
+    }
+
+    .buttonContainer {
+      display: flex;
+      justify-content: space-around;
+      width: 350px;
+
+      .newGameButton {
+        width: 125px;
+      }
+    }
+  }
+
   .loadGame {
     display: none;
-    height: 75vh;
+    height: 70vh;
     position: relative;
     top: 30px;
     width: 100%;
@@ -72,16 +107,6 @@
       .loadGameButton {
         width: 125px;
       }
-    }
-  }
-}
-
-@media screen and (max-width: $smallScreen) {
-  .home {
-    flex-direction: column;
-
-    .gameButton {
-      margin: 50px auto;
     }
   }
 }

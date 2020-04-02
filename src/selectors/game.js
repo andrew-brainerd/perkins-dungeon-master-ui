@@ -1,9 +1,13 @@
-import { path, pathOr } from 'ramda';
+import { compose, path, pathOr, prop } from 'ramda';
 import { createSelector } from 'reselect';
 
 export const getIsPlaying = path(['game', 'isPlaying']);
 
-export const getCurrentGameId = path(['game', 'currentGame', '_id']);
+export const getCurrentGame = path(['game', 'currentGame']);
+
+export const getCurrentGameId = compose(prop('_id'), getCurrentGame);
+
+export const getCurrentGameName = compose(prop('name'), getCurrentGame);
 
 export const getLocalMessages = pathOr([], ['game', 'localMessages']);
 

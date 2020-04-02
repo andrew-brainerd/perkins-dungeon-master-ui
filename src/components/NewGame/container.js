@@ -1,16 +1,21 @@
 import { connect } from 'react-redux';
+import { getGameId } from '../../selectors/routing';
+import { getCurrentGameName } from '../../selectors/game';
 import { getCurrentPlayer } from '../../selectors/player';
-import { sendInvite, startNewGame } from '../../actions/game';
+import { loadGame, sendInvite, startGame } from '../../actions/game';
 import { navTo } from '../../actions/routing';
 import NewGame from './NewGame';
 
 const mapStateToProps = state => ({
+  gameId: getGameId(state),
+  gameName: getCurrentGameName(state),
   player: getCurrentPlayer(state)
 });
 
 const mapDispatchToProps = dispatch => ({
+  loadGame: gameId => dispatch(loadGame(gameId)),
   sendInvite: email => dispatch(sendInvite(email)),
-  startNewGame: (name, createdBy) => dispatch(startNewGame(name, createdBy)),
+  startGame: () => dispatch(startGame()),
   navTo: path => dispatch(navTo(path))
 });
 

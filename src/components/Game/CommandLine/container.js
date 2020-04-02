@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
-import { getPathname } from '../../../selectors/routing';
+import { getGameId } from '../../../selectors/routing';
 import { addPlayerInput, loadGame } from '../../../actions/game';
 import { connectClient } from '../../../actions/pusher';
 import CommandLine from './CommandLine';
 import { getCurrentCharacter } from '../../../selectors/characters';
 
 const mapStateToProps = state => ({
-  gameId: getPathname(state).split('/')[2],
+  gameId: getGameId(state),
   character: getCurrentCharacter(state)
 });
 
