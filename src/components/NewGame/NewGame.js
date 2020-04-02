@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { shape, string, array, func } from 'prop-types';
+import { shape, string, func } from 'prop-types';
 import { values } from 'ramda';
 import { ROOT_ROUTE } from '../../constants/routes';
 import TextInput from '../common/TextInput/TextInput';
@@ -43,26 +43,23 @@ const NewGame = ({
               placeholder={'Player Email'}
               value={inviteEmail}
               onChange={setInviteEmail}
-              onPressEnter={() => console.log('Sending Email')}
+              onPressEnter={() => sendInvite(gameId, player.name, inviteEmail)}
             />
             <Button
               className={styles.inviteButton}
               text={'Send'}
-              onClick={() => sendInvite(inviteEmail)}
+              onClick={() => sendInvite(gameId, player.name, inviteEmail)}
               disabled={!inviteEmail}
             />
           </>
         )}
       </div>
       <div className={styles.partyMemberList}>
-        {values(partyMembers).map(player => {
-          console.log(player);
-          return (
-            <div key={player._id} className={styles.partyMember}>
-              {player.name}
-            </div>
-          );
-        })}
+        {values(partyMembers).map(player => (
+          <div key={player._id} className={styles.partyMember}>
+            {player.name}
+          </div>
+        ))}
       </div>
       <div className={styles.buttonContainer}>
         <Button
@@ -76,7 +73,7 @@ const NewGame = ({
         <Button
           className={styles.newGameButton}
           text={'Start'}
-          onClick={() => startGame()}
+          onClick={() => startGame(gameId)}
           disabled={!player}
         />
       </div>

@@ -99,9 +99,9 @@ export const addPlayerInput = input => async dispatch => {
     });
 };
 
-export const sendInvite = email => async dispatch => {
+export const sendInvite = (gameId, playerName, email) => async dispatch => {
   dispatch({ type: SENDING_INVITE_EMAIL });
-  gameApi.sendInvite(email);
+  gameApi.sendInvite(gameId, playerName, email);
 };
 
 export const deleteGame = gameId => async dispatch => {

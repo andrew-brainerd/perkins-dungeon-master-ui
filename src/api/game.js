@@ -37,12 +37,15 @@ export const processPlayerInput = async (gameId, input) => {
 };
 
 export const sendInvite = async (gameId, playerName, email) => {
+  const { protocol, hostname } = process.env.NODE_ENV === 'production' ?
+    window.location : { protocol: 'http:', hostname: 'localhost:3000' };
+
   const response = await client.post('/messaging', {
     gameId,
     to: email,
-    from: 'invites@anorakgm.com',
-    subject: `${playerName} invites you to an adventure!`,
-    text: `${window.location.hostname}/game/${gameId}/party`
+    from: 'noreply@anorakgm.com',
+    subject: `${playerName} invites you on an adventure!`,
+    text: `${protocol}//${hostname}/game/${gameId}/setup`
   });
 
   return prop('data', response);

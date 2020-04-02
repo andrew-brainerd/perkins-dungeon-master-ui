@@ -1,4 +1,4 @@
-import { compose, path, pathOr, prop, propOr } from 'ramda';
+import { compose, path, pathOr, prop } from 'ramda';
 import { createSelector } from 'reselect';
 
 export const getIsPlaying = path(['game', 'isPlaying']);

@@ -38,14 +38,6 @@
       position: relative;
       top: 2px;
 
-      &:hover {
-        svg {
-          path {
-            fill: white;
-          }
-        }
-      }
-
       svg {
         height: 20px;
         width: 45px;
@@ -53,6 +45,14 @@
         path {
           fill: $gray-40;
           transition: 0.3s fill;
+        }
+      }
+
+      &:hover {
+        svg {
+          path {
+            fill: white;
+          }
         }
       }
     }

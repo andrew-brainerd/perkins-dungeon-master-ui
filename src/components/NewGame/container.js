@@ -15,8 +15,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadGame: gameId => dispatch(loadGame(gameId)),
-  sendInvite: email => dispatch(sendInvite(email)),
-  startGame: () => dispatch(startGame()),
+  sendInvite: (gameId, playerName, email) => dispatch(sendInvite(gameId, playerName, email)),
+  startGame: gameId => dispatch(startGame(gameId)),
   deleteGame: gameId => dispatch(deleteGame(gameId)),
   navTo: path => dispatch(navTo(path))
 });
