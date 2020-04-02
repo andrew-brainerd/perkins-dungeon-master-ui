@@ -6,7 +6,7 @@ import styles from './TextInput.module.scss';
 const TextInput = ({
   className,
   placeholder,
-  value,
+  value = '',
   inputClassName,
   autofocus,
   onChange,

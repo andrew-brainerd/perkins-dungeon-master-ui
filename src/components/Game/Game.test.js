@@ -15,7 +15,8 @@ describe('Game Component', () => {
       height: 500,
       connectClient: jest.fn(),
       loadGame: jest.fn(),
-      loadCharacters: jest.fn()
+      loadCharacters: jest.fn(),
+      navTo: jest.fn()
     };
   });
 
