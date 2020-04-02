@@ -1,18 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { shape, string, func } from 'prop-types';
+import { shape, string, array, func } from 'prop-types';
+import { values } from 'ramda';
 import { ROOT_ROUTE } from '../../constants/routes';
 import TextInput from '../common/TextInput/TextInput';
 import Button from '../common/Button/Button';
 import Icon from '../common/Icon/Icon';
 import styles from './NewGame.module.scss';
 
-const NewGame = ({ gameId, gameName, player, loadGame, sendInvite, startGame, navTo }) => {
-  const [isInviting, setIsInviting] = useState(true);
+const NewGame = ({
+  gameId,
+  gameName,
+  player,
+  partyMembers,
+  loadGame,
+  sendInvite,
+  startGame,
+  deleteGame,
+  navTo
+}) => {
+  const [isInviting, setIsInviting] = useState(false);
   const [inviteEmail, setInviteEmail] = useState('');
 
   useEffect(() => {
-    loadGame(gameId);
-  });
+    gameId && loadGame(gameId);
+  }, [gameId, loadGame]);
 
   return (
     <div className={styles.newGame}>
@@ -43,13 +54,22 @@ const NewGame = ({ gameId, gameName, player, loadGame, sendInvite, startGame, na
           </>
         )}
       </div>
-      <div className={styles.partyMemberList}></div>
+      <div className={styles.partyMemberList}>
+        {values(partyMembers).map(player => {
+          console.log(player);
+          return (
+            <div key={player._id} className={styles.partyMember}>
+              {player.name}
+            </div>
+          );
+        })}
+      </div>
       <div className={styles.buttonContainer}>
         <Button
           className={styles.newGameButton}
           text={'Cancel'}
           onClick={() => {
-            // delete game
+            deleteGame(gameId);
             navTo(ROOT_ROUTE);
           }}
         />
@@ -70,9 +90,15 @@ NewGame.propTypes = {
   player: shape({
     email: string
   }),
+  partyMembers: shape({
+    _id: string,
+    name: string,
+    email: string
+  }),
   loadGame: func.isRequired,
   sendInvite: func.isRequired,
   startGame: func.isRequired,
+  deleteGame: func.isRequired,
   navTo: func.isRequired
 };
 

@@ -47,3 +47,15 @@ export const sendInvite = async (gameId, playerName, email) => {
 
   return prop('data', response);
 };
+
+export const deleteGame = async gameId => {
+  const response = client.delete(`/games/${gameId}`);
+
+  return prop('data', response);
+};
+
+export const getPlayers = async gameId => {
+  const response = await client.get(`/games/${gameId}/players`);
+
+  return prop('data', response);
+};

@@ -88,6 +88,16 @@
     border: 1px solid $gray-80;
     min-height: 200px;
     width: 100%;
+
+    .partyMember {
+      background: $gray-80;
+      border: 1px solid $gray-80;
+      border-radius: 5px;
+      display: inline-block;
+      margin: 10px;
+      padding: 5px 10px;
+      text-align: center;
+    }
   }
 
   .buttonContainer {

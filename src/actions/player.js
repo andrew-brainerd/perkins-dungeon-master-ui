@@ -4,9 +4,15 @@ const PREFIX = 'PLAYER';
 
 export const LOADING_PLAYER = `${PREFIX}/LOADING_PLAYER`;
 export const SET_CURRENT_PLAYER = `${PREFIX}/SET_CURRENT_PLAYER`;
+export const LOADING_PLAYERS = `${PREFIX}/LOADING_PLAYERS`;
+export const PLAYERS_LOADED = `${PREFIX}/PLAYERS_LOADED`;
+
+export const loadingPlayer = { type: LOADING_PLAYER };
+export const loadingPlayers = { type: LOADING_PLAYERS };
+export const playersLoaded = players => ({ type: PLAYERS_LOADED, players });
 
 export const setCurrentPlayer = player => async dispatch => {
-  dispatch({ type: LOADING_PLAYER });
+  dispatch(loadingPlayer);
   playersApi.getPlayerByEmail(player.email).then(({ doesNotExist, ...playerData }) => {
     if (doesNotExist) {
       playersApi.createPlayer(player.name, player.email);

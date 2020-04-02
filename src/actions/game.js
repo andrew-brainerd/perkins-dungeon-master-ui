@@ -21,6 +21,9 @@ export const CREATING_CHARACTER = `${PREFIX}/CREATING_CHARACTER`;
 export const CHARACTER_CREATED = `${PREFIX}/CHARACTER_CREATED`;
 export const EXIT_GAME = `${PREFIX}/EXIT_GAME`;
 export const SENDING_INVITE_EMAIL = `${PREFIX}/SENDING_INVITE_EMAIL`;
+export const DELETING_GAME = `${PREFIX}/DELETING_GAME`;
+export const LOADING_PLAYERS = `${PREFIX}/LOADING_PLAYERS`;
+export const PLAYERS_LOADED = `${PREFIX}/PLAYERS_LOADED`;
 
 export const creatingGame = { type: CREATING_GAME };
 export const startingGame = { type: STARTING_GAME };
@@ -32,6 +35,8 @@ export const triggerUpdate = { type: TRIGGER_UPDATE };
 export const addLocalMessage = message => ({ type: ADD_LOCAL_MESSAGE, message });
 export const creatingCharacter = { type: CREATING_CHARACTER };
 export const characterCreated = character => ({ type: CHARACTER_CREATED, character });
+export const loadingGamePlayers = { type: LOADING_PLAYERS };
+export const gamePlayersLoaded = players => ({ type: PLAYERS_LOADED, players });
 
 export const createGame = name => async (dispatch, getState) => {
   const createdBy = getCurrentPlayerId(getState());
@@ -64,6 +69,7 @@ export const loadGame = (gameId, shouldNavTo) => async dispatch => {
   dispatch(loadingGame);
   gameApi.loadGame(gameId).then(game => {
     dispatch(gameLoaded(game));
+    dispatch(loadGamePlayers(gameId));
     shouldNavTo && dispatch(navTo(GAME_ROUTE.replace(':gameId', gameId)));
   });
 };
@@ -96,4 +102,16 @@ export const addPlayerInput = input => async dispatch => {
 export const sendInvite = email => async dispatch => {
   dispatch({ type: SENDING_INVITE_EMAIL });
   gameApi.sendInvite(email);
+};
+
+export const deleteGame = gameId => async dispatch => {
+  dispatch({ type: DELETING_GAME });
+  gameApi.deleteGame(gameId);
+};
+
+export const loadGamePlayers = gameId => async dispatch => {
+  dispatch(loadingGamePlayers);
+  gameApi.getPlayers(gameId).then(players =>
+    dispatch(gamePlayersLoaded(players))
+  );
 };
