@@ -3,9 +3,10 @@ import { object } from 'prop-types';
 import { Auth0Provider } from '../../hooks/useAuth0';
 import { ConnectedRouter } from 'connected-react-router';
 import { Route, Switch } from 'react-router-dom';
-import { ROOT_ROUTE, CHARACTER_CREATION_ROUTE, GAME_ROUTE } from '../../constants/routes';
+import { ROOT_ROUTE, CHARACTER_CREATION_ROUTE, GAME_ROUTE, NEW_GAME_ROUTE } from '../../constants/routes';
 import Header from '../Header/container';
 import Home from '../Home/container';
+import NewGame from '../NewGame/container';
 import NewCharacter from '../NewCharacter/container';
 import Game from '../Game/container';
 import styles from './App.module.scss';
@@ -29,6 +30,7 @@ const App = ({ history }) => {
           <Header />
           <Switch>
             <Route path={ROOT_ROUTE} exact component={Home} />
+            <Route path={NEW_GAME_ROUTE} exact component={NewGame} />
             <Route path={CHARACTER_CREATION_ROUTE} exact component={NewCharacter} />
             <Route path={GAME_ROUTE} exact component={Game} />
           </Switch>

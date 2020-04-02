@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { shape, string, array, func } from 'prop-types';
 import { isEmpty } from 'ramda';
+import { NEW_GAME_ROUTE, GAME_ROUTE } from '../../constants/routes';
 import Button from '../common/Button/Button';
-import TextInput from '../common/TextInput/TextInput';
 import styles from './Home.module.scss';
-import { GAME_ROUTE } from '../../constants/routes';
 
-const Home = ({ player, playerGames, loadPlayerGames, startNewGame, navTo }) => {
-  const [isNewGameOpen, setIsNewGameOpen] = useState(false);
+const Home = ({ player, playerGames, loadPlayerGames, navTo }) => {
   const [isLoadGameOpen, setIsLoadGameOpen] = useState(false);
   const [selectedGame, setSelectedGame] = useState(null);
-  const [gameName, setGameName] = useState('');
 
   useEffect(() => {
     isLoadGameOpen && player && loadPlayerGames(player._id);
@@ -23,7 +20,7 @@ const Home = ({ player, playerGames, loadPlayerGames, startNewGame, navTo }) => 
           <Button
             className={styles.gameButton}
             text={'New Game'}
-            onClick={() => setIsNewGameOpen(true)}
+            onClick={() => navTo(NEW_GAME_ROUTE)}
           />
           <Button
             className={styles.gameButton}
@@ -36,33 +33,6 @@ const Home = ({ player, playerGames, loadPlayerGames, startNewGame, navTo }) => 
           Sign in to start your adventure!
         </div>
       }
-      <div className={[
-        styles.newGame,
-        isNewGameOpen ? styles.isOpen : ''
-      ].join(' ')}>
-        <h1>Start A New Game</h1>
-        <TextInput
-          autofocus
-          className={styles.nameInput}
-          placeholder={'Name'}
-          value={gameName}
-          onChange={setGameName}
-          onPressEnter={() => startNewGame(gameName, player.email)}
-        />
-        <div className={styles.buttonContainer}>
-          <Button
-            className={styles.newGameButton}
-            text={'Cancel'}
-            onClick={() => setIsNewGameOpen(false)}
-          />
-          <Button
-            className={styles.newGameButton}
-            text={'Start'}
-            onClick={() => startNewGame(gameName, player.email)}
-            disabled={!gameName || !player}
-          />
-        </div>
-      </div>
       <div className={[
         styles.loadGame,
         isLoadGameOpen ? styles.isOpen : ''
@@ -108,7 +78,6 @@ Home.propTypes = {
   }),
   playerGames: array,
   loadPlayerGames: func.isRequired,
-  startNewGame: func.isRequired,
   navTo: func.isRequired
 };
 
