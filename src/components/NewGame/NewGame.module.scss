@@ -10,25 +10,30 @@
   padding: 20px 50px;
   width: 100%;
 
+  h1, h2 {
+    user-select: none;
+    white-space: nowrap;
+  }
+
   .nameInput {
+    background: $gray-90;
     border: 1px solid $gray-80;
     margin-bottom: 15px;
 
     input {
+      background: $gray-90;
       text-align: left;
       text-indent: 10px;
     }
   }
 
   .partyMembers {
-    h2 {
-      display: inline-block;
-      width: 180px;
-    }
+    align-items: center;
+    display: flex;
 
     .invite {
       cursor: pointer;
-      display: inline-block;
+      margin: 0 10px;
       position: relative;
       top: 2px;
 
@@ -46,6 +51,32 @@
             fill: white;
           }
         }
+      }
+    }
+
+    .inviteInput {
+      background: $gray-90;
+      border: 1px solid $gray-80;
+      display: inline-block;
+
+      input {
+        background: $gray-90;
+        font-size: 18px;
+        padding: 5px;
+        text-align: left;
+      }
+    }
+
+    .inviteButton {
+      border: 1px solid $gray-80;
+      border-radius: 0;
+      padding: 7px;
+      position: relative;
+      right: 2px;
+      width: 100px;
+
+      &:hover {
+        transform: none;
       }
     }
   }

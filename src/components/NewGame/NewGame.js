@@ -6,8 +6,10 @@ import Button from '../common/Button/Button';
 import Icon from '../common/Icon/Icon';
 import styles from './NewGame.module.scss';
 
-const NewGame = ({ player, startNewGame, navTo }) => {
+const NewGame = ({ player, sendInvite, startNewGame, navTo }) => {
   const [name, setName] = useState('');
+  const [isInviting, setIsInviting] = useState(true);
+  const [inviteEmail, setInviteEmail] = useState('');
 
   return (
     <div className={styles.newGame}>
@@ -18,7 +20,6 @@ const NewGame = ({ player, startNewGame, navTo }) => {
         placeholder={'Party Name'}
         value={name}
         onChange={setName}
-        onPressEnter={() => startNewGame(name, player.email)}
       />
       <div className={styles.partyMembers}>
         <h2>Party Members</h2>
@@ -26,7 +27,25 @@ const NewGame = ({ player, startNewGame, navTo }) => {
           className={styles.invite}
           name={'invitation'}
           title={'Invite Players'}
+          onClick={() => setIsInviting(!isInviting)}
         />
+        {isInviting && (
+          <>
+            <TextInput
+              className={styles.inviteInput}
+              placeholder={'Player Email'}
+              value={inviteEmail}
+              onChange={setInviteEmail}
+              onPressEnter={() => console.log('Sending Email')}
+            />
+            <Button
+              className={styles.inviteButton}
+              text={'Send'}
+              onClick={() => sendInvite(inviteEmail)}
+              disabled={!inviteEmail}
+            />
+          </>
+        )}
       </div>
       <div className={styles.partyMemberList}></div>
       <div className={styles.buttonContainer}>
