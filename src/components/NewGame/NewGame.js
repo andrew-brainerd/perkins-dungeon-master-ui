@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { shape, string, func } from 'prop-types';
-import { values } from 'ramda';
+import { isEmpty, values } from 'ramda';
 import { ROOT_ROUTE } from '../../constants/routes';
 import TextInput from '../common/TextInput/TextInput';
 import Button from '../common/Button/Button';
 import Icon from '../common/Icon/Icon';
 import styles from './NewGame.module.scss';
+
+const getIsPlayerPartyMember = (members, player) => values(members).find(member => member._id === player._id);
 
 const NewGame = ({
   gameId,
@@ -16,17 +18,19 @@ const NewGame = ({
   sendInvite,
   startGame,
   deleteGame,
+  addPlayer,
   navTo
 }) => {
-  const [isInviting, setIsInviting] = useState(true);
-  const [inviteEmail, setInviteEmail] = useState('andrew.brainerd3@gmail.com');
+  const [isInviting, setIsInviting] = useState(false);
+  const [inviteEmail, setInviteEmail] = useState('');
 
   useEffect(() => {
     gameId && loadGame(gameId);
   }, [gameId, loadGame]);
 
   useEffect(() => {
-    console.log('Player: %o', player);
+    !isEmpty(player) && !getIsPlayerPartyMember(partyMembers, player) &&
+      addPlayer(gameId, player._id);
   }, [player]);
 
   return (
@@ -91,22 +95,23 @@ const NewGame = ({
   );
 };
 
-NewGame.propTypes = {
-  gameId: string,
-  gameName: string,
-  player: shape({
-    email: string
-  }),
-  partyMembers: shape({
-    _id: string,
-    name: string,
-    email: string
-  }),
-  loadGame: func.isRequired,
-  sendInvite: func.isRequired,
-  startGame: func.isRequired,
-  deleteGame: func.isRequired,
-  navTo: func.isRequired
-};
+  NewGame.propTypes = {
+    gameId: string,
+    gameName: string,
+    player: shape({
+      email: string
+    }),
+    partyMembers: shape({
+      _id: string,
+      name: string,
+      email: string
+    }),
+    loadGame: func.isRequired,
+    sendInvite: func.isRequired,
+    startGame: func.isRequired,
+    deleteGame: func.isRequired,
+    addPlayer: func.isRequired,
+    navTo: func.isRequired
+  };
 
-export default NewGame;
+  export default NewGame;

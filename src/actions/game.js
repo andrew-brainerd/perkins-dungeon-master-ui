@@ -24,6 +24,8 @@ export const SENDING_INVITE_EMAIL = `${PREFIX}/SENDING_INVITE_EMAIL`;
 export const DELETING_GAME = `${PREFIX}/DELETING_GAME`;
 export const LOADING_PLAYERS = `${PREFIX}/LOADING_PLAYERS`;
 export const PLAYERS_LOADED = `${PREFIX}/PLAYERS_LOADED`;
+export const ADDING_PLAYER = `${PREFIX}/ADDING_PLAYER`;
+export const PLAYER_ADDED = `${PREFIX}/PLAYER_ADDED`;
 
 export const creatingGame = { type: CREATING_GAME };
 export const startingGame = { type: STARTING_GAME };
@@ -37,6 +39,8 @@ export const creatingCharacter = { type: CREATING_CHARACTER };
 export const characterCreated = character => ({ type: CHARACTER_CREATED, character });
 export const loadingGamePlayers = { type: LOADING_PLAYERS };
 export const gamePlayersLoaded = players => ({ type: PLAYERS_LOADED, players });
+export const addingPlayer = { type: ADDING_PLAYER };
+export const playerAdded = player => ({ type: PLAYER_ADDED, player });
 
 export const createGame = name => async (dispatch, getState) => {
   const createdBy = getCurrentPlayerId(getState());
@@ -69,7 +73,7 @@ export const loadGame = (gameId, shouldNavTo) => async dispatch => {
   dispatch(loadingGame);
   gameApi.loadGame(gameId).then(game => {
     dispatch(gameLoaded(game));
-    dispatch(loadGamePlayers(gameId));
+    dispatch(loadPlayers(gameId));
     shouldNavTo && dispatch(navTo(GAME_ROUTE.replace(':gameId', gameId)));
   });
 };
@@ -109,9 +113,16 @@ export const deleteGame = gameId => async dispatch => {
   gameApi.deleteGame(gameId);
 };
 
-export const loadGamePlayers = gameId => async dispatch => {
+export const loadPlayers = gameId => async dispatch => {
   dispatch(loadingGamePlayers);
   gameApi.getPlayers(gameId).then(players =>
     dispatch(gamePlayersLoaded(players))
+  );
+};
+
+export const addPlayer = (gameId, player) => async dispatch => {
+  dispatch(addingPlayer);
+  gameApi.addPlayer(gameId, player).then(() =>
+    dispatch(playerAdded)
   );
 };

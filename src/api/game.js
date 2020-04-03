@@ -60,3 +60,9 @@ export const getPlayers = async gameId => {
 
   return prop('data', response);
 };
+
+export const addPlayer = async (gameId, playerId) => {
+  const response = await client.patch(`/games/${gameId}/players`, { playerId });
+
+  return prop('data', response);
+};

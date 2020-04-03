@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { getGameId } from '../../selectors/routing';
 import { getCurrentGameName, getGamePlayers } from '../../selectors/game';
 import { getCurrentPlayer } from '../../selectors/player';
-import { loadGame, sendInvite, startGame, deleteGame } from '../../actions/game';
+import { loadGame, sendInvite, startGame, deleteGame, addPlayer } from '../../actions/game';
 import { navTo } from '../../actions/routing';
 import NewGame from './NewGame';
 
@@ -18,6 +18,7 @@ const mapDispatchToProps = dispatch => ({
   sendInvite: (gameId, playerName, email) => dispatch(sendInvite(gameId, playerName, email)),
   startGame: gameId => dispatch(startGame(gameId)),
   deleteGame: gameId => dispatch(deleteGame(gameId)),
+  addPlayer: (gameId, playerId) => dispatch(addPlayer(gameId, playerId)),
   navTo: path => dispatch(navTo(path))
 });
 
