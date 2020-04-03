@@ -18,12 +18,16 @@ const NewGame = ({
   deleteGame,
   navTo
 }) => {
-  const [isInviting, setIsInviting] = useState(false);
-  const [inviteEmail, setInviteEmail] = useState('');
+  const [isInviting, setIsInviting] = useState(true);
+  const [inviteEmail, setInviteEmail] = useState('andrew.brainerd3@gmail.com');
 
   useEffect(() => {
     gameId && loadGame(gameId);
   }, [gameId, loadGame]);
+
+  useEffect(() => {
+    console.log('Player: %o', player);
+  }, [player]);
 
   return (
     <div className={styles.newGame}>
@@ -43,12 +47,18 @@ const NewGame = ({
               placeholder={'Player Email'}
               value={inviteEmail}
               onChange={setInviteEmail}
-              onPressEnter={() => sendInvite(gameId, player.name, inviteEmail)}
+              onPressEnter={() => {
+                sendInvite(gameId, player.name, inviteEmail);
+                setIsInviting(false);
+              }}
             />
             <Button
               className={styles.inviteButton}
               text={'Send'}
-              onClick={() => sendInvite(gameId, player.name, inviteEmail)}
+              onClick={() => {
+                sendInvite(gameId, player.name, inviteEmail);
+                setIsInviting(false);
+              }}
               disabled={!inviteEmail}
             />
           </>
