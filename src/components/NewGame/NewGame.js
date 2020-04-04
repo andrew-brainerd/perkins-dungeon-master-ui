@@ -31,11 +31,11 @@ const NewGame = ({
   useEffect(() => {
     !isEmpty(player) && !getIsPlayerPartyMember(partyMembers, player) &&
       addPlayer(gameId, player._id);
-  }, [player]);
+  }, [player, partyMembers, addPlayer, gameId]);
 
   return (
     <div className={styles.newGame}>
-      <h1>{gameName || 'New Adventure'}</h1>
+      <h1>{gameName}</h1>
       <div className={styles.partyMembers}>
         <h2>Party Members</h2>
         <Icon
@@ -95,23 +95,23 @@ const NewGame = ({
   );
 };
 
-  NewGame.propTypes = {
-    gameId: string,
-    gameName: string,
-    player: shape({
-      email: string
-    }),
-    partyMembers: shape({
-      _id: string,
-      name: string,
-      email: string
-    }),
-    loadGame: func.isRequired,
-    sendInvite: func.isRequired,
-    startGame: func.isRequired,
-    deleteGame: func.isRequired,
-    addPlayer: func.isRequired,
-    navTo: func.isRequired
-  };
+NewGame.propTypes = {
+  gameId: string,
+  gameName: string,
+  player: shape({
+    email: string
+  }),
+  partyMembers: shape({
+    _id: string,
+    name: string,
+    email: string
+  }),
+  loadGame: func.isRequired,
+  sendInvite: func.isRequired,
+  startGame: func.isRequired,
+  deleteGame: func.isRequired,
+  addPlayer: func.isRequired,
+  navTo: func.isRequired
+};
 
-  export default NewGame;
+export default NewGame;

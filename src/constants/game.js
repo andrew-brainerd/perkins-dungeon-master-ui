@@ -2,20 +2,20 @@ export const localCommands = [
   'help'
 ];
 
-export const inviteBodyStyle = `
+const inviteBodyStyle = `
   background-color: black !important;
   height: 300px;
   width: 550px;
 `.replace(/\n/g, '');
 
-export const headerStyle = `
+const headerStyle = `
   color: #00fcfe;
   margin: 30px auto;
   padding: 30px;
   text-align: center;
 `.replace(/\n/g, '');
 
-export const inviteButtonStyle = `
+const inviteButtonStyle = `
   background-color: #fffd33;
   border-radius: 5px;
   margin: 30px auto;

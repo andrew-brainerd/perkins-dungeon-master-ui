@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { number, string, bool, func } from 'prop-types';
+import { events } from 'gm-common';
 import usePrevious from '../../hooks/usePrevious';
 import { isDefined } from '../../utils/validation';
 import { CHARACTER_CREATION_ROUTE } from '../../constants/routes';
@@ -36,7 +37,7 @@ const Game = ({
 
   useEffect(() => {
     if (isDefined(gameId)) {
-      connectClient(gameId);
+      connectClient(gameId, events.GAME_UPDATED);
     }
   }, [connectClient, gameId]);
 

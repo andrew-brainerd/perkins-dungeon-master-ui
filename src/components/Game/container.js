@@ -22,7 +22,7 @@ const mapStateToProps = state => ({
 const mapSizesToProps = ({ height }) => ({ height });
 
 const mapDispatchToProps = dispatch => ({
-  connectClient: podId => dispatch(connectClient(podId)),
+  connectClient: (channel, event) => dispatch(connectClient(channel, event)),
   loadGame: gameId => dispatch(loadGame(gameId)),
   loadCharacters: gameId => dispatch(loadCharacters(gameId)),
   navTo: path => dispatch(navTo(path))

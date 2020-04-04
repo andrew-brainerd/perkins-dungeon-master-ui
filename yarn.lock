@@ -5318,10 +5318,10 @@ globule@^1.0.0:
     lodash "~4.17.12"
     minimatch "~3.0.2"
 
-gm-common@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/gm-common/-/gm-common-0.0.8.tgz#893775c4777f59afa0cffada2362433f231ea2aa"
-  integrity sha512-mH2cVPI7wZzt7m/IPmQp1i+9KEotzD/rDJAuA1kudaJXsjg9ID50reUr0SiFBth+mDzr1XWYicNNcnk7fqJm2Q==
+gm-common@0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/gm-common/-/gm-common-0.1.0.tgz#aaff19c1c9d9e9abe2fdad796d126f02735a5fa2"
+  integrity sha512-pXW62C9hnSXA59Ef/cseCJGsMM7bFWNXzvwbYFvXy/G5NNXA+DWjV7lhxkue0MCtpQnTmBPstY514+xM1HJUOg==
 
 gonzales-pe@^4.2.4:
   version "4.2.4"
