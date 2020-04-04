@@ -38,7 +38,6 @@ const Game = ({
 
   useEffect(() => {
     if (isDefined(gameId)) {
-      console.log({ gameId, event: events.GAME_UPDATED, triggerUpdate });
       connectClient(gameId, events.GAME_UPDATED, triggerUpdate);
     }
   }, [connectClient, gameId, triggerUpdate]);
