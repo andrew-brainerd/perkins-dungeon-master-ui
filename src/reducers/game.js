@@ -74,7 +74,8 @@ const game = (state = initialState, action) => {
         ...state,
         isPlaying: false,
         currentGame: {},
-        localMessages: []
+        localMessages: [],
+        players: {}
       };
     case SENDING_INVITE_EMAIL:
       return {

@@ -6,7 +6,7 @@ import { getShouldUpdateGame } from '../../selectors/game';
 import { getCurrentPlayerId } from '../../selectors/player';
 import { getCurrentCharacterId, getIsLoadingCharacters } from '../../selectors/characters';
 import { connectClient } from '../../actions/pusher';
-import { loadGame } from '../../actions/game';
+import { loadGame, triggerUpdate } from '../../actions/game';
 import { loadCharacters } from '../../actions/characters';
 import { navTo } from '../../actions/routing';
 import Game from './Game';
@@ -22,9 +22,10 @@ const mapStateToProps = state => ({
 const mapSizesToProps = ({ height }) => ({ height });
 
 const mapDispatchToProps = dispatch => ({
-  connectClient: (channel, event) => dispatch(connectClient(channel, event)),
+  connectClient: (channel, event, action) => dispatch(connectClient(channel, event, action)),
   loadGame: gameId => dispatch(loadGame(gameId)),
   loadCharacters: gameId => dispatch(loadCharacters(gameId)),
+  triggerUpdate: () => dispatch(triggerUpdate),
   navTo: path => dispatch(navTo(path))
 });
 

@@ -21,6 +21,7 @@ const Game = ({
   connectClient,
   loadGame,
   loadCharacters,
+  triggerUpdate,
   navTo
 }) => {
   const [isInitialLoad, setIsInitialLoad] = useState(isDefined(gameId));
@@ -37,9 +38,10 @@ const Game = ({
 
   useEffect(() => {
     if (isDefined(gameId)) {
-      connectClient(gameId, events.GAME_UPDATED);
+      console.log({ gameId, event: events.GAME_UPDATED, triggerUpdate });
+      connectClient(gameId, events.GAME_UPDATED, triggerUpdate);
     }
-  }, [connectClient, gameId]);
+  }, [connectClient, gameId, triggerUpdate]);
 
   useEffect(() => {
     if ((shouldUpdate || isInitialLoad) && playerId) {
@@ -67,6 +69,7 @@ Game.propTypes = {
   connectClient: func.isRequired,
   loadGame: func.isRequired,
   loadCharacters: func.isRequired,
+  triggerUpdate: func.isRequired,
   navTo: func.isRequired
 };
 

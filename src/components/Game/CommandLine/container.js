@@ -12,7 +12,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   addPlayerInput: message => dispatch(addPlayerInput(message)),
-  connectClient: (channel, event) => dispatch(connectClient(channel, event)),
+  connectClient: (channel, event, action) => dispatch(connectClient(channel, event, action)),
   loadGame: gameId => dispatch(loadGame(gameId))
 });
 

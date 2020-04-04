@@ -34,12 +34,6 @@ const game = (state = initialState, action) => {
         isLoadingCharacters: false,
         currentCharacter: action.currentCharacter
       };
-    case SET_CURRENT_CHARACTER:
-      return {
-        ...state,
-        isLoadingCharacters: false,
-        currentCharacter: action.currentCharacter
-      };
     default:
       return state;
   }

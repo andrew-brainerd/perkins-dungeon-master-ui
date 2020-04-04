@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { shape, string, func } from 'prop-types';
+import { shape, string, bool, func } from 'prop-types';
 import { isEmpty, values } from 'ramda';
+import { events } from 'gm-common';
+import usePrevious from '../../hooks/usePrevious';
+import { isDefined } from '../../utils/validation';
 import { ROOT_ROUTE } from '../../constants/routes';
 import TextInput from '../common/TextInput/TextInput';
 import Button from '../common/Button/Button';
@@ -14,19 +17,35 @@ const NewGame = ({
   gameName,
   player,
   partyMembers,
+  shouldUpdateGame,
   loadGame,
   sendInvite,
   startGame,
   deleteGame,
   addPlayer,
+  connectClient,
+  triggerUpdate,
   navTo
 }) => {
   const [isInviting, setIsInviting] = useState(false);
   const [inviteEmail, setInviteEmail] = useState('');
+  const [isInitialLoad, setIsInitialLoad] = useState(isDefined(gameId));
+  const prevGameId = usePrevious(gameId);
+  const hasUpdatedGameId = isDefined(gameId) && gameId !== prevGameId;
+  const shouldUpdate = shouldUpdateGame || hasUpdatedGameId;
 
   useEffect(() => {
-    gameId && loadGame(gameId);
-  }, [gameId, loadGame]);
+    if ((shouldUpdate || isInitialLoad) && player) {
+      loadGame(gameId);
+      setIsInitialLoad(false);
+    }
+  }, [shouldUpdate, isInitialLoad, loadGame, gameId, player, prevGameId]);
+
+  useEffect(() => {
+    if (isDefined(gameId)) {
+      connectClient(gameId, events.PLAYER_ADDED, triggerUpdate);
+    }
+  }, [connectClient, gameId, triggerUpdate]);
 
   useEffect(() => {
     !isEmpty(player) && !getIsPlayerPartyMember(partyMembers, player) &&
@@ -106,11 +125,14 @@ NewGame.propTypes = {
     name: string,
     email: string
   }),
+  shouldUpdateGame: bool,
   loadGame: func.isRequired,
   sendInvite: func.isRequired,
   startGame: func.isRequired,
   deleteGame: func.isRequired,
   addPlayer: func.isRequired,
+  connectClient: func.isRequired,
+  triggerUpdate: func.isRequired,
   navTo: func.isRequired
 };
 
