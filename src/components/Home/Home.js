@@ -21,11 +21,13 @@ const Home = ({ player, playerGames, loadPlayerGames, createGame, navTo }) => {
       {!isEmpty(player) ? (
         <>
           <Button
+            name={'newGame'}
             className={styles.gameButton}
             text={'New Game'}
             onClick={() => setIsNewGameOpen(true)}
           />
           <Button
+            name={'loadGame'}
             className={styles.gameButton}
             text={'Load Game'}
             onClick={() => setIsLoadGameOpen(true)}
