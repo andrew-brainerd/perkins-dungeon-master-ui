@@ -6,7 +6,11 @@ import {
   GAME_LOADED,
   TRIGGER_UPDATE,
   ADD_LOCAL_MESSAGE,
-  EXIT_GAME
+  EXIT_GAME,
+  SENDING_INVITE_EMAIL,
+  DELETING_GAME,
+  LOADING_PLAYERS,
+  PLAYERS_LOADED
 } from '../actions/game';
 
 const initialState = {
@@ -15,7 +19,8 @@ const initialState = {
   currentGame: {},
   currentPlayerGames: [],
   localMessages: [],
-  hasUpdates: false
+  hasUpdates: false,
+  players: {}
 };
 
 const game = (state = initialState, action) => {
@@ -69,7 +74,29 @@ const game = (state = initialState, action) => {
         ...state,
         isPlaying: false,
         currentGame: {},
-        localMessages: []
+        localMessages: [],
+        players: {}
+      };
+    case SENDING_INVITE_EMAIL:
+      return {
+        ...state,
+        isSendingEmail: true
+      };
+    case DELETING_GAME:
+      return {
+        ...state,
+        isDeletingGame: true
+      };
+    case LOADING_PLAYERS:
+      return {
+        ...state,
+        isLoadingPlayers: true
+      };
+    case PLAYERS_LOADED:
+      return {
+        ...state,
+        isLoadingPlayers: false,
+        players: action.players
       };
     default:
       return state;

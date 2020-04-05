@@ -54,21 +54,10 @@ describe('TextInput Component', () => {
     });
 
     it('should set input value to default value', () => {
-      props.value = null;
+      props.value = undefined;
       const component = render().find('input');
 
       expect(component.props().value).toEqual('');
-    });
-  });
-
-  describe('Update input value', () => {
-    it('should update input value on change', () => {
-      const input = render().find('input');
-
-      input.simulate('change', { target: { value: 'updated value' } });
-      input.update();
-
-      expect(input.instance().value).toBe('updated value');
     });
   });
 

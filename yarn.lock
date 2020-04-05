@@ -889,12 +889,19 @@
     "@babel/helper-plugin-utils" "^7.8.3"
     "@babel/plugin-transform-typescript" "^7.8.3"
 
-"@babel/runtime@7.8.4", "@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.0", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.2", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.3", "@babel/runtime@^7.8.4":
+"@babel/runtime@7.8.4", "@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.0", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.1", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.2", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.3":
   version "7.8.4"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.8.4.tgz#d79f5a2040f7caa24d53e563aad49cbc05581308"
   integrity sha512-neAp3zt80trRVBI1x0azq6c57aNBqYZH8KhMm3TaB7wEI5Q4A2SHfBHE8w9gOhI/lrqxtEbXZgQIrHP+wvSGwQ==
   dependencies:
     regenerator-runtime "^0.13.2"
+
+"@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
+  version "7.9.2"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.9.2.tgz#d90df0583a3a252f09aaa619665367bae518db06"
+  integrity sha512-NE2DtOdufG7R5vnfQUTehdTfNycfUANEtCa9PssN9O/xmTzP4E08UI797ixaei6hBEVL9BI/PsdJS5x7mWoB9Q==
+  dependencies:
+    regenerator-runtime "^0.13.4"
 
 "@babel/template@^7.4.0", "@babel/template@^7.8.3":
   version "7.8.3"
@@ -1317,12 +1324,12 @@
     "@svgr/plugin-svgo" "^4.3.1"
     loader-utils "^1.2.3"
 
-"@tanem/svg-injector@^8.0.41":
-  version "8.0.42"
-  resolved "https://registry.yarnpkg.com/@tanem/svg-injector/-/svg-injector-8.0.42.tgz#b90f760b20f0ae7a86013ef9cff2708f8088b01c"
-  integrity sha512-xHL+PgOkL0FtTuZBq9ihrPPbAy81DR8NirmzAaEuSCKm4m4tViF++wxtixPXwGpYB3PcRyUE9xXFNd/V1DIM6A==
+"@tanem/svg-injector@^8.0.43":
+  version "8.0.45"
+  resolved "https://registry.yarnpkg.com/@tanem/svg-injector/-/svg-injector-8.0.45.tgz#5ab8ae62dd9bfd2bf8921c2907d37460adb10482"
+  integrity sha512-jX1S527aMdLiaxw/Efp7uy7xX6xW0lVabPE58mFb035uWw8K/jQtcmqepZWx75I/WBD1UFwZaTKV+jeqcYUhiw==
   dependencies:
-    "@babel/runtime" "^7.8.4"
+    "@babel/runtime" "^7.9.2"
 
 "@testing-library/dom@^6.11.0":
   version "6.12.2"
@@ -5311,10 +5318,10 @@ globule@^1.0.0:
     lodash "~4.17.12"
     minimatch "~3.0.2"
 
-gm-common@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/gm-common/-/gm-common-0.0.7.tgz#95e0992eb083e14bc9265e0983488e40f38f5f03"
-  integrity sha512-QTRPo4MiuXsNMPlua+AF4ZNOZxEhRnW8R7vYfBRxPdWshcMYdYYnt1jNNfoQNgBQyM+RDk4PwLfPquAVayQTZg==
+gm-common@0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/gm-common/-/gm-common-0.1.0.tgz#aaff19c1c9d9e9abe2fdad796d126f02735a5fa2"
+  integrity sha512-pXW62C9hnSXA59Ef/cseCJGsMM7bFWNXzvwbYFvXy/G5NNXA+DWjV7lhxkue0MCtpQnTmBPstY514+xM1HJUOg==
 
 gonzales-pe@^4.2.4:
   version "4.2.4"
@@ -9773,13 +9780,13 @@ react-sizes@^2.0.0:
     lodash.throttle "^4.1.1"
     prop-types "^15.6.0"
 
-react-svg@^11.0.12:
-  version "11.0.12"
-  resolved "https://registry.yarnpkg.com/react-svg/-/react-svg-11.0.12.tgz#4d71e92fb2ae42c8b51db14b7b885d834592ae4c"
-  integrity sha512-8GqcIv4S8DHatDiw1uem25OwEwvLQV2FUDyTruZw1B0rcUJTqvP9hP9h3WKzZQ+AL5A6Vsta4anXj5pw/2ur8A==
+react-svg@^11.0.15:
+  version "11.0.15"
+  resolved "https://registry.yarnpkg.com/react-svg/-/react-svg-11.0.15.tgz#8739a4f7736613741781fbc5de479af763b3a9c0"
+  integrity sha512-LyZBobRTWz0DEw7qRm46GLhTM1Z7idaZcbqttOaaS5jcem7k4JcHXUQuAIO36V/gwwgMmCu3bTNxzmS96cRqQg==
   dependencies:
-    "@babel/runtime" "^7.8.4"
-    "@tanem/svg-injector" "^8.0.41"
+    "@babel/runtime" "^7.8.7"
+    "@tanem/svg-injector" "^8.0.43"
     prop-types "^15.7.2"
 
 react-test-renderer@^16.0.0-0:
@@ -9995,6 +10002,11 @@ regenerator-runtime@^0.13.2, regenerator-runtime@^0.13.3:
   version "0.13.3"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.3.tgz#7cf6a77d8f5c6f60eb73c5fc1955b2ceb01e6bf5"
   integrity sha512-naKIZz2GQ8JWh///G7L3X6LaQUAMp2lvb1rvwwsURe/VXwD6VMfr+/1NuNw3ag8v2kY1aQ/go5SNn79O9JU7yw==
+
+regenerator-runtime@^0.13.4:
+  version "0.13.5"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.5.tgz#d878a1d094b4306d10b9096484b33ebd55e26697"
+  integrity sha512-ZS5w8CpKFinUzOwW3c83oPeVXoNsrLsaCoLtJvAClH135j/R77RuymhiSErhm2lKcwSCIpmvIWSbDkIfAqKQlA==
 
 regenerator-transform@^0.14.0:
   version "0.14.1"

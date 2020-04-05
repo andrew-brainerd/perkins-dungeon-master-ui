@@ -1,0 +1,116 @@
+@import '../../styles/colors.scss';
+@import '../../styles/sizing.scss';
+
+.newGame {
+  background: $defaultBackground;
+  display: flex;
+  flex-direction: column;
+  height: 92vh;
+  margin: auto;
+  max-width: $maxContentWidth;
+  padding: 20px 50px;
+  width: 100%;
+
+  h1,
+  h2 {
+    user-select: none;
+    white-space: nowrap;
+  }
+
+  .nameInput {
+    background: $gray-90;
+    border: 1px solid $gray-80;
+    margin-bottom: 15px;
+
+    input {
+      background: $gray-90;
+      text-align: left;
+      text-indent: 10px;
+    }
+  }
+
+  .partyMembers {
+    align-items: center;
+    display: flex;
+
+    .invite {
+      cursor: pointer;
+      margin: 0 10px;
+      position: relative;
+      top: 2px;
+
+      svg {
+        height: 20px;
+        width: 45px;
+
+        path {
+          fill: $gray-40;
+          transition: 0.3s fill;
+        }
+      }
+
+      &:hover {
+        svg {
+          path {
+            fill: white;
+          }
+        }
+      }
+    }
+
+    .inviteInput {
+      background: $gray-90;
+      border: 1px solid $gray-80;
+      display: inline-block;
+
+      input {
+        background: $gray-90;
+        font-size: 18px;
+        padding: 5px;
+        text-align: left;
+      }
+    }
+
+    .inviteButton {
+      border: 1px solid $gray-80;
+      border-radius: 0;
+      padding: 7px;
+      position: relative;
+      right: 2px;
+      width: 100px;
+
+      &:hover {
+        transform: none;
+      }
+    }
+  }
+
+  .partyMemberList {
+    border: 1px solid $gray-80;
+    min-height: 200px;
+    width: 100%;
+
+    .partyMember {
+      background: $gray-80;
+      border: 1px solid $gray-80;
+      border-radius: 5px;
+      display: inline-block;
+      margin: 10px;
+      padding: 5px 10px;
+      text-align: center;
+    }
+  }
+
+  .buttonContainer {
+    align-self: flex-end;
+    bottom: 50px;
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    width: 350px;
+
+    .newGameButton {
+      width: 125px;
+    }
+  }
+}

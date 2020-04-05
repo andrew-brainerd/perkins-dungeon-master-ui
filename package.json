@@ -9,7 +9,7 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "connected-react-router": "^6.7.0",
-    "gm-common": "^0.0.7",
+    "gm-common": "0.1.0",
     "history": "^4.10.1",
     "node-sass": "^4.13.1",
     "pusher-js": "^5.1.1",
@@ -22,12 +22,31 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
     "react-sizes": "^2.0.0",
-    "react-svg": "^11.0.12",
+    "react-svg": "^11.0.15",
     "react-uuid": "^1.0.2",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "webfontloader": "^1.6.28"
+  },
+  "devDependencies": {
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jest": "^23.8.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.18.3",
+    "eslint-plugin-react-hooks": "^2.5.0",
+    "eslint-plugin-standard": "^4.0.1",
+    "husky": "^4.2.3",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-mock-store": "^1.5.4",
+    "stylelint": "^13.2.0",
+    "stylelint-config-standard": "^20.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -53,25 +72,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2",
-    "eslint": "^6.8.0",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-jest": "^23.8.1",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-react": "^7.18.3",
-    "eslint-plugin-react-hooks": "^2.5.0",
-    "eslint-plugin-standard": "^4.0.1",
-    "husky": "^4.2.3",
-    "redux-devtools-extension": "^2.13.8",
-    "redux-mock-store": "^1.5.4",
-    "stylelint": "^13.2.0",
-    "stylelint-config-standard": "^20.0.0"
   },
   "jest": {
     "moduleNameMapper": {

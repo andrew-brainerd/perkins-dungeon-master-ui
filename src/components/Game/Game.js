@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { number, string, bool, func } from 'prop-types';
+import { events } from 'gm-common';
 import usePrevious from '../../hooks/usePrevious';
 import { isDefined } from '../../utils/validation';
 import { CHARACTER_CREATION_ROUTE } from '../../constants/routes';
@@ -20,6 +21,7 @@ const Game = ({
   connectClient,
   loadGame,
   loadCharacters,
+  triggerUpdate,
   navTo
 }) => {
   const [isInitialLoad, setIsInitialLoad] = useState(isDefined(gameId));
@@ -36,9 +38,9 @@ const Game = ({
 
   useEffect(() => {
     if (isDefined(gameId)) {
-      connectClient(gameId);
+      connectClient(gameId, events.GAME_UPDATED, triggerUpdate);
     }
-  }, [connectClient, gameId]);
+  }, [connectClient, gameId, triggerUpdate]);
 
   useEffect(() => {
     if ((shouldUpdate || isInitialLoad) && playerId) {
@@ -66,6 +68,7 @@ Game.propTypes = {
   connectClient: func.isRequired,
   loadGame: func.isRequired,
   loadCharacters: func.isRequired,
+  triggerUpdate: func.isRequired,
   navTo: func.isRequired
 };
 

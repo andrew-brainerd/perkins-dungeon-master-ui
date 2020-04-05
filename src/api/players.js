@@ -16,4 +16,3 @@ export const getPlayerByEmail = async email => {
 
   return response;
 };
-

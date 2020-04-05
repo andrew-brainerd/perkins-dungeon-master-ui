@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { string, bool, func } from 'prop-types';
 import noop from '../../../utils/noop';
 import styles from './TextInput.module.scss';
@@ -6,7 +6,7 @@ import styles from './TextInput.module.scss';
 const TextInput = ({
   className,
   placeholder,
-  value,
+  value = '',
   inputClassName,
   autofocus,
   onChange,
@@ -14,20 +14,14 @@ const TextInput = ({
   onFocus,
   onBlur
 }) => {
-  const [val, setVal] = useState(value || '');
   const inputRef = useRef();
 
   useEffect(() => {
     autofocus && inputRef.current.focus();
   }, [autofocus]);
 
-  useEffect(() => {
-    value && setVal(value);
-  }, [value]);
-
   const handleChange = event => {
     const newValue = event.target.value;
-    setVal(newValue);
     onChange ? onChange(newValue) : noop();
   };
 
@@ -56,7 +50,7 @@ const TextInput = ({
         ].join(' ')}
         placeholder={placeholder || ''}
         ref={inputRef}
-        value={val}
+        value={value}
         autoComplete={'false'}
         onChange={handleChange}
         onKeyPress={handleKeyPress}

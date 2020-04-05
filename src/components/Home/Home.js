@@ -6,7 +6,7 @@ import TextInput from '../common/TextInput/TextInput';
 import styles from './Home.module.scss';
 import { GAME_ROUTE } from '../../constants/routes';
 
-const Home = ({ player, playerGames, loadPlayerGames, startNewGame, navTo }) => {
+const Home = ({ player, playerGames, loadPlayerGames, createGame, navTo }) => {
   const [isNewGameOpen, setIsNewGameOpen] = useState(false);
   const [isLoadGameOpen, setIsLoadGameOpen] = useState(false);
   const [selectedGame, setSelectedGame] = useState(null);
@@ -47,7 +47,7 @@ const Home = ({ player, playerGames, loadPlayerGames, startNewGame, navTo }) => 
           placeholder={'Name'}
           value={gameName}
           onChange={setGameName}
-          onPressEnter={() => startNewGame(gameName, player.email)}
+          onPressEnter={() => createGame(gameName, player.email)}
         />
         <div className={styles.buttonContainer}>
           <Button
@@ -58,7 +58,7 @@ const Home = ({ player, playerGames, loadPlayerGames, startNewGame, navTo }) => 
           <Button
             className={styles.newGameButton}
             text={'Start'}
-            onClick={() => startNewGame(gameName, player.email)}
+            onClick={() => createGame(gameName, player.email)}
             disabled={!gameName || !player}
           />
         </div>
@@ -108,7 +108,7 @@ Home.propTypes = {
   }),
   playerGames: array,
   loadPlayerGames: func.isRequired,
-  startNewGame: func.isRequired,
+  createGame: func.isRequired,
   navTo: func.isRequired
 };
 

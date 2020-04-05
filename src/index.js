@@ -9,7 +9,7 @@ import App from './components/App/App';
 import './index.scss';
 
 console.log(
-  `%cPerkins DM App v${version}`,
+  `%cAnorak GM v${version}`,
   'color: orange; font-size: 20px;'
 );
 
