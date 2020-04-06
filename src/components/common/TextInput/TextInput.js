@@ -4,6 +4,7 @@ import noop from '../../../utils/noop';
 import styles from './TextInput.module.scss';
 
 const TextInput = ({
+  name,
   className,
   placeholder,
   value = '',
@@ -43,6 +44,7 @@ const TextInput = ({
     ].join(' ')}
     >
       <input
+        name={name}
         type={'text'}
         className={[
           styles.textInput,
@@ -62,6 +64,7 @@ const TextInput = ({
 };
 
 TextInput.propTypes = {
+  name: string,
   className: string,
   placeholder: string,
   value: string,

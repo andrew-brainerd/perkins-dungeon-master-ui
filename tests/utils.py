@@ -1,7 +1,16 @@
 import os
 import time
+from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
+
+def does_element_exist(browser, name):
+    try:
+        browser.find_element_by_name(name)
+    except NoSuchElementException:
+        return False
+    return True
 
 def open_browser(browser, base_url):
   browser.get(base_url)

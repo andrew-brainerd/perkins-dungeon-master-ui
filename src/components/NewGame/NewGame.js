@@ -54,7 +54,7 @@ const NewGame = ({
 
   return (
     <div className={styles.newGame}>
-      <h1>{gameName}</h1>
+      <h1 name={'gameName'}>{gameName}</h1>
       <div className={styles.partyMembers}>
         <h2>Party Members</h2>
         <Icon
@@ -96,6 +96,7 @@ const NewGame = ({
       </div>
       <div className={styles.buttonContainer}>
         <Button
+          name={'cancelGameStart'}
           className={styles.newGameButton}
           text={'Cancel'}
           onClick={() => {
@@ -104,6 +105,7 @@ const NewGame = ({
           }}
         />
         <Button
+          name={'startNewGame'}
           className={styles.newGameButton}
           text={'Start'}
           onClick={() => startGame(gameId)}

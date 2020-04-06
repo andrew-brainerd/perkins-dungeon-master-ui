@@ -45,6 +45,7 @@ const Home = ({ player, playerGames, loadPlayerGames, createGame, navTo }) => {
         <h1>Start A New Game</h1>
         <TextInput
           autofocus
+          name={'newGameName'}
           className={styles.nameInput}
           placeholder={'Name'}
           value={gameName}
@@ -53,13 +54,15 @@ const Home = ({ player, playerGames, loadPlayerGames, createGame, navTo }) => {
         />
         <div className={styles.buttonContainer}>
           <Button
+            name={'cancelNewGame'}
             className={styles.newGameButton}
             text={'Cancel'}
             onClick={() => setIsNewGameOpen(false)}
           />
           <Button
+            name={'createNewGame'}
             className={styles.newGameButton}
-            text={'Start'}
+            text={'Create'}
             onClick={() => createGame(gameName, player.email)}
             disabled={!gameName || !player}
           />
@@ -86,6 +89,7 @@ const Home = ({ player, playerGames, loadPlayerGames, createGame, navTo }) => {
         </div>
         <div className={styles.buttonContainer}>
           <Button
+            name={'cancelLoadGame'}
             className={styles.loadGameButton}
             text={'Cancel'}
             onClick={() => setIsLoadGameOpen(false)}
