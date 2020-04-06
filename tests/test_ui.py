@@ -56,4 +56,3 @@ def test_signIn():
   assert loadGameButton.text == 'Load Game'
 
   browser.close()
-  
