@@ -2,10 +2,11 @@ import React from 'react';
 import { string, array, func } from 'prop-types';
 import styles from './Dropdown.module.scss';
 
-const Dropdown = ({ className, options, displayKey, valueKey, selectedOption, onOptionSelected }) => {
+const Dropdown = ({ name, className, options, displayKey, valueKey, selectedOption, onOptionSelected }) => {
   return (
     <div className={styles.dropdown}>
       <select
+        name={name}
         className={[
           styles.dropdownInput,
           className || ''
@@ -27,6 +28,7 @@ const Dropdown = ({ className, options, displayKey, valueKey, selectedOption, on
 };
 
 Dropdown.propTypes = {
+  name: string,
   className: string,
   options: array.isRequired,
   displayKey: string.isRequired,

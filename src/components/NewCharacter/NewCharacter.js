@@ -47,10 +47,12 @@ const NewCharacter = ({ gameId, createCharacter }) => {
 
   return (
     <div className={styles.newCharacter}>
+      <h2 name={'characterCreation'}>Character Creation</h2>
       <div className={styles.characterInput}>
         <div className={styles.label}>Character Name</div>
         <TextInput
           autofocus
+          name={'characterName'}
           inputClassName={styles.textInput}
           placeholder={'BoJack Horseman'}
           value={characterName}
@@ -60,6 +62,7 @@ const NewCharacter = ({ gameId, createCharacter }) => {
       <div className={styles.characterInput}>
         <div className={styles.label}>Character Class</div>
         <Dropdown
+          name={'characterClass'}
           className={styles.classDropdown}
           options={characterClassOptions}
           displayKey={'name'}
@@ -71,6 +74,7 @@ const NewCharacter = ({ gameId, createCharacter }) => {
       <div className={styles.characterInput}>
         <div className={styles.label}>Character Race</div>
         <Dropdown
+          name={'characterRace'}
           className={styles.raceDropdown}
           options={characterRaceOptions}
           displayKey={'name'}
@@ -82,6 +86,7 @@ const NewCharacter = ({ gameId, createCharacter }) => {
       <div className={styles.characterInput}>
         <div className={styles.label}>Order</div>
         <Dropdown
+          name={'characterOrder'}
           className={styles.orderDropdown}
           options={characterOrderOptions}
           displayKey={'name'}
@@ -91,6 +96,7 @@ const NewCharacter = ({ gameId, createCharacter }) => {
         />
         <div className={styles.label}>Morality</div>
         <Dropdown
+          name={'characterMorality'}
           className={styles.moralityDropdown}
           options={characterMoralityOptions}
           displayKey={'name'}
@@ -100,6 +106,7 @@ const NewCharacter = ({ gameId, createCharacter }) => {
         />
       </div>
       <Button
+        name={'createCharacter'}
         className={styles.submit}
         text={'Create'}
         onClick={() => createCharacter({
