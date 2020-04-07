@@ -13,11 +13,12 @@ export const playersLoaded = players => ({ type: PLAYERS_LOADED, players });
 
 export const setCurrentPlayer = player => async dispatch => {
   dispatch(loadingPlayer);
-  playersApi.getPlayerByEmail(player.email).then(({ doesNotExist, ...playerData }) => {
-    if (doesNotExist) {
-      playersApi.createPlayer(player.name, player.email);
-    }
+  playersApi.getPlayerByEmail(player.email)
+    .then(({ doesNotExist, ...playerData }) => {
+      if (doesNotExist) {
+        playersApi.createPlayer(player.name, player.email);
+      }
 
-    dispatch({ type: SET_CURRENT_PLAYER, player: { ...player, ...playerData } });
-  });
+      dispatch({ type: SET_CURRENT_PLAYER, player: { ...player, ...playerData } });
+    });
 };
