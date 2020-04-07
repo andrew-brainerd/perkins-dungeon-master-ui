@@ -28,6 +28,7 @@ const Header = ({ isPlaying, shouldSignIn, shouldSignOut, setCurrentPlayer, exit
     <>
       <div className={styles.header}>
         <div
+          name={'menu'}
           className={styles.menuIcon}
           onClick={() => isMenuOpen ? setIsMenuOpen(false) : setIsMenuOpen(true)}
         >
@@ -39,6 +40,7 @@ const Header = ({ isPlaying, shouldSignIn, shouldSignOut, setCurrentPlayer, exit
         <div className={styles.headerMenu} ref={menuRef}>
           {!isAuthenticated && (
             <Button
+              name={'signIn'}
               className={styles.menuButton}
               text={loading ? 'Loading...' : 'Sign In'}
               onClick={() => !loading && loginWithRedirect()}

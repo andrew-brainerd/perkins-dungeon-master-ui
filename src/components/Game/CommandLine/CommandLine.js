@@ -12,6 +12,7 @@ const CommandLine = ({ gameId, character, addPlayerInput }) => {
   return (
     <div className={styles.commandLine}>
       <TextInput
+        name={'commandLine'}
         className={styles.command}
         inputClassName={styles.commandInput}
         autofocus
