@@ -1,0 +1,27 @@
+@import '../../../styles/colors.scss';
+@import '../../../styles/mixins.scss';
+
+.plusMinusHost {
+  display: flex;
+  flex-direction: row;
+  font-size: 1.5em;
+  height: 52px;
+}
+
+/* Extends the default button control class */
+.plusMinusButton {
+  width: 32px;
+  font-size: 1em;
+}
+
+.label {
+  line-height: 52px;
+  margin-right: 10px;
+  flex: 1 0;
+}
+
+.value {
+  line-height: 52px;
+  margin-left: 10px;
+  width: 30px;
+}

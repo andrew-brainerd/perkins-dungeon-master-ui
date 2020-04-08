@@ -3,6 +3,25 @@
 .newCharacter {
   margin: 50px;
   position: relative;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-auto-rows: min-content;
+
+  .column1 {
+    grid-column: 1;
+  }
+
+  .abilitiesContainer {
+    grid-column: 2;
+    grid-row: 3 / span 3;
+    margin-left: 50px;
+  }
+
+  .abilitiesMetadata {
+    grid-column: 2;
+    grid-row: 6;
+    margin-left: 50px;
+  }
 
   .characterInput {
     margin: 15px auto;
