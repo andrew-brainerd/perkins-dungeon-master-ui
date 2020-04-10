@@ -16,6 +16,7 @@ describe('Game Component', () => {
       connectClient: jest.fn(),
       loadGame: jest.fn(),
       loadCharacters: jest.fn(),
+      triggerUpdate: jest.fn(),
       navTo: jest.fn()
     };
   });
