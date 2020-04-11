@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { getGameId } from '../../../selectors/routing';
-import { addPlayerInput, loadGame } from '../../../actions/games';
-import { connectClient } from '../../../actions/pusher';
+import { addPlayerInput } from '../../../actions/games';
 import CommandLine from './CommandLine';
 import { getCurrentCharacter } from '../../../selectors/characters';
 
@@ -11,9 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addPlayerInput: message => dispatch(addPlayerInput(message)),
-  connectClient: (channel, event, action) => dispatch(connectClient(channel, event, action)),
-  loadGame: gameId => dispatch(loadGame(gameId))
+  addPlayerInput: message => dispatch(addPlayerInput(message))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommandLine);
