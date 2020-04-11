@@ -1,6 +1,6 @@
 import { CONNECTING_CLIENT, SET_IS_CONNECTED } from '../actions/pusher';
 
-const initialState = {
+export const initialState = {
   isConnected: false
 };
 
