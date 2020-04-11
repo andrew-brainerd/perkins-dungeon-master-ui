@@ -4,15 +4,25 @@ import {
   creatingCharacter,
   loadingCharacters
 } from '../actions/characters';
-import reducer from './characters';
+import reducer, { initialState as defaultState } from './characters';
 
 describe('Characters Reducer', () => {
   it('should return the default state', () => {
-    const initialState = {};
     const action = { type: 'NONEXISTENT' };
+
+    const newState = reducer(undefined, action);
+
+    expect(newState).toEqual(defaultState);
+  });
+
+  it('should return the provided state', () => {
+    const initialState = {};
+
+    const action = { type: 'NONEXISTENT' };
+
     const newState = reducer(initialState, action);
 
-    expect(typeof newState).toEqual('object');
+    expect(newState).toEqual({});
   });
 
   describe('CREATING_CHARACTER', () => {

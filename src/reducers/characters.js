@@ -5,7 +5,7 @@ import {
   SET_CURRENT_CHARACTER
 } from '../actions/characters';
 
-const initialState = {
+export const initialState = {
   isLoadingCharacters: false,
   currentCharacter: {},
   gameCharacters: {}
