@@ -51,22 +51,51 @@ Your app is ready to be deployed!
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 
-## Testing Examples
+## Unit Testing Templates
 
-### Reducer
+### Reducers
 
 ```js
-describe('REDUCER_NAME', () => {
-  it('should update state in the following way', () => {
-    const initialState = {};
 
-    const expectedState = {};
+describe('Reducers', () => {
+  import { actionToTest } from './actions';
+  import reducer from './reducer';
 
-    const action = matchingAction;
+  describe('REDUCER_NAME', () => {
+    it('should update state in the following way', () => {
+      const initialState = {};
 
-    const newState = reducer(initialState, action);
+      const expectedState = {};
 
-    expect(newState).toEqual(expectedState);
+      const action = actionToTest;
+
+      const newState = reducer(initialState, action);
+
+      expect(newState).toEqual(expectedState);
+    });
   });
+});
+```
+
+### Selectors
+
+```js
+import { derviveValueFromState } from './selectors';
+
+describe('Selectors', () => {
+  let state;
+
+  beforeEach(() => {
+    state = {};
+  });
+
+  describe('Selector Name', () => {
+    it('should retrieve the following values from state', () => {
+      const value = derviveValueFromState(state);
+
+      const expectedResult = {};
+
+      expect(value).toEqual(exprectedResult);
+    });
 });
 ```
