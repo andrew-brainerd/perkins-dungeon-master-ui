@@ -1,6 +1,6 @@
 import { SET_CURRENT_PLAYER } from '../actions/players';
 
-const initialState = {
+export const initialState = {
   currentPlayer: {}
 };
 
