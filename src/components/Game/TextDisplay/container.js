@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
-import { getMessages } from '../../../selectors/games';
+import { deriveMessages } from '../../../selectors/games';
 import { getCurrentCharacterId } from '../../../selectors/characters';
 import TextDisplay from './TextDisplay';
 
 const mapStateToProps = state => ({
-  messages: getMessages(state),
+  messages: deriveMessages(state),
   characterId: getCurrentCharacterId(state)
 });
 

@@ -13,7 +13,7 @@ export const getLocalMessages = pathOr([], ['games', 'localMessages']);
 
 export const getGameMessages = pathOr([], ['games', 'currentGame', 'messages']);
 
-export const getMessages = createSelector([getGameMessages, getLocalMessages],
+export const deriveMessages = createSelector([getGameMessages, getLocalMessages],
   (gameMessages, localMessages) => {
     const allMessages = [...gameMessages, ...localMessages];
     const sortedMessages = allMessages.slice().sort((a, b) =>
