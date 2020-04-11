@@ -41,10 +41,12 @@ describe('Pusher Reducer', () => {
   describe('SET_IS_CONNECTED', () => {
     it('should set isConnected to given boolean', () => {
       const initialState = {
+        isConnecting: true,
         isConnected: false
       };
 
       const expectedState = {
+        isConnecting: false,
         isConnected: true
       };
 

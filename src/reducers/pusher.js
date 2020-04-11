@@ -14,6 +14,7 @@ const pusher = (state = initialState, action) => {
     case SET_IS_CONNECTED:
       return {
         ...state,
+        isConnecting: false,
         isConnected: action.isConnected
       };
     default:
