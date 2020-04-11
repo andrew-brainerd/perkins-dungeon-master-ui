@@ -1,10 +1,10 @@
-import { SET_CURRENT_PLAYER } from '../actions/player';
+import { SET_CURRENT_PLAYER } from '../actions/players';
 
 const initialState = {
   currentPlayer: {}
 };
 
-const player = (state = initialState, action) => {
+const players = (state = initialState, action) => {
   switch (action.type) {
     case SET_CURRENT_PLAYER:
       return {
@@ -16,4 +16,4 @@ const player = (state = initialState, action) => {
   }
 };
 
-export default player;
+export default players;

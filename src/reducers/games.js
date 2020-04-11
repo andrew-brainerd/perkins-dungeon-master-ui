@@ -11,7 +11,7 @@ import {
   DELETING_GAME,
   LOADING_PLAYERS,
   PLAYERS_LOADED
-} from '../actions/game';
+} from '../actions/games';
 
 const initialState = {
   isPlaying: false,

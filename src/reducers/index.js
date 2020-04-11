@@ -1,16 +1,16 @@
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 import characters from './characters';
-import game from './game';
+import games from './games';
 import pusher from './pusher';
-import player from './player';
+import players from './players';
 
 const rootReducer = history => combineReducers({
   router: connectRouter(history),
   characters,
-  game,
+  games,
   pusher,
-  player
+  players
 });
 
 export default rootReducer;

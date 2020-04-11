@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import { getIsPlaying } from '../../selectors/game';
-import { setCurrentPlayer } from '../../actions/player';
-import { exitGame } from '../../actions/game';
+import { getIsPlaying } from '../../selectors/games';
+import { setCurrentPlayer } from '../../actions/players';
+import { exitGame } from '../../actions/games';
 import Header from './Header';
 
 const mapStateToProps = state => ({

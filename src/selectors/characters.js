@@ -1,6 +1,6 @@
 import { compose, path, prop } from 'ramda';
 import { createSelector } from 'reselect';
-import { getCurrentPlayerId } from './player';
+import { getCurrentPlayerId } from './players';
 
 export const getGameCharacters = path(['characters', 'gameCharacters', 'items']);
 

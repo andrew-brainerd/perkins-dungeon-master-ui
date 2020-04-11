@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import { getCurrentPlayer } from '../../selectors/player';
-import { getCurrentPlayerGames } from '../../selectors/game';
-import { loadPlayerGames, createGame } from '../../actions/game';
+import { getCurrentPlayer } from '../../selectors/players';
+import { getCurrentPlayerGames } from '../../selectors/games';
+import { loadPlayerGames, createGame } from '../../actions/games';
 import { navTo } from '../../actions/routing';
 import Home from './Home';
 

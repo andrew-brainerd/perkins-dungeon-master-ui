@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { getGameId } from '../../../selectors/routing';
-import { addPlayerInput, loadGame } from '../../../actions/game';
+import { addPlayerInput, loadGame } from '../../../actions/games';
 import { connectClient } from '../../../actions/pusher';
 import CommandLine from './CommandLine';
 import { getCurrentCharacter } from '../../../selectors/characters';

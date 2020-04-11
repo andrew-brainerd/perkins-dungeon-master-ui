@@ -1,7 +1,7 @@
 import { prop } from 'ramda';
 import { client } from './tools';
-import { parseServerResponse } from '../utils/game';
-import { getInviteHtml } from '../constants/game';
+import { parseServerResponse } from '../utils/games';
+import { getInviteHtml } from '../constants/games';
 
 export const createGame = async (name, createdBy = 'System') => {
   const response = await client.post('/games', { name, createdBy })

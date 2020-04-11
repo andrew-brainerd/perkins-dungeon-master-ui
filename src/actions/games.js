@@ -1,11 +1,11 @@
 import { omit } from 'ramda';
 import { AUTH_USER } from 'gm-common';
-import * as gameApi from '../api/game';
+import * as gameApi from '../api/games';
 import { GAME_ROUTE, CHARACTER_CREATION_ROUTE, ROOT_ROUTE, GAME_SETUP_ROUTE } from '../constants/routes';
-import { localCommands } from '../constants/game';
+import { localCommands } from '../constants/games';
 import { navTo } from './routing';
-import { parseLocalInput } from '../utils/game';
-import { getCurrentPlayerId } from '../selectors/player';
+import { parseLocalInput } from '../utils/games';
+import { getCurrentPlayerId } from '../selectors/players';
 
 const PREFIX = 'GAME';
 
