@@ -38,7 +38,7 @@ export const addLocalMessage = message => ({ type: ADD_LOCAL_MESSAGE, message })
 export const creatingCharacter = { type: CREATING_CHARACTER };
 export const characterCreated = character => ({ type: CHARACTER_CREATED, character });
 export const loadingGamePlayers = { type: LOADING_PLAYERS };
-export const gamePlayersLoaded = players => ({ type: PLAYERS_LOADED, players });
+export const playersLoaded = players => ({ type: PLAYERS_LOADED, players });
 export const addingPlayer = { type: ADDING_PLAYER };
 export const playerAdded = player => ({ type: PLAYER_ADDED, player });
 
@@ -116,7 +116,7 @@ export const deleteGame = gameId => async dispatch => {
 export const loadPlayers = gameId => async dispatch => {
   dispatch(loadingGamePlayers);
   gameApi.getPlayers(gameId).then(players =>
-    dispatch(gamePlayersLoaded(players))
+    dispatch(playersLoaded(players))
   );
 };
 

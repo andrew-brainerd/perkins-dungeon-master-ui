@@ -49,3 +49,24 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+
+## Testing Examples
+
+### Reducer
+
+```js
+describe('REDUCER_NAME', () => {
+  it('should update state in the following way', () => {
+    const initialState = {};
+
+    const expectedState = {};
+
+    const action = matchingAction;
+
+    const newState = reducer(initialState, action);
+
+    expect(newState).toEqual(expectedState);
+  });
+});
+```

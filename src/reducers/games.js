@@ -13,7 +13,7 @@ import {
   PLAYERS_LOADED
 } from '../actions/games';
 
-const initialState = {
+export const initialState = {
   isPlaying: false,
   isLoadingGame: false,
   currentGame: {},
