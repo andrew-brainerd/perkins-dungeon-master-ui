@@ -1,6 +1,5 @@
 import { prop } from 'ramda';
 import { client } from './tools';
-import { parseServerResponse } from '../utils/games';
 import { getInviteHtml } from '../constants/games';
 
 export const createGame = async (name, createdBy = 'System') => {
@@ -33,8 +32,6 @@ export const processPlayerInput = async (gameId, input) => {
       .then(prop('data'))
       .catch(err => console.error(err));
   }
-
-  return parseServerResponse(input);
 };
 
 export const sendInvite = async (gameId, playerName, email) => {

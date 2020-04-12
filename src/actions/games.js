@@ -1,5 +1,4 @@
 import { omit } from 'ramda';
-import { AUTH_USER } from 'gm-common';
 import * as gameApi from '../api/games';
 import { GAME_ROUTE, CHARACTER_CREATION_ROUTE, ROOT_ROUTE, GAME_SETUP_ROUTE } from '../constants/routes';
 import { localCommands } from '../constants/games';
@@ -79,7 +78,7 @@ export const loadGame = (gameId, shouldNavTo) => async dispatch => {
 };
 
 export const addPlayerInput = input => async dispatch => {
-  const { login, logout, gameId, message } = input || {};
+  const { gameId, message } = input || {};
   const config = omit(['login', 'logout'], input);
 
   if (localCommands.includes(message)) {
@@ -91,16 +90,7 @@ export const addPlayerInput = input => async dispatch => {
     return 0;
   }
 
-  return gameApi.processPlayerInput(gameId, config)
-    .then(({ character, message }) => {
-      if (character === AUTH_USER) {
-        if (message === 'Signing In...') {
-          login();
-        } else if (message === 'Signing Out...') {
-          logout();
-        }
-      }
-    });
+  return gameApi.processPlayerInput(gameId, config);
 };
 
 export const sendInvite = (gameId, playerName, email) => async dispatch => {
