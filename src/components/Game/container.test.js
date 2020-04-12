@@ -3,6 +3,7 @@ import { mount } from 'enzyme';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
+import navToAction from '../../../__mocks__/navToAction';
 import { SET_IS_CONNECTED } from '../../actions/pusher';
 import { LOADING_GAME, TRIGGER_UPDATE } from '../../actions/games';
 import { CHARACTERS_LOADED, LOADING_CHARACTERS } from '../../actions/characters';
@@ -96,5 +97,15 @@ describe('Game Container', () => {
     component.props().triggerUpdate();
 
     expect(store.getActions()).toEqual([{ type: TRIGGER_UPDATE }]);
+  });
+
+  it('should dispatch navTo action', () => {
+    const wrapper = render();
+    const component = wrapper.find(Container).find(Game);
+    store.clearActions();
+
+    component.props().navTo('/');
+
+    expect(store.getActions()).toEqual([navToAction]);
   });
 });
