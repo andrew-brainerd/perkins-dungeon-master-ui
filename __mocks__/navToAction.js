@@ -1,7 +1,7 @@
-export default {
+export default (path = '/') => ({
   payload: {
-    args: ['/'],
+    args: [path],
     method: 'push'
   },
   type: '@@router/CALL_HISTORY_METHOD'
-};
+});

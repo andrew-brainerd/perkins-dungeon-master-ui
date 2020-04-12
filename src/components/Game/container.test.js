@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import navToAction from '../../../__mocks__/navToAction';
+import getNavToAction from '../../../__mocks__/navToAction';
 import { SET_IS_CONNECTED } from '../../actions/pusher';
 import { LOADING_GAME, TRIGGER_UPDATE } from '../../actions/games';
 import { CHARACTERS_LOADED, LOADING_CHARACTERS } from '../../actions/characters';
@@ -106,6 +106,6 @@ describe('Game Container', () => {
 
     component.props().navTo('/');
 
-    expect(store.getActions()).toEqual([navToAction]);
+    expect(store.getActions()).toEqual([getNavToAction('/')]);
   });
 });

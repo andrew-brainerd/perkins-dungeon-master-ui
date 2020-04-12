@@ -3,7 +3,7 @@ import { mount } from 'enzyme';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
-import navToAction from '../../../__mocks__/navToAction';
+import getNavToAction from '../../../__mocks__/navToAction';
 import { LOADING_PLAYER } from '../../actions/players';
 import { EXIT_GAME } from '../../actions/games';
 import Container from './container';
@@ -74,6 +74,6 @@ describe('Header Container', () => {
 
     component.props().exitGame();
 
-    expect(store.getActions()).toEqual([{ type: EXIT_GAME }, navToAction]);
+    expect(store.getActions()).toEqual([{ type: EXIT_GAME }, getNavToAction('/')]);
   });
 });
