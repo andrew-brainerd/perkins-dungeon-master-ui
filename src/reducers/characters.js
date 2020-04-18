@@ -5,7 +5,7 @@ import {
   SET_CURRENT_CHARACTER
 } from '../actions/characters';
 
-const initialState = {
+export const initialState = {
   isLoadingCharacters: false,
   currentCharacter: {},
   gameCharacters: {}
@@ -31,6 +31,7 @@ const game = (state = initialState, action) => {
     case SET_CURRENT_CHARACTER:
       return {
         ...state,
+        isCreatingCharacter: false,
         isLoadingCharacters: false,
         currentCharacter: action.currentCharacter
       };

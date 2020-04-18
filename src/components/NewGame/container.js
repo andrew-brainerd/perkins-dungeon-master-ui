@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { getGameId } from '../../selectors/routing';
-import { getCurrentGameName, getGamePlayers, getShouldUpdateGame } from '../../selectors/game';
-import { getCurrentPlayer } from '../../selectors/player';
+import { getCurrentGameName, getGamePlayers, getShouldUpdateGame } from '../../selectors/games';
+import { getCurrentPlayer } from '../../selectors/players';
 import {
   loadGame,
   sendInvite,
@@ -9,7 +9,7 @@ import {
   deleteGame,
   addPlayer,
   triggerUpdate
-} from '../../actions/game';
+} from '../../actions/games';
 import { connectClient } from '../../actions/pusher';
 import { navTo } from '../../actions/routing';
 import NewGame from './NewGame';

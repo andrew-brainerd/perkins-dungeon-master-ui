@@ -3,9 +3,9 @@ import { shallow } from 'enzyme';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
-import Game from './Game';
+import TextDisplay from './TextDisplay';
 
-describe('Game Component', () => {
+describe('TextDisplay Component', () => {
   let store, props;
 
   beforeEach(() => {
@@ -13,17 +13,14 @@ describe('Game Component', () => {
 
     props = {
       height: 500,
-      connectClient: jest.fn(),
-      loadGame: jest.fn(),
-      loadCharacters: jest.fn(),
-      triggerUpdate: jest.fn(),
-      navTo: jest.fn()
+      messages: [],
+      characterId: '12345'
     };
   });
 
   const render = () => shallow(
     <Provider store={store}>
-      <Game {...props} />
+      <TextDisplay {...props} />
     </Provider>
   );
 

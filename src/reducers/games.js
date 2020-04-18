@@ -11,9 +11,9 @@ import {
   DELETING_GAME,
   LOADING_PLAYERS,
   PLAYERS_LOADED
-} from '../actions/game';
+} from '../actions/games';
 
-const initialState = {
+export const initialState = {
   isPlaying: false,
   isLoadingGame: false,
   currentGame: {},

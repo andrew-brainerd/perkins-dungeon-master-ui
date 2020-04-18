@@ -3,27 +3,24 @@ import { shallow } from 'enzyme';
 import thunk from 'redux-thunk';
 import configureStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
-import Game from './Game';
+import CommandLine from './CommandLine';
 
-describe('Game Component', () => {
+describe('CommandLine Component', () => {
   let store, props;
 
   beforeEach(() => {
     store = configureStore([thunk])();
 
     props = {
-      height: 500,
-      connectClient: jest.fn(),
-      loadGame: jest.fn(),
-      loadCharacters: jest.fn(),
-      triggerUpdate: jest.fn(),
-      navTo: jest.fn()
+      gameId: '12345',
+      character: {},
+      addPlayerInput: jest.fn()
     };
   });
 
   const render = () => shallow(
     <Provider store={store}>
-      <Game {...props} />
+      <CommandLine {...props} />
     </Provider>
   );
 

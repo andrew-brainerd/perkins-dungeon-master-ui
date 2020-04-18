@@ -9,7 +9,7 @@ const Icon = ({ className, name, title, onClick }) => {
     <ReactSVG
       className={className}
       title={title || name}
-      src={iconImage}
+      src={typeof iconImage === 'object' ? '' : iconImage}
       wrapper={'span'}
       onClick={onClick || noop}
     />

@@ -8,7 +8,6 @@ export const SET_IS_CONNECTED = `${PREFIX}/SET_IS_CONNECTED`;
 export const setIsConnected = isConnected => ({ type: SET_IS_CONNECTED, isConnected });
 
 export const connectClient = (channel, event, action) => async dispatch => {
-  console.log('%cConnecting to Pusher channel %o', 'color: cyan', { channel, event, action });
   getChannel(channel).bind(event, action);
   dispatch(setIsConnected(true));
 };

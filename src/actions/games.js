@@ -1,11 +1,10 @@
 import { omit } from 'ramda';
-import { AUTH_USER } from 'gm-common';
-import * as gameApi from '../api/game';
+import * as gameApi from '../api/games';
 import { GAME_ROUTE, CHARACTER_CREATION_ROUTE, ROOT_ROUTE, GAME_SETUP_ROUTE } from '../constants/routes';
-import { localCommands } from '../constants/game';
+import { localCommands } from '../constants/games';
 import { navTo } from './routing';
-import { parseLocalInput } from '../utils/game';
-import { getCurrentPlayerId } from '../selectors/player';
+import { parseLocalInput } from '../utils/games';
+import { getCurrentPlayerId } from '../selectors/players';
 
 const PREFIX = 'GAME';
 
@@ -38,7 +37,7 @@ export const addLocalMessage = message => ({ type: ADD_LOCAL_MESSAGE, message })
 export const creatingCharacter = { type: CREATING_CHARACTER };
 export const characterCreated = character => ({ type: CHARACTER_CREATED, character });
 export const loadingGamePlayers = { type: LOADING_PLAYERS };
-export const gamePlayersLoaded = players => ({ type: PLAYERS_LOADED, players });
+export const playersLoaded = players => ({ type: PLAYERS_LOADED, players });
 export const addingPlayer = { type: ADDING_PLAYER };
 export const playerAdded = player => ({ type: PLAYER_ADDED, player });
 
@@ -79,7 +78,7 @@ export const loadGame = (gameId, shouldNavTo) => async dispatch => {
 };
 
 export const addPlayerInput = input => async dispatch => {
-  const { login, logout, gameId, message } = input || {};
+  const { gameId, message } = input || {};
   const config = omit(['login', 'logout'], input);
 
   if (localCommands.includes(message)) {
@@ -91,16 +90,7 @@ export const addPlayerInput = input => async dispatch => {
     return 0;
   }
 
-  return gameApi.processPlayerInput(gameId, config)
-    .then(({ character, message }) => {
-      if (character === AUTH_USER) {
-        if (message === 'Signing In...') {
-          login();
-        } else if (message === 'Signing Out...') {
-          logout();
-        }
-      }
-    });
+  return gameApi.processPlayerInput(gameId, config);
 };
 
 export const sendInvite = (gameId, playerName, email) => async dispatch => {
@@ -116,7 +106,7 @@ export const deleteGame = gameId => async dispatch => {
 export const loadPlayers = gameId => async dispatch => {
   dispatch(loadingGamePlayers);
   gameApi.getPlayers(gameId).then(players =>
-    dispatch(gamePlayersLoaded(players))
+    dispatch(playersLoaded(players))
   );
 };
 

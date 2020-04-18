@@ -1,7 +1,7 @@
 import * as charactersApi from '../api/characters';
 import { GAME_ROUTE } from '../constants/routes';
 import { navTo } from './routing';
-import { getCurrentPlayerId } from '../selectors/player';
+import { getCurrentPlayerId } from '../selectors/players';
 import { getPathname } from '../selectors/routing';
 import { deriveCurrentCharacter } from '../selectors/characters';
 
