@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { getGameId } from '../../selectors/routing';
 import { getCurrentGameName, getGamePlayers, getShouldUpdateGame } from '../../selectors/games';
-import { getCurrentPlayer } from '../../selectors/players';
+import { getCurrentPlayer, getIsLoadingPlayer } from '../../selectors/players';
 import {
   loadGame,
   sendInvite,
@@ -18,6 +18,7 @@ const mapStateToProps = state => ({
   gameId: getGameId(state),
   gameName: getCurrentGameName(state),
   player: getCurrentPlayer(state),
+  isLoadingPlayer: getIsLoadingPlayer(state),
   partyMembers: getGamePlayers(state),
   shouldUpdateGame: getShouldUpdateGame(state)
 });

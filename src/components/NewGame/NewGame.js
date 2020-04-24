@@ -3,6 +3,7 @@ import { shape, string, bool, func } from 'prop-types';
 import { isEmpty, values } from 'ramda';
 import { events } from 'gm-common';
 import usePrevious from '../../hooks/usePrevious';
+import { useAuth0 } from '../../hooks/useAuth0';
 import { isDefined } from '../../utils/validation';
 import { ROOT_ROUTE } from '../../constants/routes';
 import TextInput from '../common/TextInput/TextInput';
@@ -16,6 +17,7 @@ const NewGame = ({
   gameId,
   gameName,
   player,
+  isLoadingPlayer,
   partyMembers,
   shouldUpdateGame,
   loadGame,
@@ -27,12 +29,17 @@ const NewGame = ({
   triggerUpdate,
   navTo
 }) => {
+  const { loading, loginWithRedirect } = useAuth0();
   const [isInviting, setIsInviting] = useState(false);
   const [inviteEmail, setInviteEmail] = useState('');
   const [isInitialLoad, setIsInitialLoad] = useState(isDefined(gameId));
   const prevGameId = usePrevious(gameId);
   const hasUpdatedGameId = isDefined(gameId) && gameId !== prevGameId;
   const shouldUpdate = shouldUpdateGame || hasUpdatedGameId;
+
+  useEffect(() => {
+    isEmpty(player) && !isLoadingPlayer && !loading && loginWithRedirect();
+  }, [player, isLoadingPlayer, loading, loginWithRedirect]);
 
   useEffect(() => {
     if ((shouldUpdate || isInitialLoad) && player) {
@@ -122,6 +129,7 @@ NewGame.propTypes = {
   player: shape({
     email: string
   }),
+  isLoadingPlayer: bool,
   partyMembers: shape({
     _id: string,
     name: string,

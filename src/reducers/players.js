@@ -1,7 +1,8 @@
-import { SET_CURRENT_PLAYER } from '../actions/players';
+import { SET_CURRENT_PLAYER, LOADING_PLAYER } from '../actions/players';
 
 export const initialState = {
-  currentPlayer: {}
+  currentPlayer: {},
+  isLoadingPlayer: false
 };
 
 const players = (state = initialState, action) => {
@@ -9,7 +10,13 @@ const players = (state = initialState, action) => {
     case SET_CURRENT_PLAYER:
       return {
         ...state,
+        isLoadingPlayer: false,
         currentPlayer: action.player
+      };
+    case LOADING_PLAYER:
+      return {
+        ...state,
+        isLoadingPlayer: true
       };
     default:
       return state;

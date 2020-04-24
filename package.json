@@ -56,7 +56,7 @@
     "test:watch": "react-scripts test",
     "lint:js": "eslint src/",
     "lint:css": "stylelint --config stylelint.json **/*.scss",
-    "coverage": "npm test -- --coverage --coverageDirectory coverage --watchAll=false",
+    "coverage": "yarn test --coverage --coverageDirectory coverage --watchAll=false",
     "verify": "yarn lint:js && yarn lint:css && yarn test"
   },
   "eslintConfig": {

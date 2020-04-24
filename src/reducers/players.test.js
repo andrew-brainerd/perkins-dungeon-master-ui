@@ -21,8 +21,9 @@ describe('Players Reducer', () => {
   });
 
   describe('SET_CURRENT_PLAYER', () => {
-    it('should set currentPlayer to given object', () => {
+    it('should set isLoadingPlayer to false and currentPlayer to given object', () => {
       const initialState = {
+        isLoadingPlayer: true,
         currentPlayer: {}
       };
 
@@ -32,6 +33,7 @@ describe('Players Reducer', () => {
       };
 
       const expectedState = {
+        isLoadingPlayer: false,
         currentPlayer: player
       };
 

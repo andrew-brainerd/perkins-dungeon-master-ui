@@ -1,9 +1,12 @@
 @import '../../styles/colors.scss';
+@import '../../styles/sizing.scss';
 
 .home {
   align-items: center;
   display: flex;
   justify-content: center;
+  margin: 0 auto;
+  max-width: $maxContentWidth;
   width: 100%;
   z-index: 1;
 
